@@ -203,3 +203,12 @@ Under machine load the A3 rule can exclude read trials (5 of 150 in the explorat
 ### Next action
 
 Coordinator: schedule M3 (EXP-002, EXP-003, then EXP-004) on a quiet machine. AI: write the EXP-001 report (11.3).
+
+## 2026-11-24: Ratification session (owner's second-round approvals)
+
+Milestone: M1 closed; pre-M3 records only. Bounded task: record the owner's ratification of the A3 implementation choice. No protocol, config or code change; no run; nothing pushed.
+
+- Recorded: DEC-010 in `research/decision_log.md`; entry under `ratified_follow_on_choices` in `research/freeze.json` (owner's answer "Approve all", 2026-11-24). Frozen hashes unchanged (protocol SHA-256 `a87ae45e049c16ed42abef0ab853a0e3fcf28daec9d5482d11bbb1dfb365f004`).
+- Other items of the second-round approvals (real data, new pre-data rules, code-only fixes) do not concern SCROLL.
+- Tests: `.venv/bin/python -m pytest -q` -> 171 passed in 31.92s.
+- Next action: unchanged. Coordinator schedules M3 on a quiet machine.

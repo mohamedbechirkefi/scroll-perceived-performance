@@ -97,3 +97,12 @@ Append-only. Each entry: id, date, decision, decided by, rationale, alternatives
 - Not in this approval: DEC-007 (implementation choices) stays as implemented in the frozen code revision but was not separately listed; DEC-008 A6 (budget) and A7 (degenerate PREFETCH cells at L below h) were not listed and were not applied as protocol changes.
 - Freeze guard: the runner accepts a confirmatory config only if the parent protocol hash, the experiment protocol hash (freeze record and registry) and the config hash all match the freeze record; tests cover acceptance and refusal.
 - Consequences: any later change to a frozen protocol or config is refused by the runner and requires a new owner decision and a dated deviation. Confirmatory runs (M3) are scheduled by the coordinator on a quiet machine.
+
+## DEC-010: Owner ratification of the hover-lead control implementation (A3)
+
+- Date: 2026-11-24
+- Decided by: the owner ("Approve all", 2026-11-24, second-round approvals file, section 3); recorded by the AI assistant
+- Status: in force
+- Owner's words: "Approve all", applied to the coordinator's item for SCROLL: "The lead control is implemented as excluding read trials whose hover-to-click lead is more than 25 ms off target."
+- Decision: the implementation choice made under DEC-009 for amendment A3 (pre-specified exclusion of read-path trials, every arm, when the measured hover-to-click lead deviates from h by more than 25 ms or no hover was recorded; the in-page timer option not adopted) is ratified by the owner.
+- Consequences: no change to the frozen protocol, configurations or code; no frozen hash changes. The ratification is listed under `ratified_follow_on_choices` in `research/freeze.json`.

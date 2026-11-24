@@ -111,5 +111,16 @@
     }
    ]
   }
- }
+ },
+ "ratified_follow_on_choices": [
+  {
+   "date": "2026-11-24",
+   "decision": "DEC-010",
+   "owner_answer": "Approve all",
+   "source": "Owner approvals file of 2026-11-24, second round (owner-approvals-2026-11-24b.md, section 3), in the labs coordination folder outside this repository.",
+   "choice": "The lead control is implemented as excluding read trials whose hover-to-click lead is more than 25 ms off target.",
+   "ratifies": "A3 (protocol section 7; DEC-009 implementation choice; HOVER_LEAD_TOLERANCE_MS = 25 in src/scroll/metrics.py)",
+   "hash_effect": "None. The choice is already in the frozen protocol text, configurations and code; no frozen hash changes."
+  }
+ ]
 }
