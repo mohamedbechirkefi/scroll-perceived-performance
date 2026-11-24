@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1.0",
+  "generated": "2026-11-24",
+  "note": "Covered by NOTICE.md (SCROLL Source-Available Non-Commercial Research License v1.0) for original content. Third-party entries keep their own licences.",
+  "primary_data": {
+    "kind": "synthetic",
+    "description": "All experimental data are generated locally by the seeded mock transport (latency and failure schedules) and the scripted browser harness. No external dataset is required for the confirmatory experiments.",
+    "generator": "src/scroll (not yet implemented)",
+    "generator_version": null,
+    "seeds": {"confirmatory": "1-20", "exploratory_smoke": "1001-1005"},
+    "redistributable": true,
+    "status": "planned"
+  },
+  "external_candidates": [
+    {
+      "id": "CRUX",
+      "name": "Chrome UX Report (CrUX)",
+      "source_url": "https://developer.chrome.com/docs/crux/methodology",
+      "licence": "CC BY 4.0 (stated on the methodology page, opened 2026-11-24)",
+      "redistributable": "yes, with attribution",
+      "intended_use": "optional context only: field distributions of INP and CLS to situate the chosen latency levels; not used in any confirmatory analysis",
+      "downloaded": false,
+      "sha256": null,
+      "status": "candidate, not selected"
+    }
+  ],
+  "third_party_software": [
+    {"name": "web-vitals", "source_url": "https://github.com/GoogleChrome/web-vitals", "licence": "Apache-2.0 (stated on repository page, opened 2026-11-24)", "use": "candidate reference for a differential check of INP-like and CLS measurement", "status": "candidate"},
+    {"name": "Playwright (Python)", "source_url": "https://github.com/microsoft/playwright", "licence": "unverified in M0 (expected Apache-2.0); to confirm from the LICENSE file", "use": "browser harness", "status": "locked in uv.lock (1.65.0), not installed"}
+  ],
+  "blockers": [
+    "Playwright licence to be confirmed from its LICENSE file before release.",
+    "Browser binary choice (DEC-005) awaits the owner."
+  ]
+}

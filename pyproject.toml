@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0
+# Licence: SCROLL Source-Available Non-Commercial Research License v1.0 (see LICENSE).
+# The license field is omitted on purpose: the licence is custom and has no SPDX list entry.
+
+[project]
+name = "scroll-research"
+version = "0.0.0"
+description = "SCROLL: loading strategies and measurable interface responsiveness under controlled delays (research code)."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "playwright>=1.55,<2",
+    "numpy>=2.2,<3",
+    "scipy>=1.15,<2",
+    "jsonschema>=4.23,<5",
+    "matplotlib>=3.10,<4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<10",
+    "hypothesis>=6.120,<7",
+]
+
+[tool.uv]
+# Only resolve distributions uploaded at least two weeks before the 2026-11-24 bootstrap.
+exclude-newer = "2026-11-10T00:00:00Z"
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

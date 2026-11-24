@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0
+# Licence: SCROLL Source-Available Non-Commercial Research License v1.0 (custom, see LICENSE).
+# No "license" field is given because the licence has no SPDX list identifier.
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below. Status: M0 bootstrap, no results."
+title: "SCROLL: loading strategies and measurable interface responsiveness under controlled delays"
+type: software
+authors:
+  - family-names: Kefi
+    given-names: Mohamed Bechir
+version: 0.0.0
+keywords:
+  - frontend performance
+  - loading strategies
+  - skeleton screens
+  - optimistic updates
+  - reproducibility
