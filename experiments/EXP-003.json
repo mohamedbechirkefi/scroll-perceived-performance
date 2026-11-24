@@ -19,7 +19,7 @@
  },
  "experiment_id": "EXP-003",
  "label": "confirmatory",
- "description": "EXP-003 write path (draft; refused by the runner until the owner freezes the protocol).",
+ "description": "EXP-003 write path (frozen v1.0, owner-approved 2026-11-24).",
  "interactions_per_session": 10,
  "seeds": [
   1,

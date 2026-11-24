@@ -18,7 +18,8 @@ from .schema import validate_instance
 CONFIG_SCHEMA = "config-1.0.0.json"
 ARMS = {"read": ("BLANK", "SKELETON", "PREFETCH"), "write": ("BLANK", "OPTIMISTIC")}
 BASELINE = "BLANK"
-CONFIRMATORY_SEEDS = range(1, 21)  # research/protocol.md, section 5
+CONFIRMATORY_SEEDS = range(1, 21)  # research/protocol.md, section 5 (20 seeds, amendment A6)
+CONFIRMATORY_CHANNEL = "chrome"  # installed Google Chrome, version recorded per run (amendment A5, DEC-005 option b)
 
 
 class ConfigError(ValueError):
@@ -69,6 +70,8 @@ def validate_config(cfg: dict[str, Any]) -> dict[str, Any]:
             raise ConfigError(f"exploratory configs must not use confirmatory seeds 1-20 (found {overlap})")
     if cfg["label"] == "confirmatory" and len(seeds) < 5:
         raise ConfigError("confirmatory configs need at least five seeds per stochastic arm")
+    if cfg["label"] == "confirmatory" and cfg["browser"]["channel"] != CONFIRMATORY_CHANNEL:
+        raise ConfigError(f"confirmatory configs must use the installed Google Chrome (channel {CONFIRMATORY_CHANNEL!r}, amendment A5)")
     for i, cond in enumerate(cfg["conditions"]):
         path = cond["path"]
         arms = cond["arms"]

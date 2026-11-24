@@ -51,7 +51,7 @@ def run_experiment(cfg: dict[str, Any], out_dir: Path | None = None, log: Callab
                    harness_factory: Callable[[dict[str, Any]], Any] | None = None) -> Path:
     validate_config(cfg)
     if cfg["label"] == "confirmatory":
-        require_frozen(cfg["experiment_id"])  # raises NotFrozenError; this code never freezes
+        require_frozen(cfg["experiment_id"], cfg=cfg)  # raises NotFrozenError; this code never freezes
     sessions = expand_sessions(cfg)
     run_id = f"{cfg['experiment_id']}-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
     out = Path(out_dir) if out_dir else default_out_dir(cfg, run_id)

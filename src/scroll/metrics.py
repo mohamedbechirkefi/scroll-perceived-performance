@@ -27,6 +27,9 @@ METRIC_KEYS = (
     "input_to_handler_ms", "defects",
 )
 EVENT_MATCH_TOLERANCE_MS = 1.0
+# Amendment A3 (owner-approved 2026-11-24, research/protocol.md section 11): a read-path trial whose
+# measured hover-to-click lead deviates from the scheduled lead h by more than this is excluded.
+HOVER_LEAD_TOLERANCE_MS = 25.0
 
 
 class MetricError(ValueError):
@@ -130,8 +133,12 @@ def _event_duration(raw: dict[str, Any], t_in: float) -> tuple[float | None, boo
     return _num(click.get("duration"), "event.duration"), False
 
 
-def compute_trial_metrics(raw: dict[str, Any] | None, settle_ms: float, timed_out: bool = False) -> dict[str, Any]:
-    """Metrics for one trial. Harness failures give status 'excluded' with a reason."""
+def compute_trial_metrics(raw: dict[str, Any] | None, settle_ms: float, timed_out: bool = False,
+                          hover_lead_ms: float | None = None) -> dict[str, Any]:
+    """Metrics for one trial. Harness failures give status 'excluded' with a reason.
+
+    When `hover_lead_ms` (the scheduled lead h) is given, the hover-lead control rule of amendment A3
+    is applied to read-path trials (see `apply_hover_lead_rule`)."""
     if timed_out or raw is None:
         return empty_metrics("timeout: no final frame within the trial limit")
     if raw.get("t_in") is None:
@@ -139,9 +146,30 @@ def compute_trial_metrics(raw: dict[str, Any] | None, settle_ms: float, timed_ou
     if not raw.get("frames"):
         return empty_metrics("no frame recorded")
     try:
-        return _compute(raw, settle_ms)
+        m = _compute(raw, settle_ms)
     except MetricError as exc:
         return empty_metrics(f"instrumentation: {exc}")
+    if hover_lead_ms is not None and raw.get("path") == "read":
+        apply_hover_lead_rule(m, hover_lead_ms)
+    return m
+
+
+def apply_hover_lead_rule(m: dict[str, Any], hover_lead_ms: float, tolerance_ms: float = HOVER_LEAD_TOLERANCE_MS) -> dict[str, Any]:
+    """Amendment A3: exclude a read-path trial whose measured hover-to-click lead is missing or deviates
+    from the scheduled lead by more than `tolerance_ms`. The metric values are kept for the record;
+    only the status and the exclusion reason change. Applied to every read arm alike, so that the
+    trial-level pairing (A1) drops the same interaction index from the contrast."""
+    if m["status"] != "ok":
+        return m
+    actual = m.get("hover_lead_actual_ms")
+    if actual is None:
+        m["status"] = "excluded"
+        m["exclusion_reason"] = "hover lead: no hover recorded before the click"
+    elif abs(actual - hover_lead_ms) > tolerance_ms:
+        m["status"] = "excluded"
+        m["exclusion_reason"] = (f"hover lead: measured {actual:.1f} ms deviates from the scheduled {hover_lead_ms:g} ms "
+                                 f"by more than {tolerance_ms:g} ms")
+    return m
 
 
 def _compute(raw: dict[str, Any], settle_ms: float) -> dict[str, Any]:

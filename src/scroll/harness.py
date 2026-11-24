@@ -2,7 +2,7 @@
 """Browser harness: drives the mock page with scripted, identical input in every arm.
 
 Uses the installed Google Chrome through Playwright's `channel="chrome"` (DEC-005 option b,
-the only option available without a download). Every session runs in a fresh browser
+approved by the owner on 2026-11-24); its version is recorded in every run manifest. Every session runs in a fresh browser
 context, offline (`context.set_offline(True)`); any non-file request is recorded as a defect.
 """
 from __future__ import annotations
@@ -105,7 +105,7 @@ class Harness:
                 raw = page.evaluate(
                     "([k, ms]) => Promise.race([window.__scroll.whenDone(k), new Promise(r => setTimeout(() => r(null), ms))])",
                     [k, timeout_ms])
-                metrics = compute_trial_metrics(raw, cfg["settle_ms"], timed_out=raw is None)
+                metrics = compute_trial_metrics(raw, cfg["settle_ms"], timed_out=raw is None, hover_lead_ms=spec.hover_lead_ms)
                 rec["trials"].append({"k": k, "wall_s": time.perf_counter() - tt, "raw": raw, "metrics": metrics})
                 if raw is None:
                     for k2 in range(k + 1, K):

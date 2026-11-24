@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
 # SCROLL research protocol
 
-**Status: DRAFT v0.1 (2026-11-24). Not frozen. Awaiting owner review and freeze (gate G-FREEZE).** No confirmatory run may start before the owner freezes this protocol and its hash is recorded in `research/experiment_registry.csv` and `research/decision_log.md`. Every result obtained before the freeze is exploratory.
+**Status: FROZEN v1.0 (owner-approved 2026-11-24, gate G-FREEZE).** This version is draft v0.1 plus the owner-approved amendments of section 11. Its SHA-256, the SHA-256 of every confirmatory experiment protocol and of every confirmatory configuration, and the code revision are recorded in `research/freeze.json` (a file cannot contain its own hash); the experiment hashes are also in `research/experiment_registry.csv`. The runner refuses any confirmatory run whose protocol or configuration differs from the frozen one. Every result obtained before the freeze (EXP-001, seeds 1001 to 1005) is exploratory. Any change after this point is a dated deviation reported separately from the frozen analysis.
 
 ## 1. Research question
 
@@ -29,7 +29,9 @@ Arms (strategies):
 
 The baseline is `BLANK` in both paths: the simplest strategy, showing nothing new until the server answers.
 
-Latency and failure injection: a seeded mock transport (proposed DEC-004) maps `(seed, request index)` to a delay `d = L x (1 + j)`, with `j` drawn uniformly in [-0.1, 0.1], and to an outcome (success, or failure with probability `p`). The same seed yields the same schedule in every arm (common random numbers).
+Browser: the installed Google Chrome, driven through Playwright with `channel="chrome"` (DEC-005 option b, amendment A5). Chrome updates itself, so its version is recorded in every run manifest and reported with every result; a version change between or within experiments is reported.
+
+Latency and failure injection: a seeded mock transport (DEC-004) maps `(seed, request index)` to a delay `d = L x (1 + j)`, with `j` drawn uniformly in [-0.1, 0.1], and to an outcome (success, or failure with probability `p`). The same seed yields the same schedule in every arm (common random numbers).
 
 ## 3. Metrics
 
@@ -48,7 +50,7 @@ Justification for a single primary metric: TTUC is the only candidate outcome th
 ### 3.2 Secondary metrics
 
 1. **Time to first feedback (TTFF)**, ms: `t_in` to the first frame with any visible change in the target region (placeholder, optimistic state or content).
-2. **Interaction duration (Event Timing)**, ms: the `duration` of the `PerformanceEventTiming` entry for the click (8 ms granularity, observer threshold 16 ms; entries under 16 ms are recorded as "below threshold", not as zero).
+2. **Interaction duration (Event Timing)**, ms: the `duration` of the `PerformanceEventTiming` entry for the click (8 ms granularity, observer threshold 16 ms; entries under 16 ms are recorded as "below threshold", not as zero). Descriptive only (amendment A4): it is reported with its below-threshold share, together with `input_to_handler_ms` (handler start minus input time), and no contrast, test or verdict is based on either.
 3. **Layout shift during the trial**: sum of `LayoutShift.value` from input to `t_final + 1000 ms`, reported twice: all entries, and entries with `hadRecentInput = false` (the CLS-eligible ones).
 4. **Wrong-state exposure (write path)**, ms: total time the displayed state differed from the final server-consistent state after input.
 5. **Rollback correctness (write path)**: share of trials whose final displayed state equals the server state (must be 1.0; anything else is a defect).
@@ -59,9 +61,13 @@ Justification for a single primary metric: TTUC is the only candidate outcome th
 
 Primary method: the application records a mark when it commits the DOM change, then the time of the next frame through a double `requestAnimationFrame` callback. Alternative method for sensitivity: Chromium Element Timing on the content element, or a performance trace (to be chosen in EXP-001). The disagreement between methods is itself reported.
 
-## 4. Hypotheses (draft)
+## 4. Hypotheses
 
-For each non-baseline arm `s` and latency level `L`, the estimand is the paired difference `Delta_s(L) = median over seeds of [ TTUC_s - TTUC_BLANK ]`, where each seed contributes the median TTUC over its K interactions.
+For each non-baseline arm `s` and latency level `L`, the estimand is the trial-paired difference (amendment A1)
+
+`Delta_s(L) = median over seeds of [ median over k of ( TTUC_s,k - TTUC_BLANK,k ) ]`,
+
+where trial `k` of arm `s` and trial `k` of `BLANK` in the same seed and cell share the same scheduled delay and outcome (common random numbers). Only interactions analysed in both arms form a pair. The seed remains the independent unit. On the write path with `p > 0` the estimand is computed separately for success trials and for failure trials (amendment A2): both strata are primary contrasts, and the mixed estimand over all trials is secondary. The draft estimand (difference of per-seed session medians) is reported as a secondary, descriptive analysis.
 
 - **H0 (primary, per contrast):** `Delta_s(L) = 0`.
 - **H1 (two-sided):** `Delta_s(L) != 0`.
@@ -78,7 +84,7 @@ What would contradict the main interpretation ("strategies that change first fee
 
 - **Experimental unit:** one browser session (fresh browser context, fresh page) per (arm, condition, seed), running K = 10 scripted interactions of one path.
 - **Independent unit for inference:** the seed. Interactions within a session are correlated (same page, warm caches) and are summarised by their median before inference.
-- **Seeds:** 20 per stochastic cell (minimum 5 required by the master prompt). Seeds `1..20` for confirmatory runs; seeds `1001..1005` reserved for smoke and exploratory runs, never reused confirmatorily.
+- **Seeds:** 20 per stochastic cell (minimum 5 required by the master prompt; confirmed by the owner, amendment A6). Seeds `1..20` for confirmatory runs; seeds `1001..1005` reserved for smoke and exploratory runs, never reused confirmatorily.
 - **Matching:** the same seed gives the same latency and failure schedule in every arm. Arm order within each seed block is randomised with a fixed meta-seed and recorded.
 - **Conditions:** latency `L` in {50, 100, 300, 1000} ms (read) and {100, 300, 1000} ms (write); failure probability `p` in {0, 0.1, 0.3} (write); prefetch lead time `h = 150 ms` (main), {0, 600} ms in sensitivity; CPU throttle 1x (main), 4x in sensitivity.
 
@@ -97,6 +103,7 @@ The latency schedule is deterministic given the seed, so variance comes from bro
 ## 7. Exclusion and stopping rules
 
 - A trial is excluded only for harness failure: browser crash, missing instrumentation mark, or no `t_final` within `L + 10 s`. Every exclusion is logged with its reason and reported.
+- Hover-lead control (amendment A3): on the read path, in every arm, a trial is excluded when the measured hover-to-click lead (`t_in - t_hover`, page clock) deviates from the scheduled lead `h` by more than 25 ms, or when no hover was recorded. The trial's values are kept in the raw record with the reason. With trial-level pairing, the same interaction index then drops out of the contrast. These exclusions count toward the 5% rule below and are reported per cell. The write path is not affected: no write arm reacts to the hover and the lead is not recorded there.
 - If more than 5% of trials in a cell are excluded, the cell is reported as failed; it is not rerun silently. Any rerun is a dated deviation.
 - Fixed sample size, no optional stopping, no interim look at confirmatory contrasts.
 - Stop rule: if rollback correctness is below 1.0 or `BLANK` TTUC is below the injected delay (impossible if the instrumentation is right), the campaign stops, the defect is recorded, and all affected runs are discarded and rerun after the fix as a recorded deviation.
@@ -148,6 +155,19 @@ Risks:
 4. **Browser version drift.** See DEC-005.
 5. **Single machine, single browser engine.** External validity is limited to Chromium on this laptop.
 
-## 11. Amendments
+## 11. Amendments before freeze (owner-approved 2026-11-24)
 
-None. Any amendment after the freeze is dated, justified and reported separately from the frozen analysis.
+The owner approved the following amendments on 2026-11-24, in answer to DEC-008 and DEC-005 (`research/decision_log.md`, DEC-009). They were proposed after the exploratory EXP-001 run (`results/exploratory/EXP-001/EXP-001-20261124T161058Z/`). No value below was tuned on the primary contrast.
+
+| ID | Approved wording | Change in this protocol | Source |
+|---|---|---|---|
+| A1 | "Pair trials one to one within each seed." | Section 4: trial-level pairing within seed and cell; the draft seed-median estimand becomes secondary. | DEC-008 A1 |
+| A2 | "Split the p > 0 write path by outcome." | Section 4 and EXP-003: success and failure strata are primary at `p > 0`; the mixed estimand is secondary. | DEC-008 A2 |
+| A3 | "Control the hover-to-click lead." | Section 7: pre-specified exclusion when the measured lead deviates from `h` by more than 25 ms (the tolerance stated in DEC-008 A3). The click stays a trusted Playwright input; the in-page timer alternative of DEC-008 A3 was not adopted because a script-dispatched click would change `t_in` and remove the Event Timing entry. | DEC-008 A3 |
+| A4 | "Event Timing is descriptive only." | Section 3.2 item 2. | DEC-008 A4 |
+| A5 | "Use the installed Google Chrome, with its version recorded." | Section 2; DEC-005 resolved as option (b). Confirmatory configs must use `channel = "chrome"`. | DEC-005 |
+| A6 | "20 seeds." | Section 5: seeds 1 to 20 confirmed for EXP-002 and EXP-003. EXP-004 keeps its reduced 10 seeds (not changed by this amendment). | DEC-008 A5 |
+
+Consequences fixed by the schedule (not by data): with K = 10 and seeds 1 to 20, the number of seeds with at least one failure trial, which therefore contribute to the failure stratum, is 12 at `p = 0.1` and 18 at `p = 0.3`; every seed has at least one success trial at both levels. In EXP-004 (seeds 1 to 10, `p = 0.3`) it is 9 seeds.
+
+Any amendment after the freeze is dated, justified and reported separately from the frozen analysis.

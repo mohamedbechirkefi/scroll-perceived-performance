@@ -19,7 +19,7 @@
  },
  "experiment_id": "EXP-004",
  "label": "confirmatory",
- "description": "EXP-004 sensitivity S2, CPU throttle 4x (draft).",
+ "description": "EXP-004 sensitivity S2, CPU throttle 4x (frozen v1.0, owner-approved 2026-11-24).",
  "interactions_per_session": 10,
  "seeds": [
   1,

@@ -3,7 +3,7 @@
 import pytest
 from hypothesis import given, settings, strategies as st
 
-from scroll.metrics import METRIC_KEYS, compute_trial_metrics, final_frame_index, state_exposure
+from scroll.metrics import HOVER_LEAD_TOLERANCE_MS, METRIC_KEYS, compute_trial_metrics, final_frame_index, state_exposure
 from rawfactory import frame, read_raw, write_raw
 
 SETTLE = 1000
@@ -165,3 +165,32 @@ def test_state_exposure_requires_server_states():
     raw["server_state_after"] = None
     with pytest.raises(ValueError):
         state_exposure(raw)
+
+
+# Amendment A3 (owner-approved 2026-11-24): hover-to-click lead control.
+@pytest.mark.parametrize("hover,expected", [
+    (850.0, "ok"),        # lead 150 ms, exactly h
+    (825.0, "ok"),        # lead 175 ms, deviation 25 ms: at the tolerance, kept
+    (824.0, "excluded"),  # lead 176 ms, deviation 26 ms
+    (876.0, "excluded"),  # lead 124 ms, deviation 26 ms (too short)
+    (875.0, "ok"),        # lead 125 ms, deviation 25 ms
+])
+def test_hover_lead_rule_boundaries(hover, expected):
+    raw = read_raw(hover=hover)
+    m = compute_trial_metrics(raw, SETTLE, hover_lead_ms=150)
+    assert HOVER_LEAD_TOLERANCE_MS == 25.0
+    assert m["status"] == expected
+    if m["status"] == "excluded":
+        assert m["exclusion_reason"].startswith("hover lead") and m["ttuc_ms"] is not None  # values kept for the record
+
+
+def test_hover_lead_rule_missing_hover_and_scope():
+    assert compute_trial_metrics(read_raw(hover=None), SETTLE, hover_lead_ms=150)["exclusion_reason"].startswith("hover lead: no hover")
+    # No scheduled lead given: rule not applied (exploratory callers and synthetic tests).
+    assert compute_trial_metrics(read_raw(hover=None), SETTLE)["status"] == "ok"
+    # Write path: no arm reacts to the hover and the lead is not recorded; rule not applied.
+    raw = write_raw(frames=[frame("confirmed", 320, {"pressed": True, "error": False})])
+    assert compute_trial_metrics(raw, SETTLE, hover_lead_ms=150)["status"] == "ok"
+    # Zero lead (EXP-004 S3, h = 0).
+    assert compute_trial_metrics(read_raw(hover=990.0), SETTLE, hover_lead_ms=0)["status"] == "ok"
+    assert compute_trial_metrics(read_raw(hover=970.0), SETTLE, hover_lead_ms=0)["status"] == "excluded"

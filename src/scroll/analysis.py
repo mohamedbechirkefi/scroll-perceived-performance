@@ -79,6 +79,8 @@ def cell_summaries(result: dict[str, Any]) -> list[dict[str, Any]]:
             "excess_min_ms": min(excess) if excess else None, "excess_median_ms": _med(excess),
             "element_minus_raf2_median_ms": _med(el), "element_available": len(el),
             "event_below_threshold_share": (sum(1 for m in ev if m["event_below_threshold"]) / len(ev)) if ev else None,
+            "input_to_handler_median_ms": _med(_vals(ms, "input_to_handler_ms")),
+            "hover_lead_excluded": sum(1 for t in all_trials if (t["metrics"].get("exclusion_reason") or "").startswith("hover lead")),
             "layout_shift_all_median": _med(_vals(ms, "layout_shift_all")),
             "layout_shift_cls_median": _med(_vals(ms, "layout_shift_cls")),
             "wrong_state_median_ms": _med(_vals(ms, "wrong_state_ms")),
@@ -92,8 +94,94 @@ def cell_summaries(result: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def _interval_fields(row: dict[str, Any], diffs: list[float], delta: float, n_boot: int) -> None:
+    row["median_diff_ms"] = float(np.median(diffs)) if diffs else None
+    if len(diffs) >= 2:
+        row["ci95_low_ms"], row["ci95_high_ms"] = stats.bootstrap_ci(diffs, n_resamples=n_boot)
+        row["sigma_d_ms"] = stats.sd(diffs)
+        row["sigma_d_ci95_low_ms"], row["sigma_d_ci95_high_ms"] = stats.bootstrap_ci(
+            diffs, stat=lambda a: float(np.std(a, ddof=1)), n_resamples=n_boot)
+        row["required_n"] = stats.required_n(row["sigma_d_ms"], delta)
+        row["required_n_at_sigma_upper"] = stats.required_n(row["sigma_d_ci95_high_ms"], delta)
+    else:
+        for k in ("ci95_low_ms", "ci95_high_ms", "sigma_d_ms", "sigma_d_ci95_low_ms", "sigma_d_ci95_high_ms", "required_n", "required_n_at_sigma_upper"):
+            row[k] = None
+
+
+def ok_trials_by_k(result: dict[str, Any]) -> dict[tuple, dict[str, dict[int, dict[int, dict[str, Any]]]]]:
+    """{cell: {arm: {seed: {k: metrics of an ok trial}}}}; failed sessions contribute nothing."""
+    out: dict[tuple, dict[str, dict[int, dict[int, dict[str, Any]]]]] = defaultdict(lambda: defaultdict(dict))
+    for s in result["sessions"]:
+        if s["status"] != "ok":
+            continue
+        by_k = {int(t["k"]): t["metrics"] for t in s["trials"] if t["metrics"]["status"] == "ok"}
+        out[cell_key(s["spec"])][s["spec"]["arm"]][int(s["spec"]["seed"])] = by_k
+    return out
+
+
+def strata_for(ck: tuple[str, float, float, float]) -> list[tuple[str, str]]:
+    """(stratum, role) pairs for a cell. Amendment A2: write cells with p > 0 are split by outcome;
+    the mixed stratum is secondary. At p = 0 every trial succeeds, so the success stratum is the cell."""
+    path, _, p, _ = ck
+    if path == "read":
+        return [("all", "primary")]
+    if p == 0:
+        return [("success", "primary")]
+    return [("success", "primary"), ("failure", "primary"), ("mixed", "secondary")]
+
+
+def _in_stratum(stratum: str, m: dict[str, Any]) -> bool:
+    if stratum in ("all", "mixed"):
+        return True
+    return (m.get("request_ok") is True) if stratum == "success" else (m.get("request_ok") is False)
+
+
+def trial_paired_contrasts(result: dict[str, Any], metric: str = "ttuc_ms", delta: float = 17.0,
+                           n_boot: int = 10_000) -> list[dict[str, Any]]:
+    """Primary estimand (amendment A1): within each seed, trial k of an arm is paired with trial k of
+    BLANK (same scheduled delay and outcome); the seed contributes the median of its trial-level
+    differences; the estimate is the median over seeds, with a percentile bootstrap over seeds.
+    The seed stays the independent unit. Pairs whose scheduled outcome differs between arms (impossible
+    by construction) are dropped and counted in `outcome_mismatches`."""
+    rows = []
+    data = ok_trials_by_k(result)
+    for ck in sorted(data):
+        arms = data[ck]
+        if BASELINE not in arms:
+            continue
+        for arm in sorted(a for a in arms if a != BASELINE):
+            for stratum, role in strata_for(ck):
+                per_seed: dict[int, float] = {}
+                n_pairs = 0
+                mismatches = 0
+                for seed in sorted(set(arms[arm]) & set(arms[BASELINE])):
+                    ta, tb = arms[arm][seed], arms[BASELINE][seed]
+                    diffs = []
+                    for k in sorted(set(ta) & set(tb)):
+                        ma, mb = ta[k], tb[k]
+                        if ma.get(metric) is None or mb.get(metric) is None:
+                            continue
+                        if ck[0] == "write" and ma.get("request_ok") != mb.get("request_ok"):
+                            mismatches += 1
+                            continue
+                        if not _in_stratum(stratum, mb):
+                            continue
+                        diffs.append(float(ma[metric]) - float(mb[metric]))
+                    if diffs:
+                        per_seed[seed] = float(np.median(diffs))
+                        n_pairs += len(diffs)
+                row: dict[str, Any] = {"cell": cell_label(ck), "contrast": f"{arm} - {BASELINE}", "stratum": stratum, "role": role,
+                                       "metric": metric, "pairs": len(per_seed), "trial_pairs": n_pairs,
+                                       "outcome_mismatches": mismatches, "seeds": sorted(per_seed),
+                                       "diffs_ms": [round(per_seed[s], 3) for s in sorted(per_seed)]}
+                _interval_fields(row, [per_seed[s] for s in sorted(per_seed)], delta, n_boot)
+                rows.append(row)
+    return rows
+
+
 def paired_contrasts(result: dict[str, Any], delta: float = 17.0, n_boot: int = 10_000) -> list[dict[str, Any]]:
-    """Seed-level paired contrasts arm - BLANK within each cell, for each paint-time method."""
+    """Draft estimand, kept as a secondary descriptive analysis after amendment A1: per-seed differences
+    of session medians (arm minus BLANK) within each cell, for each paint-time method."""
     rows = []
     per_method = {meth: seed_medians(result, key) for meth, key in PAIRED_METRICS.items()}
     main = per_method["double_raf"]
@@ -106,17 +194,7 @@ def paired_contrasts(result: dict[str, Any], delta: float = 17.0, n_boot: int = 
             diffs = list(d.values())
             row: dict[str, Any] = {"cell": cell_label(ck), "contrast": f"{arm} - {BASELINE}", "pairs": len(diffs),
                                    "diffs_ms": [round(x, 3) for x in diffs]}
-            row["median_diff_ms"] = float(np.median(diffs))
-            if len(diffs) >= 2:
-                row["ci95_low_ms"], row["ci95_high_ms"] = stats.bootstrap_ci(diffs, n_resamples=n_boot)
-                row["sigma_d_ms"] = stats.sd(diffs)
-                row["sigma_d_ci95_low_ms"], row["sigma_d_ci95_high_ms"] = stats.bootstrap_ci(
-                    diffs, stat=lambda a: float(np.std(a, ddof=1)), n_resamples=n_boot)
-                row["required_n"] = stats.required_n(row["sigma_d_ms"], delta)
-                row["required_n_at_sigma_upper"] = stats.required_n(row["sigma_d_ci95_high_ms"], delta)
-            else:
-                for k in ("ci95_low_ms", "ci95_high_ms", "sigma_d_ms", "sigma_d_ci95_low_ms", "sigma_d_ci95_high_ms", "required_n", "required_n_at_sigma_upper"):
-                    row[k] = None
+            _interval_fields(row, diffs, delta, n_boot)
             for meth in ("raf1", "element"):
                 a2 = per_method[meth].get(ck, {})
                 if arm in a2 and BASELINE in a2:
@@ -133,17 +211,20 @@ def paired_contrasts(result: dict[str, Any], delta: float = 17.0, n_boot: int = 
 def degenerate_cases(result: dict[str, Any], contrasts: list[dict[str, Any]], cells: list[dict[str, Any]]) -> list[str]:
     notes = []
     for c in contrasts:
+        tag = f"{c['cell']} {c['contrast']}" + (f" [{c['stratum']}]" if c.get("stratum") else "")
+        if c.get("outcome_mismatches"):
+            notes.append(f"{tag}: {c['outcome_mismatches']} trial pair(s) with different scheduled outcomes (defect: common random numbers broken).")
         if c["pairs"] < 2:
-            notes.append(f"{c['cell']} {c['contrast']}: fewer than two matched seeds; no interval.")
+            notes.append(f"{tag}: fewer than two matched seeds; no interval.")
         elif c["sigma_d_ms"] == 0:
-            notes.append(f"{c['cell']} {c['contrast']}: zero spread between seeds.")
+            notes.append(f"{tag}: zero spread between seeds.")
     for r in cells:
         if r["trials_excluded"]:
             notes.append(f"{r['cell']} {r['arm']}: {r['trials_excluded']} excluded trial(s).")
         if r["sessions_failed"]:
             notes.append(f"{r['cell']} {r['arm']}: {r['sessions_failed']} failed session(s).")
         if r["event_below_threshold_share"] is not None and r["event_below_threshold_share"] >= 0.5:
-            notes.append(f"{r['cell']} {r['arm']}: Event Timing duration below the 16 ms threshold in {r['event_below_threshold_share']:.0%} of trials (metric mostly unobservable).")
+            notes.append(f"{r['cell']} {r['arm']}: Event Timing duration below the 16 ms threshold in {r['event_below_threshold_share']:.0%} of trials (metric mostly unobservable; descriptive only, amendment A4).")
         if r["element_available"] == 0 and r["cell"].startswith("read"):
             notes.append(f"{r['cell']} {r['arm']}: no Element Timing entries.")
         if r["defects"]:

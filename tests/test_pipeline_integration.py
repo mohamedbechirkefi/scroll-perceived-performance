@@ -6,7 +6,7 @@ import json
 import pytest
 
 from scroll import schedule as S
-from scroll.analysis import paired_contrasts, runtime_model
+from scroll.analysis import paired_contrasts, runtime_model, trial_paired_contrasts
 from scroll.report import build_report
 from scroll.runner import run_experiment
 from scroll.schema import SchemaError, read_result, write_result
@@ -91,7 +91,8 @@ def test_report_builds_from_results_only(run_dir):
     md = build_report(run_dir)
     text = md.read_text()
     assert "EXPLORATORY" in text and "PREFETCH - BLANK" in text
-    for f in ("metrics.csv", "cell_summary.csv", "paired_contrasts.csv", "runtime_projection.csv", "analysis.json",
+    assert "Primary estimand: trial-paired contrasts" in text
+    for f in ("metrics.csv", "cell_summary.csv", "paired_contrasts.csv", "trial_paired_contrasts.csv", "runtime_projection.csv", "analysis.json",
               "figures/fig-ttuc.svg", "figures/fig-paired.png", "figures/fig-excess.svg"):
         assert (run_dir / "report" / f).is_file(), f
 
@@ -117,3 +118,59 @@ def test_read_result_missing_and_malformed(tmp_path):
     (tmp_path / "bad.json").write_text("{")
     with pytest.raises(SchemaError):
         read_result(tmp_path / "bad.json")
+
+
+# Amendments A1 (trial-level pairing) and A2 (write path split by outcome), owner-approved 2026-11-24.
+def test_trial_pairing_and_outcome_strata(run_dir):
+    r = read_result(run_dir / "results.json")
+    rows = trial_paired_contrasts(r, n_boot=500)
+    c = {(x["cell"], x["contrast"], x["stratum"]): x for x in rows}
+    assert c[("read L=300 h=150", "SKELETON - BLANK", "all")]["diffs_ms"] == [0, 0, 0]
+    assert c[("read L=300 h=150", "PREFETCH - BLANK", "all")]["diffs_ms"] == [-150, -150, -150]
+    assert c[("read L=300 h=150", "PREFETCH - BLANK", "all")]["trial_pairs"] == 12
+    # Smoke write cell: L = 100, p = 0.5. In the fake, OPTIMISTIC success paints at 16 ms and BLANK at d + 20,
+    # so each success pair differs by -(d + 4); failure pairs both paint at d + 20 (difference 0).
+    K, seeds = 4, [1001, 1002, 1003]
+    fails = {s: [k for k in range(K) if not S.succeeds(s, "write", k, 0.5)] for s in seeds}
+    succ = {s: [k for k in range(K) if k not in fails[s]] for s in seeds}
+    f = c[("write L=100 p=0.5", "OPTIMISTIC - BLANK", "failure")]
+    assert f["role"] == "primary" and f["seeds"] == [s for s in seeds if fails[s]] and set(f["diffs_ms"]) <= {0}
+    ok = c[("write L=100 p=0.5", "OPTIMISTIC - BLANK", "success")]
+    assert ok["role"] == "primary" and ok["seeds"] == [s for s in seeds if succ[s]]
+    import numpy as np
+    for s, v in zip(ok["seeds"], ok["diffs_ms"]):
+        assert v == pytest.approx(float(np.median([-(S.delay_ms(s, "write", k, 100, 0.1) + 4) for k in succ[s]])), abs=1e-3)
+    mixed = c[("write L=100 p=0.5", "OPTIMISTIC - BLANK", "mixed")]
+    assert mixed["role"] == "secondary" and mixed["trial_pairs"] == K * len(seeds)
+    assert all(x["outcome_mismatches"] == 0 for x in rows)
+
+
+def _session(arm, seed, ttucs, path="read", oks=None, excluded=()):
+    trials = []
+    for k, v in enumerate(ttucs):
+        st = "excluded" if k in excluded else "ok"
+        m = {"status": st, "ttuc_ms": v, "request_ok": True if oks is None else oks[k]}
+        trials.append({"k": k, "metrics": m})
+    return {"spec": {"path": path, "arm": arm, "seed": seed, "latency_ms": 1000, "failure_prob": 0 if oks is None else 0.5,
+                     "hover_lead_ms": 150}, "status": "ok", "trials": trials}
+
+
+def test_trial_pairing_removes_shared_delay_jitter_and_drops_excluded_pairs():
+    # BLANK and SKELETON share the per-trial delays; the arm adds +1 ms on each trial.
+    delays = {1: [900, 1100, 1000], 2: [1050, 950, 1000], 3: [1000, 1090, 910]}
+    sessions = []
+    for seed, d in delays.items():
+        sessions.append(_session("BLANK", seed, d))
+        sessions.append(_session("SKELETON", seed, [x + 1 for x in d], excluded=(0,) if seed == 3 else ()))
+    r = {"sessions": sessions}
+    row = trial_paired_contrasts(r, n_boot=200)[0]
+    assert row["diffs_ms"] == [1, 1, 1] and row["sigma_d_ms"] == 0
+    assert row["trial_pairs"] == 8  # the excluded SKELETON trial drops pair k = 0 of seed 3
+
+
+def test_outcome_mismatch_is_flagged_not_paired():
+    s1 = _session("BLANK", 1, [100, 200], path="write", oks=[True, False])
+    s2 = _session("OPTIMISTIC", 1, [10, 20], path="write", oks=[True, True])
+    rows = trial_paired_contrasts({"sessions": [s1, s2]}, n_boot=200)
+    assert all(r["outcome_mismatches"] == 1 for r in rows)
+    assert {r["stratum"]: r["trial_pairs"] for r in rows} == {"success": 1, "failure": 0, "mixed": 1}

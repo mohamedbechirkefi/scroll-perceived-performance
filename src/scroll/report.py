@@ -43,6 +43,7 @@ def md_table(rows: list[dict[str, Any]], cols: list[tuple[str, str]], nd: int = 
 
 
 def figures(result: dict[str, Any], contrasts: list[dict[str, Any]], out: Path) -> list[dict[str, str]]:
+    """`contrasts` are the primary trial-paired contrasts (amendments A1 and A2)."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -68,7 +69,7 @@ def figures(result: dict[str, Any], contrasts: list[dict[str, Any]], out: Path) 
         ax.set_yticks(range(len(keys)), [f"{c}  {a}" for c, a in keys], fontsize=7)
         ax.set_xscale("log")
         ax.set_xlabel("TTUC, ms (log scale); dots = trials, bar = median")
-        ax.set_title("EXPLORATORY: time to usable content per trial", fontsize=9)
+        ax.set_title(f"{result['label'].upper()}: time to usable content per trial", fontsize=9)
         fig.tight_layout()
         for ext in ("svg", "png"):
             fig.savefig(out / f"fig-ttuc.{ext}", dpi=150)
@@ -85,15 +86,15 @@ def figures(result: dict[str, Any], contrasts: list[dict[str, Any]], out: Path) 
                 ax.plot([c["ci95_low_ms"], c["ci95_high_ms"]], [i, i], color="#1a5fb4", lw=3, alpha=0.5)
             ax.plot([c["median_diff_ms"]] * 2, [i - 0.3, i + 0.3], color="k", lw=1.5)
         ax.axvline(0, color="#999", lw=0.8)
-        ax.set_yticks(range(len(contrasts)), [f"{c['cell']}  {c['contrast']}" for c in contrasts], fontsize=7)
-        ax.set_xlabel("Per-seed difference in median TTUC, ms (dots = seeds; bar = median; band = 95% bootstrap over seeds)")
-        ax.set_title("EXPLORATORY: paired seed-level contrasts against BLANK", fontsize=9)
+        ax.set_yticks(range(len(contrasts)), [f"{c['cell']}  {c['contrast']}  [{c['stratum']}]" for c in contrasts], fontsize=7)
+        ax.set_xlabel("Per-seed median of trial-paired TTUC differences, ms (dots = seeds; bar = median; band = 95% bootstrap over seeds)")
+        ax.set_title(f"{result['label'].upper()}: trial-paired contrasts against BLANK", fontsize=9)
         fig.tight_layout()
         for ext in ("svg", "png"):
             fig.savefig(out / f"fig-paired.{ext}", dpi=150)
         plt.close(fig)
         made.append({"id": "FIG-E2", "file": "fig-paired.svg",
-                     "caption": "Per-seed paired differences in median TTUC (arm minus BLANK, ms), with the median and a 95% percentile bootstrap interval over seeds. Exploratory; few seeds give wide intervals.",
+                     "caption": "Trial-paired TTUC differences (arm minus BLANK, ms): each dot is one seed's median over its paired interactions (write cells with p > 0 split by outcome), with the median over seeds and a 95% percentile bootstrap interval over seeds.",
                      "alt": "Dot plot of per-seed TTUC differences against BLANK for each contrast with median bars and interval bands."})
     # Figure 3: excess over the reference lower bound.
     ex: dict[tuple, list[float]] = {}
@@ -109,7 +110,7 @@ def figures(result: dict[str, Any], contrasts: list[dict[str, Any]], out: Path) 
         ax.set_yticks(range(1, len(keys) + 1), [f"{c}  {a}" for c, a in keys], fontsize=7)
         ax.axvline(0, color="#a51d2d", lw=0.8)
         ax.set_xlabel("TTUC minus the reference-model lower bound, ms (instrumentation overhead; must be >= 0)")
-        ax.set_title("EXPLORATORY: timing-chain overhead over the ideal model", fontsize=9)
+        ax.set_title(f"{result['label'].upper()}: timing-chain overhead over the ideal model", fontsize=9)
         fig.tight_layout()
         for ext in ("svg", "png"):
             fig.savefig(out / f"fig-excess.{ext}", dpi=150)
@@ -126,8 +127,9 @@ def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | 
     rdir = run_dir / "report"
     rdir.mkdir(exist_ok=True)
     cells = analysis.cell_summaries(result)
+    primary = analysis.trial_paired_contrasts(result)
     contrasts = analysis.paired_contrasts(result)
-    notes = analysis.degenerate_cases(result, contrasts, cells)
+    notes = analysis.degenerate_cases(result, primary + contrasts, cells)
     model = analysis.runtime_model(result)
     projection_dir = projection_dir or (repo_root() / "experiments")
     projections = []
@@ -138,9 +140,11 @@ def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | 
 
     write_csv(flatten_trials(result), rdir / "metrics.csv")
     write_csv(cells, rdir / "cell_summary.csv")
-    write_csv([{k: (";".join(map(str, v)) if isinstance(v, list) else v) for k, v in c.items()} for c in contrasts], rdir / "paired_contrasts.csv")
+    flat = lambda rows: [{k: (";".join(map(str, v)) if isinstance(v, list) else v) for k, v in c.items()} for c in rows]  # noqa: E731
+    write_csv(flat(primary), rdir / "trial_paired_contrasts.csv")
+    write_csv(flat(contrasts), rdir / "paired_contrasts.csv")
     write_csv(projections, rdir / "runtime_projection.csv")
-    figs = figures(result, contrasts, rdir / "figures")
+    figs = figures(result, [c for c in primary if c["diffs_ms"]], rdir / "figures")
 
     man = result["manifest"]
     label = result["label"].upper()
@@ -174,14 +178,25 @@ def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | 
                          ("excess_min_ms", "Excess min"), ("excess_median_ms", "Excess median")]),
         "",
         md_table(cells, [("cell", "Cell"), ("arm", "Arm"), ("element_minus_raf2_median_ms", "Element - rAF2 (ms)"),
-                         ("event_below_threshold_share", "Event <16 ms share"), ("layout_shift_all_median", "Shift all (median)"),
+                         ("event_below_threshold_share", "Event <16 ms share (descriptive)"), ("input_to_handler_median_ms", "Input to handler (ms)"),
+                         ("hover_lead_excluded", "Hover-lead excl."), ("layout_shift_all_median", "Shift all (median)"),
                          ("layout_shift_cls_median", "Shift CLS-eligible (median)"), ("wrong_state_median_ms", "Wrong-state (ms)"),
                          ("false_state_median_ms", "False-state (ms)"), ("failures_injected", "Failures"),
                          ("final_correct_share", "Final correct"), ("prefetch_hit_share", "Prefetch hit"), ("defects", "Defects")], nd=3),
         "",
-        "## Paired seed-level contrasts (descriptive; no hypothesis tests on exploratory data)",
+        "## Primary estimand: trial-paired contrasts (amendments A1 and A2)",
         "",
-        "Unit: the seed. Each seed contributes the median TTUC of its session; differences are arm minus BLANK for the same seed and cell. "
+        "Unit: the seed. Within a seed and cell, interaction k of an arm is paired with interaction k of BLANK (same scheduled delay and outcome); "
+        "the seed contributes the median of its paired differences. Write cells with p > 0 are split by outcome (success, failure; primary) and also shown mixed (secondary). "
+        "Intervals are 95% percentile bootstrap over seeds (10,000 resamples, seed 20261124)." + (" Descriptive only: no hypothesis tests on exploratory data." if result["label"] == "exploratory" else ""),
+        "",
+        md_table(primary, [("cell", "Cell"), ("contrast", "Contrast"), ("stratum", "Stratum"), ("role", "Role"), ("pairs", "Seeds"),
+                           ("trial_pairs", "Trial pairs"), ("median_diff_ms", "Median diff (ms)"), ("ci95_low_ms", "CI low"), ("ci95_high_ms", "CI high"),
+                           ("sigma_d_ms", "sigma_d (ms)"), ("required_n", "n req.")]),
+        "",
+        "## Secondary: draft seed-median estimand (descriptive)",
+        "",
+        "Each seed contributes the median TTUC of its session; differences are arm minus BLANK for the same seed and cell. "
         "Intervals are 95% percentile bootstrap over seeds (10,000 resamples, seed 20261124). `n req.` is the protocol 5.1 formula with delta = 17 ms, alpha 0.05, power 0.80.",
         "",
         md_table(contrasts, [("cell", "Cell"), ("contrast", "Contrast"), ("pairs", "Pairs"), ("median_diff_ms", "Median diff (ms)"),
@@ -208,11 +223,11 @@ def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | 
     ]
     for f in figs:
         lines += [f"![{f['alt']}](figures/{f['file'].replace('.svg', '.png')})", "", f"**{f['id']}.** {f['caption']}", ""]
-    lines += ["## Files", "", "- `../results.json` (validated against `src/scroll/schemas/result-1.0.0.json`)", "- `metrics.csv`, `cell_summary.csv`, `paired_contrasts.csv`, `runtime_projection.csv`", "- `figures/`", "",
+    lines += ["## Files", "", "- `../results.json` (validated against `src/scroll/schemas/result-1.0.0.json`)", "- `metrics.csv`, `cell_summary.csv`, `trial_paired_contrasts.csv`, `paired_contrasts.csv`, `runtime_projection.csv`", "- `figures/`", "",
               f"Report generated {utc_now()}."]
     md = "\n".join(lines) + "\n"
     (rdir / "report.md").write_text(md, encoding="utf-8")
-    (rdir / "analysis.json").write_text(json.dumps({"cells": cells, "contrasts": contrasts, "notes": notes, "runtime_model": model,
+    (rdir / "analysis.json").write_text(json.dumps({"cells": cells, "primary_contrasts": primary, "contrasts": contrasts, "notes": notes, "runtime_model": model,
                                                     "projections": projections, "results_sha256": res_sha}, indent=1, default=str) + "\n", encoding="utf-8")
     if pdf:
         build_pdf(rdir / "report.md", rdir / "report.pdf")

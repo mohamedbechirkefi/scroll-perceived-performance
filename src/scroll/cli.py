@@ -3,7 +3,7 @@
 
   python -m scroll smoke                         tiny exploratory toolchain run (experiments/smoke.json)
   python -m scroll run --config experiments/EXP-001.json
-                                                 refuses confirmatory configs while the protocol is unfrozen
+                                                 refuses confirmatory configs unless the protocol and the config are frozen (research/freeze.json)
   python -m scroll report --run <run dir> [--pdf]
   python -m scroll test [pytest args]
 """

@@ -61,6 +61,7 @@ def test_expansion_is_matched_across_arms(smoke_cfg):
     (lambda c: c.pop("seeds"), "config-1.0.0"),
     (lambda c: c.update(label="confirmatory", seeds=[1, 2]), "five seeds"),
     (lambda c: c["browser"].update(channel="firefox"), "config-1.0.0"),
+    (lambda c: (c.update(label="confirmatory", seeds=list(range(1, 21))), c["browser"].update(channel="chromium")), "installed Google Chrome"),
 ])
 def test_invalid_configs(smoke_cfg, mutate, msg):
     mutate(smoke_cfg)
@@ -75,3 +76,12 @@ def test_load_config_errors(tmp_path):
     bad.write_text("{not json")
     with pytest.raises(ConfigError, match="valid JSON"):
         load_config(bad)
+
+
+def test_confirmatory_configs_follow_the_amendments():
+    # A6: 20 seeds (1..20) in the main experiments; A5: installed Chrome in every confirmatory config.
+    for name in ("EXP-002.json", "EXP-003.json"):
+        assert load_config(ROOT / "experiments" / name)["seeds"] == list(range(1, 21))
+    for p in sorted((ROOT / "experiments").glob("EXP-00[234]*.json")):
+        c = load_config(p)
+        assert c["label"] == "confirmatory" and c["browser"]["channel"] == "chrome", p.name
