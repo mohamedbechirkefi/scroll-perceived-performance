@@ -14,9 +14,9 @@ and
 **Contributor:** The individual accepting this Agreement.
 
 The Agreement concerns contributions intentionally submitted
-for inclusion in SCROLL (research repository), planned at:
+for inclusion in SCROLL (research repository), at:
 
-https://github.com/mohamedbechirkefi/scroll-research
+https://github.com/mohamedbechirkefi/scroll-perceived-performance
 
 ## 1. Ownership of contributions
 

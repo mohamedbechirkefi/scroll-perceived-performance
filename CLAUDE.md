@@ -33,7 +33,7 @@ Then: run `git status`, inspect existing files, never overwrite owner changes. S
 - No confirmatory experiment before the owner freezes the protocol. A tiny exploratory smoke check of the toolchain is allowed, labelled exploratory.
 
 ### Scope
-- Work only inside this repository (`/Users/bechir/research/labs/scroll-research`). Tools are used read-only: `/usr/local/bin/python3`, `/Users/bechir/research/labs/.tools/py/bin/` (uv, typst, pypdf, pillow), `/Users/bechir/research/labs/.tools/pandoc`, Node at `/Users/bechir/research/helix/.tools/node/bin` (never modify that folder), git.
+- Work only inside this repository (`/Users/bechir/research/labs/scroll-perceived-performance`). Tools are used read-only: `/usr/local/bin/python3`, `/Users/bechir/research/labs/.tools/py/bin/` (uv, typst, pypdf, pillow), `/Users/bechir/research/labs/.tools/pandoc`, Node at `/Users/bechir/research/helix/.tools/node/bin` (never modify that folder), git.
 - Do not touch any other folder under `/Users/bechir/research` (hive, helix, cogkt, trading, the other labs).
 - Never kill processes you did not start. Never delete anything you did not create in the current session.
 
