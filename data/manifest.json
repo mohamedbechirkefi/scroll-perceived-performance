@@ -12,7 +12,7 @@
       "exploratory_smoke": "1001-1005"
     },
     "redistributable": true,
-    "status": "implemented (M2); exploratory runs only until the owner freezes the protocol",
+    "status": "implemented (M2); protocol frozen 2026-11-24 (owner-approved); confirmatory runs scheduled in M3",
     "schedule_formula": "u = fmix32-chain(seed, stream, index, field) / 2^32; delay_ms = floor(L * (1 + jitter * (2u - 1)) + 0.5); failure iff u_outcome < p"
   },
   "external_candidates": [

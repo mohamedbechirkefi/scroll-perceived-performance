@@ -1,8 +1,9 @@
 ---
 # SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0
 title: "Working title: Why faster-feeling interfaces are not always faster (to be revised after results)"
-author: "Owner-approved authorship metadata pending"
-status: "Skeleton only. Independent research manuscript draft, not peer reviewed. No results exist."
+author: "Mohamed Bechir Kefi"
+ai_disclosure: "An AI system (Claude, Anthropic) was used as a research and development assistant; it is not an author."
+status: "Skeleton only. Independent research manuscript draft, not peer reviewed. Protocol frozen 2026-11-24 (owner-approved); no confirmatory results exist."
 ---
 
 # Abstract

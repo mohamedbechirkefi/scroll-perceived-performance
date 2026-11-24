@@ -11,7 +11,8 @@ Run: `PYTHONPATH=src .venv/bin/python -m scroll test` or `uv run pytest`. Browse
 | `test_reference.py` | Reference model values and invalid inputs. |
 | `test_stats.py` | Hand-computed required n and Holm, bootstrap determinism, invalid inputs, invariants. |
 | `test_config.py` | Shipped configs validate; matrix sizes equal the protocol's; invalid configs rejected. |
-| `test_freeze_and_cli.py` | Freeze rules; the runner and CLI refuse confirmatory configs while unfrozen (exit 3, before any browser starts). |
+| `test_freeze_and_cli.py` | Freeze rules on fake repositories: parent status, freeze record, registry and protocol hashes, config hashes; the runner and CLI refuse changed configs (exit 3, before any browser starts). |
+| `test_frozen_repository.py` | This repository's freeze (2026-11-24): the freeze record matches the files; the frozen confirmatory configs pass the guard; changed ones are refused. |
 | `test_pipeline_integration.py` | Config to results to report with a deterministic fake harness; known effects recovered; tampered results fail closed. |
 | `test_browser.py` | Project-specific verification on Chrome: every arm clean, timing chain lower bound, in-page schedule equals Python, rollback under certain failure, layout-shift regressions, keyboard operation and live region, offline (file URLs only), fail-closed configuration, zero latency, CPU throttle path. |
 

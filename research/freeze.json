@@ -1,0 +1,115 @@
+{
+ "freeze_record_version": "1.0.0",
+ "project": "SCROLL",
+ "frozen_on": "2026-11-24",
+ "protocol_version": "1.0",
+ "git_revision": "b4bd25b02368dbde1805bf56864c2db680d93178",
+ "git_revision_note": "Commit at which the frozen protocol files, configurations and code were committed. This record and the registry hashes were added in the following commit.",
+ "owner_approval": {
+  "date": "2026-11-24",
+  "source": "Owner approvals file of 2026-11-24 in the labs coordination folder (outside this repository).",
+  "quoted_answers": "The owner answered the M2 decision list in this session. Quoted answers: \"2. yes 3. yes 4. yes\", \"yes for all others\", and for TOKEN \"1. yes 2. yes 3. yes 4. exclude it 5. keep 6. yes\".",
+  "scroll_approved_amendments": [
+   "Pair trials one to one within each seed.",
+   "Split the p > 0 write path by outcome.",
+   "Control the hover-to-click lead.",
+   "Event Timing is descriptive only.",
+   "Use the installed Google Chrome, with its version recorded.",
+   "20 seeds."
+  ],
+  "gate": "G-FREEZE, owner-approved 2026-11-24"
+ },
+ "amendments": {
+  "A1": "Trial-level pairing within seed (protocol section 4; DEC-008 A1).",
+  "A2": "Write path at p > 0 split into success and failure strata, both primary; mixed estimand secondary (protocol section 4; EXP-003 section 4; DEC-008 A2).",
+  "A3": "Read-path trials excluded when the measured hover-to-click lead deviates from h by more than 25 ms or no hover was recorded (protocol section 7; DEC-008 A3, exclusion option).",
+  "A4": "Event Timing duration descriptive only (protocol section 3.2; DEC-008 A4).",
+  "A5": "Installed Google Chrome through channel chrome, version recorded per run (protocol section 2; DEC-005 option b).",
+  "A6": "20 seeds (1..20) for EXP-002 and EXP-003 (protocol section 5; DEC-008 A5)."
+ },
+ "common_decisions": {
+  "C1": "Data: synthetic data only. SCROLL uses a locally served mock interface with a seeded schedule; no external data.",
+  "C2": "PDFs: built with pandoc and Typst (-V mainfont=\"Libertinus Serif\"); there is no LaTeX on the machine.",
+  "C3": "Authorship: \"Mohamed Bechir Kefi\", no affiliation. The AI is disclosed as a research and development assistant, not as an author.",
+  "C4": "Disclosure: exploratory values of the primary contrasts were seen before the freeze; see c4_disclosure."
+ },
+ "c4_disclosure": {
+  "summary": "Before the freeze, exploratory run EXP-001-20261124T161058Z (seeds 1001 to 1005, disjoint from confirmatory seeds 1 to 20; K = 5; noisy machine) produced values of the contrasts that later became primary. They informed amendments A1, A2, A3 and A6. No amendment value was tuned on them: the 25 ms tolerance and the 20 seeds were stated in DEC-008 before approval.",
+  "storage": [
+   "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/paired_contrasts.csv (draft seed-median estimand, all contrasts)",
+   "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/report.md and analysis.json",
+   "results/exploratory/EXP-001/EXP-001-20261124T161058Z/results.json and trials.csv (raw)",
+   "research/decision_log.md DEC-008 and progress.md (session M2), including ad hoc trial-paired values"
+  ],
+  "values_seen_ms": {
+   "draft_estimand_median_diff": {
+    "read L=100 SKELETON - BLANK": -1.8,
+    "read L=1000 SKELETON - BLANK": -10.3,
+    "read L=100 PREFETCH - BLANK": -87.1,
+    "read L=1000 PREFETCH - BLANK": -149.9,
+    "write L=100 p=0 OPTIMISTIC - BLANK": -86.8,
+    "write L=1000 p=0 OPTIMISTIC - BLANK": -950.5,
+    "write L=100 p=0.5 OPTIMISTIC - BLANK": -5.8,
+    "write L=1000 p=0.5 OPTIMISTIC - BLANK": -72.8
+   },
+   "trial_paired_ad_hoc": "read L=1000 SKELETON - BLANK: per-seed values between -0.9 and 0.4 ms, SD 0.5 ms (computed ad hoc in session M2, recorded in DEC-008 A1).",
+   "seed_spread_sigma_d": "Recorded in DEC-008 A5 and paired_contrasts.csv (4.1 to 498 ms by contrast)."
+  }
+ },
+ "not_frozen": {
+  "EXP-001": "Exploratory by design (smoke run and instrumentation validation); never confirmatory."
+ },
+ "not_in_this_approval": [
+  "DEC-007 implementation choices: in force as the operationalisation in the frozen code revision; not separately listed in the owner's approvals.",
+  "DEC-008 A6 (budget) and A7 (degenerate PREFETCH cells): not listed in the owner's approvals; not applied."
+ ],
+ "protocol": {
+  "path": "research/protocol.md",
+  "sha256": "a87ae45e049c16ed42abef0ab853a0e3fcf28daec9d5482d11bbb1dfb365f004"
+ },
+ "experiments": {
+  "EXP-002": {
+   "protocol_path": "research/experiments/EXP-002/protocol.md",
+   "protocol_sha256": "3d263935e5ed7f97f673b0c4b2beb27ea3b3016184c6d58186655358c73b2f1d",
+   "configs": [
+    {
+     "path": "experiments/EXP-002.json",
+     "file_sha256": "9516bd2c35a98b3784bcab8c2db60033f9c97aff1c903b916bccde200e62701b",
+     "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752"
+    }
+   ]
+  },
+  "EXP-003": {
+   "protocol_path": "research/experiments/EXP-003/protocol.md",
+   "protocol_sha256": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "configs": [
+    {
+     "path": "experiments/EXP-003.json",
+     "file_sha256": "b510a872644964f56b66dca8e2c3ab7b2d026b732e8757fe2aa66aaa4d5fe353",
+     "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c"
+    }
+   ]
+  },
+  "EXP-004": {
+   "protocol_path": "research/experiments/EXP-004/protocol.md",
+   "protocol_sha256": "9d67a8e91d965456c9fddaf372db1d21156840f311478d8647509aa46e5ae54d",
+   "configs": [
+    {
+     "path": "experiments/EXP-004-S2.json",
+     "file_sha256": "048504b10a394ca73a317ed871e2044dcb0ed76b2eae060686b4b90eb5ee0575",
+     "config_hash": "200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e"
+    },
+    {
+     "path": "experiments/EXP-004-S3.json",
+     "file_sha256": "0b24e7af7aeb3ae90d23ef0e70006f7f0f29130bf50c44a71b59b177ab0bdd69",
+     "config_hash": "5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5"
+    },
+    {
+     "path": "experiments/EXP-004-S4.json",
+     "file_sha256": "56d79b5b3f98f7b27f2f2002a64c3a850aba219177c4a3fb24862412f3e2ba8f",
+     "config_hash": "7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50"
+    }
+   ]
+  }
+ }
+}

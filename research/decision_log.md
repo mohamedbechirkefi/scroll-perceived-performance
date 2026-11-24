@@ -81,3 +81,19 @@ Append-only. Each entry: id, date, decision, decided by, rationale, alternatives
   - **A6. Runtime budget.** EXP-001 took 651.6 s for 350 interactions (planning estimate about 15 min). Projected from this run: EXP-002 65 min, EXP-003 104 min, EXP-004 about 117 min (S2 and S4 projections ignore throttling and headed-mode cost). All within the protocol's per-experiment budgets; no matrix cut needed.
   - **A7. Degenerate cell.** PREFETCH at L = 100 ms with h = 150 ms has residual wait 0 by construction (h exceeds the maximum delay), so it tests only rendering overhead. In EXP-002 this also holds at L = 50 ms. This is expected but should be stated in the frozen protocol.
 - Also for the owner: DEC-005 (browser binary) and DEC-007 (implementation choices) remain open.
+
+## DEC-009: Owner-approved amendments and protocol freeze v1.0 (G-FREEZE)
+
+- Date: 2026-11-24
+- Decided by: the owner (approval); applied by the AI assistant under the freeze brief of the same day
+- Status: in force
+- Owner's words (approvals file of 2026-11-24, labs coordination folder): for SCROLL, "Pair trials one to one within each seed.", "Split the p > 0 write path by outcome.", "Control the hover-to-click lead.", "Event Timing is descriptive only.", "Use the installed Google Chrome, with its version recorded.", "20 seeds." Common decisions: C1 synthetic data only; C2 PDFs through pandoc and Typst; C3 authorship "Mohamed Bechir Kefi", no affiliation, the AI disclosed as a research and development assistant, not as an author; C4 disclosure of exploratory primary values seen before the freeze.
+- Decision: research/protocol.md becomes v1.0 (frozen) with amendments A1 to A6 (protocol section 11); EXP-002, EXP-003 and EXP-004 protocols become v1.0 (frozen); EXP-001 stays exploratory and is not frozen. The freeze record `research/freeze.json` holds the SHA-256 of the parent protocol, of each confirmatory protocol and of each confirmatory configuration (file hash and canonical config hash), the code revision, the owner's quoted approval, C1 to C4 and the C4 disclosure.
+- Resolves: DEC-005 (option b, installed Chrome); DEC-008 A1 to A5 (A5 of DEC-008 is the seed count, A6 of the protocol).
+- Implementation choices made in applying the approval:
+  - A3: of the two options in DEC-008 A3, the pre-specified exclusion rule (25 ms tolerance, the value stated in DEC-008) was applied. The in-page timer option would replace the trusted Playwright click by a script-dispatched one, which changes `t_in` and removes the Event Timing entry. The rule applies to read-path trials in every arm; the write path records no hover lead and no write arm reacts to it.
+  - A2: the Holm family of EXP-003 grows from 9 to 15 primary contrasts (3 at p = 0, 12 for the two strata at p > 0). The failure-stratum seed counts are fixed by the schedule (12 at p = 0.1, 18 at p = 0.3, for seeds 1..20 and K = 10).
+  - Editorial at freeze: the reproduction commands in the EXP protocols now name the implemented CLI; the EXP-004 interaction counts, left "fixed at freeze" in the draft, are stated from the configurations (3,600 interactions).
+- Not in this approval: DEC-007 (implementation choices) stays as implemented in the frozen code revision but was not separately listed; DEC-008 A6 (budget) and A7 (degenerate PREFETCH cells at L below h) were not listed and were not applied as protocol changes.
+- Freeze guard: the runner accepts a confirmatory config only if the parent protocol hash, the experiment protocol hash (freeze record and registry) and the config hash all match the freeze record; tests cover acceptance and refusal.
+- Consequences: any later change to a frozen protocol or config is refused by the runner and requires a new owner decision and a dated deviation. Confirmatory runs (M3) are scheduled by the coordinator on a quiet machine.

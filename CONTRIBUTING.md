@@ -43,5 +43,5 @@ Never commit an e-mail address, a name or any other personal identifier in code,
 - Run the tests: `uv run pytest` (or `PYTHONPATH=src .venv/bin/python -m scroll test`); `-m "not browser"` skips the tests that launch Chrome.
 - Build the manuscript PDF without TeX: `pandoc research/paper/manuscript.md -s -t typst -V mainfont="Libertinus Serif" -o manuscript.typ`, then compile `manuscript.typ` with the `typst` Python package.
 - Exploratory toolchain smoke run: `PYTHONPATH=src .venv/bin/python -m scroll smoke --report`.
-- Run a config: `PYTHONPATH=src .venv/bin/python -m scroll run --config experiments/EXP-001.json` (confirmatory configs are refused until the owner freezes the protocol).
+- Run a config: `PYTHONPATH=src .venv/bin/python -m scroll run --config experiments/EXP-001.json` (confirmatory configs run only if they match the frozen configurations in `research/freeze.json`; confirmatory runs are scheduled by the coordinator in M3).
 - Build a run report: `PYTHONPATH=src .venv/bin/python -m scroll report --run <run dir> [--pdf]`.

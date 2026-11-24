@@ -161,3 +161,45 @@ Chrome auto-updates (DEC-005); machine load from other agents inflates the timin
 ### Next action
 
 Owner: decide DEC-005, DEC-007 and DEC-008, then freeze the protocol. AI: write the EXP-001 report (11.3) from the committed run outputs, and add trial-level pairing and outcome stratification to the analysis if adopted.
+
+## 2026-11-24: Freeze session (owner-approved amendments, protocol v1.0 frozen)
+
+Milestone: M1 close (G-FREEZE, owner-approved 2026-11-24). Bounded task: apply exactly the owner's approved amendments, update code and tests, write the freeze record, update the records. No confirmatory run, nothing pushed, nothing downloaded.
+
+### Starting state
+
+`git status`: clean on `main` at `96d6720`.
+
+### Amendments applied (DEC-009; protocol section 11)
+
+A1 trial-level pairing within seed; A2 write path at p > 0 split into success and failure strata (Holm family of EXP-003: 15); A3 hover-lead control by a pre-specified exclusion (deviation above 25 ms or no hover, read path, every arm); A4 Event Timing descriptive only; A5 installed Google Chrome, version recorded, confirmatory configs must use `channel = "chrome"`; A6 20 seeds confirmed. None could not be applied. Not in the approval and not applied as protocol changes: DEC-007 (stays as implemented), DEC-008 A6 and A7.
+
+### Code changes
+
+`metrics.py` (A3 rule, `HOVER_LEAD_TOLERANCE_MS = 25`), `harness.py` (passes h), `analysis.py` (`trial_paired_contrasts` with outcome strata; draft estimand kept as secondary), `report.py` (primary table, `trial_paired_contrasts.csv`, figure from the primary estimand), `config.py` (A5 channel rule), `freeze.py` (freeze record `research/freeze.json`: parent, protocol and config hashes), `runner.py` (passes the config to the guard). Tests: new A1/A2/A3/A5 tests, freeze-guard tests on fake repositories, `tests/test_frozen_repository.py`.
+
+### Commands and actual outputs
+
+```
+$ .venv/bin/python -m pytest -q -m "not browser"   -> 133 passed, 21 deselected in 4.98s (before commit b4bd25b)
+$ .venv/bin/python -m pytest -q                    -> 154 passed in 32.18s (load 4.37; commit b4bd25b)
+$ .venv/bin/python -m pytest -q                    -> 171 passed in 32.70s (after the freeze record and repository tests)
+```
+
+The frozen configs were not run: acceptance is tested with a stub harness that stops right after the guard.
+
+### Freeze record
+
+`research/freeze.json`: code revision `b4bd25b` (the commit holding the frozen protocols, configs and code); `research/protocol.md` SHA-256 `a87ae45e049c16ed42abef0ab853a0e3fcf28daec9d5482d11bbb1dfb365f004`; EXP-002, EXP-003, EXP-004 protocol and config hashes; owner's quoted approval; C1 to C4; C4 disclosure of the exploratory EXP-001 values (paths under `results/exploratory/EXP-001/EXP-001-20261124T161058Z/`, DEC-008).
+
+### Records
+
+Registry (EXP-002 to EXP-004 frozen, not yet run; EXP-001 exploratory, not frozen), `roadmap.md` (M1 done), `research/decision_log.md` (DEC-009), `CITATION.cff` and manuscript metadata (C3), `manuscript.tex` regenerated with pandoc, READMEs, CONTRIBUTING, `data/manifest.json`.
+
+### Risks
+
+Under machine load the A3 rule can exclude read trials (5 of 150 in the exploratory run would have been excluded), counting toward the 5% cell rule: M3 needs a quiet machine. Chrome auto-updates; the version is recorded per run.
+
+### Next action
+
+Coordinator: schedule M3 (EXP-002, EXP-003, then EXP-004) on a quiet machine. AI: write the EXP-001 report (11.3).

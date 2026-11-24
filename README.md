@@ -17,9 +17,9 @@ Loading strategies are often chosen because they look faster. This project measu
 | ID | Experiment | Status |
 |---|---|---|
 | EXP-001 | Smoke run and instrumentation validation (exploratory) | exploratory run made pre-freeze (2026-11-24); see `progress.md` |
-| EXP-002 | Read path: blank vs skeleton vs prefetch | planned (protocol draft, awaiting owner freeze) |
-| EXP-003 | Write path: blank vs optimistic, with failures | planned (protocol draft, awaiting owner freeze) |
-| EXP-004 | Sensitivity analyses | planned (protocol draft, awaiting owner freeze) |
+| EXP-002 | Read path: blank vs skeleton vs prefetch | frozen (owner-approved 2026-11-24), not yet run |
+| EXP-003 | Write path: blank vs optimistic, with failures | frozen (owner-approved 2026-11-24), not yet run |
+| EXP-004 | Sensitivity analyses | frozen (owner-approved 2026-11-24), not yet run |
 
 - Roadmap: [`roadmap.md`](roadmap.md); session journal: [`progress.md`](progress.md).
 - Literature and sources: [`research/literature_review.md`](research/literature_review.md); limitations: [`research/limitations.md`](research/limitations.md).
@@ -35,7 +35,7 @@ PYTHONPATH=src .venv/bin/python -m scroll run --config experiments/EXP-001.json
 PYTHONPATH=src .venv/bin/python -m scroll report --run results/exploratory/EXP-001/<run-id> --pdf
 ```
 
-Confirmatory configs (`experiments/EXP-002.json` and later) are refused until the owner freezes the protocol.
+Confirmatory configs (`experiments/EXP-002.json` and later) are accepted only if they match the frozen configurations recorded in `research/freeze.json` (protocol frozen by the owner on 2026-11-24); any changed config or protocol is refused.
 
 Not yet implemented: confirmatory results, the demo (M5) and the experiment reports.
 
