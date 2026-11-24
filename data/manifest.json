@@ -5,11 +5,15 @@
   "primary_data": {
     "kind": "synthetic",
     "description": "All experimental data are generated locally by the seeded mock transport (latency and failure schedules) and the scripted browser harness. No external dataset is required for the confirmatory experiments.",
-    "generator": "src/scroll (not yet implemented)",
-    "generator_version": null,
-    "seeds": {"confirmatory": "1-20", "exploratory_smoke": "1001-1005"},
+    "generator": "src/web/schedule.js and src/scroll/schedule.py (bit-identical twins); browser harness src/scroll/harness.py",
+    "generator_version": "scroll 0.1.0 (M2, commit 2059ba7)",
+    "seeds": {
+      "confirmatory": "1-20",
+      "exploratory_smoke": "1001-1005"
+    },
     "redistributable": true,
-    "status": "planned"
+    "status": "implemented (M2); exploratory runs only until the owner freezes the protocol",
+    "schedule_formula": "u = fmix32-chain(seed, stream, index, field) / 2^32; delay_ms = floor(L * (1 + jitter * (2u - 1)) + 0.5); failure iff u_outcome < p"
   },
   "external_candidates": [
     {
@@ -25,11 +29,23 @@
     }
   ],
   "third_party_software": [
-    {"name": "web-vitals", "source_url": "https://github.com/GoogleChrome/web-vitals", "licence": "Apache-2.0 (stated on repository page, opened 2026-11-24)", "use": "candidate reference for a differential check of INP-like and CLS measurement", "status": "candidate"},
-    {"name": "Playwright (Python)", "source_url": "https://github.com/microsoft/playwright", "licence": "unverified in M0 (expected Apache-2.0); to confirm from the LICENSE file", "use": "browser harness", "status": "locked in uv.lock (1.65.0), not installed"}
+    {
+      "name": "web-vitals",
+      "source_url": "https://github.com/GoogleChrome/web-vitals",
+      "licence": "Apache-2.0 (stated on repository page, opened 2026-11-24)",
+      "use": "candidate reference for a differential check of INP-like and CLS measurement",
+      "status": "candidate"
+    },
+    {
+      "name": "Playwright (Python)",
+      "source_url": "https://github.com/microsoft/playwright",
+      "licence": "unverified in M0 (expected Apache-2.0); to confirm from the LICENSE file",
+      "use": "browser harness",
+      "status": "locked in uv.lock (1.65.0) and installed in .venv by uv sync; drives the installed Google Chrome 158.0.8127.38 (channel chrome); no browser downloaded"
+    }
   ],
   "blockers": [
     "Playwright licence to be confirmed from its LICENSE file before release.",
-    "Browser binary choice (DEC-005) awaits the owner."
+    "Browser binary choice (DEC-005) awaits the owner; M2 exploratory runs used the installed Google Chrome (DEC-006)."
   ]
 }

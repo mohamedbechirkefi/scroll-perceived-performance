@@ -121,7 +121,7 @@ def figures(result: dict[str, Any], contrasts: list[dict[str, Any]], out: Path) 
 
 
 def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | None = None) -> Path:
-    run_dir = Path(run_dir)
+    run_dir = Path(run_dir).resolve()
     result = read_result(run_dir / "results.json")  # fails closed on malformed input
     rdir = run_dir / "report"
     rdir.mkdir(exist_ok=True)
@@ -220,6 +220,7 @@ def build_report(run_dir: str | Path, pdf: bool = False, projection_dir: Path | 
 
 
 def build_pdf(md: Path, out_pdf: Path) -> Path:
+    md, out_pdf = Path(md).resolve(), Path(out_pdf).resolve()
     typ = out_pdf.with_suffix(".typ")
     subprocess.run([PANDOC, str(md), "-s", "-t", "typst", "-V", 'mainfont=Libertinus Serif', "--resource-path", str(md.parent), "-o", str(typ)], check=True, cwd=md.parent)
     subprocess.run([TYPST_PY, "-c", "import typst,sys; typst.compile(sys.argv[1], output=sys.argv[2], root=sys.argv[3])", str(typ), str(out_pdf), str(md.parent)], check=True, cwd=md.parent)

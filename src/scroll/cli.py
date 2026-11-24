@@ -33,12 +33,13 @@ def main(argv: list[str] | None = None) -> int:
     rp.add_argument("--run", type=Path, required=True)
     rp.add_argument("--pdf", action="store_true")
     t = sub.add_parser("test", help="run the test suite")
-    t.add_argument("pytest_args", nargs=argparse.REMAINDER)
-    a = ap.parse_args(argv)
+    a, extra = ap.parse_known_args(argv)
+    if extra and a.cmd != "test":
+        ap.error(f"unrecognized arguments: {' '.join(extra)}")
 
     try:
         if a.cmd == "test":
-            return subprocess.call([sys.executable, "-m", "pytest", *a.pytest_args], cwd=repo_root())
+            return subprocess.call([sys.executable, "-m", "pytest", *extra], cwd=repo_root())
         if a.cmd == "report":
             from .report import build_report
             print(build_report(a.run, pdf=a.pdf))

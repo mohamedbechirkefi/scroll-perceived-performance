@@ -103,3 +103,61 @@ Frame-time estimation under headless rendering; Event Timing 16 ms floor and 8 m
 ### Next action
 
 Owner: read the draft protocol, decide DEC-004 and DEC-005, and the open questions listed in `roadmap.md` (M1 blockers). AI, while the freeze is pending: implement M2 (schedule module and BLANK arm first, tests), then run EXP-001 as an exploratory smoke run to measure noise before the owner freezes.
+
+## 2026-11-24: Session M2 (core implementation while the freeze is pending)
+
+Milestone: M2. Next bounded task at start: implement the reference baseline and variants with tests, records and tooling, then run EXP-001 as an exploratory smoke run. The protocol stays a draft; nothing was frozen, pushed or downloaded (apart from locked Python packages installed by `uv sync`).
+
+### Starting state
+
+`git status`: clean on `main` at `c0782c1`. `ollama ps`: not relevant (not the TOKEN project).
+
+### Commands and actual outputs
+
+```
+$ uv sync --python /usr/local/bin/python3      -> installed the 28 locked packages into .venv (playwright 1.65.0, numpy 2.5.4, scipy 1.18.1, jsonschema 4.26.0, matplotlib 3.11.2, pytest 9.2.0, hypothesis 6.170.15)
+$ (playwright check) chromium.launch(channel="chrome", headless=True).version  -> 158.0.8127.38
+$ python -m scroll smoke (first attempt, scratch dir)  -> every trial timed out; page error "unknown stream: 0" (defect: stream id passed instead of name). Fixed in app.js.
+$ python -m scroll smoke (second attempt)       -> 5 sessions ok, 10/10 trials ok, 12.1 s
+$ python -m scroll run --config experiments/EXP-002.json  -> "REFUSED: ... research/protocol.md declares itself not frozen", exit 3
+$ python -m pytest -q                           -> 137 passed in 39.42s (before commit 2059ba7)
+$ python -m scroll run --config experiments/EXP-001.json  -> 70 sessions, 70 ok, 350/350 trials ok, 651.6 s
+$ python -m scroll report --run results/exploratory/EXP-001/EXP-001-20261124T161058Z --pdf
+    first attempt: pandoc failed (relative path combined with cwd); fixed by resolving paths; second attempt: report.md and a 9-page report.pdf (not visually inspected)
+$ python -m scroll test -q   first attempt: argparse rejected "-q" (fixed); then 137 passed in 30.74s
+```
+
+Load average (other agents running on the same machine): 25.31, 34.98, 22.02 at the start of EXP-001 and 3.14, 8.87, 14.17 at the end. All timings in this session are noisy.
+
+### EXP-001 exploratory run (pre-freeze; not a finding)
+
+Run `EXP-001-20261124T161058Z`, code `2059ba7` (clean), Chrome 158.0.8127.38 headless, CPU 1x, seeds 1001 to 1005. Outputs in `results/exploratory/EXP-001/EXP-001-20261124T161058Z/` (journal J-0003). Instrumentation checks: C1 pass (no BLANK trial below the injected delay; minimum excess 2.5 ms), C2 pass (cell median excess 11.5 to 23.8 ms), C3 pass (final state correct in 100% of write trials), C4 pass (prefetch used in 100% of trials). No exclusions, no failed sessions, no defect flags.
+
+Planning measurements:
+
+- Runtime: 651.6 s for 350 interactions (median session 10.0 s, median trial 2.03 s; fitted overhead 0.057 s per trial and 0.130 s per session beyond the scheduled waits).
+- Projected full matrix: EXP-002 65.3 min, EXP-003 104.2 min, EXP-004 about 117 min (S2 44.8, S3 27.6, S4 44.8; S2 and S4 do not model throttling or headed cost). Total about 4.8 h.
+- Seed spread (sigma_d, draft estimand): 4.1 to 9.3 ms for SKELETON, 8.3 and 22.5 ms for PREFETCH, 4.3 and 49.5 ms for OPTIMISTIC at p = 0, 45 and 498 ms at p = 0.5 (bimodal, degenerate).
+- Degenerate cases: write cells with p = 0.5 (mixture of success and failure regimes); PREFETCH at L = 100 (residual wait 0 by construction); Event Timing duration below the 16 ms threshold in 72 to 88% of trials; hover lead 153 to 375 ms instead of 150 ms under load.
+
+Proposed amendments for the owner: DEC-008 (A1 trial-level pairing, A2 outcome stratification, A3 hover-lead control, A4 Event Timing as descriptive only, A5 keep 20 seeds with A1, A6 budget fits, A7 state the degenerate prefetch cells). Implementation choices awaiting review: DEC-007. Browser: DEC-006 (installed Chrome for exploratory runs), DEC-005 still open.
+
+### Files changed
+
+New: `src/web/{index.html,app.js,schedule.js}`, `src/scroll/*.py`, `src/scroll/schemas/{config,result}-1.0.0.json`, `experiments/*.json`, `tests/*.py`, `results/exploratory/EXP-001/EXP-001-20261124T161058Z/`. Updated: `pyproject.toml` (pytest pythonpath and marker), `README.md`, `CONTRIBUTING.md` (development commands), `data/manifest.json`, `research/decision_log.md` (DEC-006 to DEC-008), `research/experiment_journal.jsonl` (J-0002, J-0003), `research/experiment_registry.csv` (EXP-001 status), `roadmap.md`, READMEs in `src/`, `tests/`, `experiments/`, `results/`.
+
+### Not done
+
+- No confirmatory run; no protocol frozen or hashed (G-FREEZE).
+- `research/experiments/EXP-001/report.md` (11.3 structure) not written: M3 work; only the generated run report exists.
+- Run report PDF built through the Typst route but not visually inspected.
+- Browser peak memory: only the JS heap per session (`performance.memory`) and the Python process RSS are recorded; Chrome process RSS is not.
+- Prefetch waste (decoy hovers) is implemented (`decoy_hovers`) but was 0 in every config run.
+
+### Risks
+
+Chrome auto-updates (DEC-005); machine load from other agents inflates the timing noise; the trial-level pairing figures in DEC-008 A1 were computed ad hoc and must be added to the report generator if the owner adopts A1.
+
+### Next action
+
+Owner: decide DEC-005, DEC-007 and DEC-008, then freeze the protocol. AI: write the EXP-001 report (11.3) from the committed run outputs, and add trial-level pairing and outcome stratification to the analysis if adopted.
