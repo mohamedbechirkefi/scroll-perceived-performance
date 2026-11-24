@@ -29,3 +29,7 @@ package = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "browser: launches the installed Google Chrome through Playwright (slower)",
+]

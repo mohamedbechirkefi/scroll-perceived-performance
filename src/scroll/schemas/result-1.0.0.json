@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scroll/result-1.0.0.json",
+  "title": "SCROLL run result 1.0.0 (times in ms on the page's performance.now() clock unless stated)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "label", "manifest", "config", "sessions"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "kind": {"const": "scroll.result"},
+    "label": {"enum": ["exploratory", "confirmatory"]},
+    "manifest": {"$ref": "#/$defs/manifest"},
+    "config": {"type": "object"},
+    "sessions": {"type": "array", "items": {"$ref": "#/$defs/session"}}
+  },
+  "$defs": {
+    "num_or_null": {"type": ["number", "null"]},
+    "manifest": {
+      "type": "object",
+      "required": ["run_id", "experiment_id", "label", "config_hash", "seeds", "git", "versions", "platform", "started_at", "finished_at", "runtime_s", "peak_rss_bytes", "browser"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "experiment_id": {"type": "string"},
+        "label": {"enum": ["exploratory", "confirmatory"]},
+        "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "seeds": {"type": "array", "items": {"type": "integer"}},
+        "git": {"type": "object", "required": ["revision", "dirty"], "properties": {"revision": {"type": ["string", "null"]}, "dirty": {"type": ["boolean", "null"]}}},
+        "versions": {"type": "object"},
+        "platform": {"type": "object"},
+        "started_at": {"type": "string"},
+        "finished_at": {"type": ["string", "null"]},
+        "runtime_s": {"type": ["number", "null"], "minimum": 0},
+        "peak_rss_bytes": {"type": ["integer", "null"], "minimum": 0},
+        "browser": {"type": "object"}
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": ["spec", "status", "failure", "wall_s", "summary", "trials"],
+      "properties": {
+        "spec": {
+          "type": "object",
+          "required": ["session_id", "seed", "condition_index", "path", "arm", "latency_ms", "failure_prob", "hover_lead_ms", "order_in_block"],
+          "properties": {
+            "session_id": {"type": "string"},
+            "seed": {"type": "integer"},
+            "path": {"enum": ["read", "write"]},
+            "arm": {"enum": ["BLANK", "SKELETON", "PREFETCH", "OPTIMISTIC"]},
+            "latency_ms": {"type": "number", "minimum": 0},
+            "failure_prob": {"type": "number", "minimum": 0, "maximum": 1},
+            "hover_lead_ms": {"type": "number", "minimum": 0}
+          }
+        },
+        "status": {"enum": ["ok", "failed"]},
+        "failure": {"type": ["string", "null"]},
+        "wall_s": {"type": "number", "minimum": 0},
+        "summary": {"type": ["object", "null"]},
+        "trials": {"type": "array", "items": {"$ref": "#/$defs/trial"}}
+      }
+    },
+    "trial": {
+      "type": "object",
+      "required": ["k", "wall_s", "raw", "metrics"],
+      "properties": {
+        "k": {"type": "integer", "minimum": 0},
+        "wall_s": {"type": "number", "minimum": 0},
+        "raw": {"type": ["object", "null"]},
+        "metrics": {"$ref": "#/$defs/metrics"}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "exclusion_reason", "delay_ms", "request_ok", "residual_wait_ms", "ttuc_ms", "ttff_ms", "ttuc_raf1_ms", "ttuc_element_ms", "ttuc_reference_ms", "ttuc_excess_ms", "event_duration_ms", "event_below_threshold", "layout_shift_all", "layout_shift_cls", "layout_shift_count", "wrong_state_ms", "stale_state_ms", "false_state_ms", "final_correct", "focus_on_toggle", "hover_lead_actual_ms", "prefetch_hit", "input_to_handler_ms", "defects"],
+      "properties": {
+        "status": {"enum": ["ok", "excluded"]},
+        "exclusion_reason": {"type": ["string", "null"]},
+        "delay_ms": {"$ref": "#/$defs/num_or_null"},
+        "request_ok": {"type": ["boolean", "null"]},
+        "residual_wait_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttuc_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttff_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttuc_raf1_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttuc_element_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttuc_reference_ms": {"$ref": "#/$defs/num_or_null"},
+        "ttuc_excess_ms": {"$ref": "#/$defs/num_or_null"},
+        "event_duration_ms": {"$ref": "#/$defs/num_or_null"},
+        "event_below_threshold": {"type": ["boolean", "null"]},
+        "layout_shift_all": {"type": ["number", "null"], "minimum": 0},
+        "layout_shift_cls": {"type": ["number", "null"], "minimum": 0},
+        "layout_shift_count": {"type": ["integer", "null"], "minimum": 0},
+        "wrong_state_ms": {"type": ["number", "null"], "minimum": 0},
+        "stale_state_ms": {"type": ["number", "null"], "minimum": 0},
+        "false_state_ms": {"type": ["number", "null"], "minimum": 0},
+        "final_correct": {"type": ["boolean", "null"]},
+        "focus_on_toggle": {"type": ["boolean", "null"]},
+        "hover_lead_actual_ms": {"$ref": "#/$defs/num_or_null"},
+        "prefetch_hit": {"type": ["boolean", "null"]},
+        "input_to_handler_ms": {"$ref": "#/$defs/num_or_null"},
+        "defects": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

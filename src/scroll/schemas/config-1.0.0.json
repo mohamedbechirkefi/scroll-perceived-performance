@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scroll/config-1.0.0.json",
+  "title": "SCROLL experiment configuration 1.0.0 (durations in ms)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["config_version", "experiment_id", "label", "description", "interactions_per_session", "jitter", "settle_ms", "reserve_space_blank", "decoy_hovers", "hover_lead_ms", "pre_input_ms", "meta_seed", "seeds", "trial_timeout_extra_ms", "browser", "conditions"],
+  "properties": {
+    "config_version": {"const": "1.0.0"},
+    "experiment_id": {"type": "string", "pattern": "^(EXP-[0-9]{3}|SMOKE)$"},
+    "label": {"enum": ["exploratory", "confirmatory"]},
+    "description": {"type": "string", "minLength": 1},
+    "interactions_per_session": {"type": "integer", "minimum": 1, "maximum": 100},
+    "jitter": {"type": "number", "minimum": 0, "exclusiveMaximum": 1},
+    "settle_ms": {"type": "number", "minimum": 0, "maximum": 10000},
+    "reserve_space_blank": {"type": "boolean"},
+    "decoy_hovers": {"type": "integer", "minimum": 0, "maximum": 1},
+    "hover_lead_ms": {"type": "number", "minimum": 0, "maximum": 5000},
+    "pre_input_ms": {"type": "number", "minimum": 0, "maximum": 5000},
+    "meta_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+    "seeds": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 0, "maximum": 4294967295}},
+    "trial_timeout_extra_ms": {"type": "number", "minimum": 100},
+    "browser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channel", "headless", "cpu_throttle", "viewport"],
+      "properties": {
+        "channel": {"enum": ["chrome", "chromium"]},
+        "headless": {"type": "boolean"},
+        "cpu_throttle": {"type": "number", "minimum": 1, "maximum": 20},
+        "viewport": {"type": "array", "items": {"type": "integer", "minimum": 200}, "minItems": 2, "maxItems": 2}
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "arms", "latency_ms"],
+        "properties": {
+          "path": {"enum": ["read", "write"]},
+          "arms": {"type": "array", "minItems": 1, "items": {"enum": ["BLANK", "SKELETON", "PREFETCH", "OPTIMISTIC"]}},
+          "latency_ms": {"type": "array", "minItems": 1, "items": {"type": "number", "minimum": 0, "maximum": 60000}},
+          "failure_prob": {"type": "array", "minItems": 1, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+          "hover_lead_ms": {"type": "array", "minItems": 1, "items": {"type": "number", "minimum": 0, "maximum": 5000}}
+        }
+      }
+    }
+  }
+}

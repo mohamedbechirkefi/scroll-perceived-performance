@@ -1,0 +1,53 @@
+{
+ "config_version": "1.0.0",
+ "jitter": 0.1,
+ "settle_ms": 200,
+ "reserve_space_blank": false,
+ "decoy_hovers": 0,
+ "hover_lead_ms": 150,
+ "pre_input_ms": 50,
+ "meta_seed": 20261124,
+ "trial_timeout_extra_ms": 10000,
+ "browser": {
+  "channel": "chrome",
+  "headless": true,
+  "cpu_throttle": 1,
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "experiment_id": "SMOKE",
+ "label": "exploratory",
+ "description": "Toolchain smoke check (exploratory): one seed, two interactions per session, every arm, settle 200 ms.",
+ "interactions_per_session": 2,
+ "seeds": [
+  1001
+ ],
+ "conditions": [
+  {
+   "path": "read",
+   "arms": [
+    "BLANK",
+    "SKELETON",
+    "PREFETCH"
+   ],
+   "latency_ms": [
+    100
+   ]
+  },
+  {
+   "path": "write",
+   "arms": [
+    "BLANK",
+    "OPTIMISTIC"
+   ],
+   "latency_ms": [
+    100
+   ],
+   "failure_prob": [
+    0.5
+   ]
+  }
+ ]
+}

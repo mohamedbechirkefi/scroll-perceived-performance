@@ -1,0 +1,65 @@
+{
+ "config_version": "1.0.0",
+ "jitter": 0.1,
+ "settle_ms": 1000,
+ "reserve_space_blank": false,
+ "decoy_hovers": 0,
+ "hover_lead_ms": 150,
+ "pre_input_ms": 50,
+ "meta_seed": 20261124,
+ "trial_timeout_extra_ms": 10000,
+ "browser": {
+  "channel": "chrome",
+  "headless": true,
+  "cpu_throttle": 1,
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "experiment_id": "EXP-003",
+ "label": "confirmatory",
+ "description": "EXP-003 write path (draft; refused by the runner until the owner freezes the protocol).",
+ "interactions_per_session": 10,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20
+ ],
+ "conditions": [
+  {
+   "path": "write",
+   "arms": [
+    "BLANK",
+    "OPTIMISTIC"
+   ],
+   "latency_ms": [
+    100,
+    300,
+    1000
+   ],
+   "failure_prob": [
+    0,
+    0.1,
+    0.3
+   ]
+  }
+ ]
+}

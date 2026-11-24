@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
+<!-- SCROLL mock interface: one page, the loading strategy is the only switch.
+     Query: ?path=read|write&arm=BLANK|SKELETON|PREFETCH|OPTIMISTIC&seed=&L=&p=&jitter=&items=&settle=&reserve=0|1
+     Instrumentation only records raw timestamps; metrics are computed in src/scroll/metrics.py. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCROLL mock catalogue</title>
+<style>
+  body { margin: 0; font: 16px/1.4 system-ui, sans-serif; color: #1b1b1b; background: #fafaf7; }
+  main { max-width: 760px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 0 0 12px; }
+  #list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; list-style: none; padding: 0; margin: 0 0 16px; }
+  #list button, #save { font: inherit; padding: 10px 8px; width: 100%; border: 1px solid #555; background: #fff; border-radius: 4px; cursor: pointer; }
+  #list button:focus-visible, #save:focus-visible { outline: 3px solid #1a5fb4; outline-offset: 2px; }
+  #detail { margin: 0; }
+  #detail.reserve { min-height: 220px; }
+  .box { height: 220px; overflow: hidden; border: 1px solid #ccc; border-radius: 4px; padding: 12px; box-sizing: border-box; background: #fff; }
+  .box h2 { font-size: 20px; margin: 0 0 8px; height: 28px; }
+  .box p { margin: 0 0 8px; height: 66px; overflow: hidden; }
+  .box dl { margin: 0; display: grid; grid-template-columns: 120px 1fr; height: 72px; }
+  .sk { background: #e4e4e0; border-radius: 3px; }
+  .sk-h { height: 28px; width: 50%; margin-bottom: 8px; }
+  .sk-p { height: 66px; margin-bottom: 8px; }
+  .sk-d { height: 72px; width: 70%; }
+  #below { height: 120px; margin-top: 16px; border-top: 1px solid #ccc; padding-top: 8px; }
+  #write-panel { border: 1px solid #ccc; border-radius: 4px; padding: 12px; background: #fff; }
+  #write-panel h2 { font-size: 20px; margin: 0 0 8px; }
+  #save { width: 180px; }
+  #save[aria-pressed="true"] { background: #1a5fb4; color: #fff; }
+  #status { min-height: 24px; height: 24px; margin: 8px 0 0; color: #a51d2d; }
+  #config-error { color: #a51d2d; font-weight: bold; }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Catalogue</h1>
+  <p id="config-error" role="alert" hidden></p>
+  <section id="read-panel" aria-labelledby="read-h" hidden>
+    <h2 id="read-h" class="visually-plain" style="font-size:16px;margin:0 0 8px">Items</h2>
+    <ul id="list"></ul>
+    <section id="detail" aria-live="polite" aria-busy="false" aria-label="Item detail"></section>
+    <div id="below"><strong>Related items</strong><p>Content below the detail region. It moves if the region above changes height.</p></div>
+  </section>
+  <section id="write-panel" aria-labelledby="item-title" hidden>
+    <h2 id="item-title">Item</h2>
+    <button id="save" type="button" aria-pressed="false">Save</button>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
+<script src="schedule.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
