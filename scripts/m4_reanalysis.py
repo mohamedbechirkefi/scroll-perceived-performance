@@ -243,6 +243,9 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     out = ROOT / args.out
+    # Revision and cleanliness are read before any output is written.
+    rev = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    dirty = bool(subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"], capture_output=True, text=True).stdout.strip())
     out.mkdir(parents=True, exist_ok=True)
     results = {n: load(n) for n in RUNS}
     write_csv(x1_readings(), out / "x1_test_readings.csv")
@@ -252,8 +255,6 @@ def main() -> int:
     write_csv(x3_a3_inclusion(results["EXP-002"]), out / "x3_a3_inclusion_exp002.csv")
     write_csv(x4_interval_robustness(), out / "x4_interval_robustness.csv")
     write_csv(x5_order(results), out / "x5_arm_order.csv")
-    rev = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
-    dirty = bool(subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"], capture_output=True, text=True).stdout.strip())
     inputs = {f"{RUNS[n]}/results.json": sha256(ROOT / RUNS[n] / "results.json") for n in RUNS}
     for exp in ("EXP-002", "EXP-003"):
         p = f"{RUNS[exp]}/report/inference.json"
