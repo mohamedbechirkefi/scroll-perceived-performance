@@ -1,0 +1,56 @@
+{
+ "browser": {
+  "channel": "chrome",
+  "cpu_throttle": 1,
+  "headless": true,
+  "version": "158.0.8127.38",
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "config_hash": "fe63a64587a49e07b2531fbc1aded23e06000eb593a543ec2646cefec25a4133",
+ "experiment_id": "SMOKE",
+ "finished_at": "2026-11-25T06:50:50Z",
+ "git": {
+  "dirty": true,
+  "revision": "7c8f7d10d14629a230536b4db42ba2fc81883538"
+ },
+ "label": "exploratory",
+ "load_average_end": [
+  1.62,
+  4.71,
+  13.37
+ ],
+ "load_average_start": [
+  1.67,
+  4.77,
+  13.44
+ ],
+ "notes": "Timings measured while other agents ran on the same machine are noisy; see progress.md.",
+ "peak_rss_bytes": 51773440,
+ "platform": {
+  "cpu": "Apple M1 Pro",
+  "mac_ver": "15.3.1",
+  "machine": "arm64",
+  "memsize_bytes": 17179869184,
+  "ncpu": 10,
+  "os": "Darwin",
+  "os_release": "24.3.0"
+ },
+ "run_id": "SMOKE-20261125T065043Z",
+ "runtime_s": 7.204102499999863,
+ "seeds": [
+  1001
+ ],
+ "started_at": "2026-11-25T06:50:43Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "playwright": "1.65.0",
+  "python": "3.12.1",
+  "scipy": "1.18.1",
+  "scroll": "0.1.0"
+ }
+}

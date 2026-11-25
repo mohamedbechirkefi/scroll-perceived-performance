@@ -1,0 +1,4 @@
+cell,contrast,pairs,diffs_ms,median_diff_ms,ci95_low_ms,ci95_high_ms,sigma_d_ms,sigma_d_ci95_low_ms,sigma_d_ci95_high_ms,required_n,required_n_at_sigma_upper,median_diff_raf1_ms,median_diff_element_ms
+read L=100 h=150,PREFETCH - BLANK,1,-103.85,-103.84999999776483,,,,,,,,-72.32399999776484,-79.84999999776483
+read L=100 h=150,SKELETON - BLANK,1,-27.1,-27.099999997764826,,,,,,,,-3.632999995529673,-1.1999999955296516
+write L=100 p=0.5,OPTIMISTIC - BLANK,1,-39.7,-39.69999999925494,,,,,,,,-40.44999999925494,

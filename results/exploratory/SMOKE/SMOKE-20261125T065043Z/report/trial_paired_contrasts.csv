@@ -1,0 +1,6 @@
+cell,contrast,stratum,role,metric,pairs,trial_pairs,outcome_mismatches,seeds,diffs_ms,median_diff_ms,ci95_low_ms,ci95_high_ms,sigma_d_ms,sigma_d_ci95_low_ms,sigma_d_ci95_high_ms,required_n,required_n_at_sigma_upper
+read L=100 h=150,PREFETCH - BLANK,all,primary,ttuc_ms,1,2,0,1001,-103.85,-103.84999999776483,,,,,,,
+read L=100 h=150,SKELETON - BLANK,all,primary,ttuc_ms,1,2,0,1001,-27.1,-27.099999997764826,,,,,,,
+write L=100 p=0.5,OPTIMISTIC - BLANK,success,primary,ttuc_ms,1,1,0,1001,-83.0,-83.0,,,,,,,
+write L=100 p=0.5,OPTIMISTIC - BLANK,failure,primary,ttuc_ms,1,1,0,1001,3.6,3.600000001490116,,,,,,,
+write L=100 p=0.5,OPTIMISTIC - BLANK,mixed,secondary,ttuc_ms,1,2,0,1001,-39.7,-39.69999999925494,,,,,,,

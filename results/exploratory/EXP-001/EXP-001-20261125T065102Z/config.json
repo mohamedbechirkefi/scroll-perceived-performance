@@ -1,0 +1,60 @@
+{
+ "browser": {
+  "channel": "chrome",
+  "cpu_throttle": 1,
+  "headless": true,
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "conditions": [
+  {
+   "arms": [
+    "BLANK",
+    "SKELETON",
+    "PREFETCH"
+   ],
+   "latency_ms": [
+    100,
+    1000
+   ],
+   "path": "read"
+  },
+  {
+   "arms": [
+    "BLANK",
+    "OPTIMISTIC"
+   ],
+   "failure_prob": [
+    0,
+    0.5
+   ],
+   "latency_ms": [
+    100,
+    1000
+   ],
+   "path": "write"
+  }
+ ],
+ "config_version": "1.0.0",
+ "decoy_hovers": 0,
+ "description": "EXP-001 smoke run and instrumentation validation (exploratory, pre-freeze), matrix of research/experiments/EXP-001/protocol.md section 5.",
+ "experiment_id": "EXP-001",
+ "hover_lead_ms": 150,
+ "interactions_per_session": 5,
+ "jitter": 0.1,
+ "label": "exploratory",
+ "meta_seed": 20261124,
+ "pre_input_ms": 50,
+ "reserve_space_blank": false,
+ "seeds": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005
+ ],
+ "settle_ms": 1000,
+ "trial_timeout_extra_ms": 10000
+}
