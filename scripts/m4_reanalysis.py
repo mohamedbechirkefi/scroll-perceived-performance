@@ -14,6 +14,8 @@ Analyses:
   X5  Arm-order check: per-seed paired differences split by whether the arm ran before BLANK.
   X6  Narrow S1 reading: the frozen robustness rule recomputed with S1 = Element Timing only (the frozen
       EXP-004 protocol names "Element Timing or trace"; DEC-011 item 5 also counted rAF1).
+  X7  EXP-003 failure-trial exposure table (descriptive), regenerated from the committed traces so that
+      the M3 one-off numbers in the EXP-003 report map to a committed output.
 
 Usage: PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS
 """
@@ -261,6 +263,24 @@ def x6_narrow_s1() -> list[dict]:
     return rows
 
 
+def x7_failure_exposure(res: dict) -> list[dict]:
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for s in res["sessions"]:
+        if s["status"] != "ok":
+            continue
+        for t in s["trials"]:
+            m = t["metrics"]
+            if m["status"] == "ok" and m.get("request_ok") is False:
+                groups[(float(s["spec"]["latency_ms"]), s["spec"]["arm"])].append(m)
+    rows = []
+    for (L, arm), ms in sorted(groups.items()):
+        med = lambda k: float(np.median([m[k] for m in ms if m.get(k) is not None]))
+        rows.append({"L": L, "arm": arm, "failure_trials": len(ms), "median_false_state_ms": med("false_state_ms"),
+                     "median_stale_state_ms": med("stale_state_ms"), "median_wrong_state_ms": med("wrong_state_ms"),
+                     "median_delay_ms": med("delay_ms"), "median_ttuc_ms": med("ttuc_ms")})
+    return rows
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
@@ -278,6 +298,7 @@ def main() -> int:
     write_csv(x3_a3_inclusion(results["EXP-002"]), out / "x3_a3_inclusion_exp002.csv")
     write_csv(x4_interval_robustness(), out / "x4_interval_robustness.csv")
     write_csv(x5_order(results), out / "x5_arm_order.csv")
+    write_csv(x7_failure_exposure(results["EXP-003"]), out / "x7_exp003_failure_exposure.csv")
     x6 = x6_narrow_s1()
     write_csv(x6, out / "x6_narrow_s1_reading.csv")
     counts = {"robust_dec011": sum(r["frozen_verdict_dec011"] == "robust" for r in x6),
