@@ -127,8 +127,8 @@ Side-by-side estimates. Each cell gives the median trial-paired TTUC difference 
 
 - **Robust findings.**
   - The prefetch benefit and the optimistic benefit on success keep their sign and approximate size under every method, CPU throttling and headed rendering.
-  - Under CPU 4x the prefetch benefit shrank by 5 to 8 ms and the optimistic benefit grew by 7 to 14 ms, a measured shift with 10 seeds.
-  - Headed rendering enlarged the optimistic benefit by 17 to 27 ms at L = 300 and 1000 ms.
+  - Under CPU 4x the prefetch benefit shrank by 5.9 to 7.6 ms and the optimistic benefit grew by 5.9 to 13.7 ms, a measured shift with 10 seeds (differences of point estimates; corrected in M4, the M3 text said 5 to 8 and 7 to 14 ms).
+  - Headed rendering enlarged the optimistic benefit by 15.3 to 27.0 ms at L = 300 and 1000 ms (corrected in M4; the M3 text said 17 to 27 ms).
   - The skeleton's equivalence with blank at L of 100 ms and above holds at every level.
 - **Method-dependent: SKELETON at L = 50 ms.** The only non-null verdict that changes is the -16.7 ms SKELETON effect at L = 50 ms. It becomes equivalent under both alternative paint methods, shrinking to -9.1 ms under Element Timing. The main interpretation ("strategies that change first feedback do not necessarily change time to usable content") is therefore qualified at the shortest delay: the frame-scale difference observed there depends on how paint time is measured.
 - **Failure strata.**

@@ -69,7 +69,7 @@
   - C3 and C4 passed.
 - **In this run:**
   - No BLANK trial had TTUC below its injected delay (0 of 796).
-  - The minimum excess over the reference lower bound was 3.1 ms in every cell.
+  - The excess over the reference lower bound was at least 3.1 ms in every cell (BLANK minima 3.9 to 6.4 ms; wording corrected in M4).
   - Prefetched responses were used in 100% of analysed PREFETCH trials.
   - The final displayed state was correct in 100% of trials.
   - No defect flag was raised.
@@ -149,7 +149,7 @@ Descriptive cell summaries (trial level; medians):
 - **Measured: SKELETON, L of 100 ms and above.** SKELETON does not change TTUC by more than a fraction of a frame. It lowers TTFF from roughly the full delay to about 28 ms: placeholders change first feedback, not usable content. This is the pattern the main interpretation predicts.
 - **Measured: SKELETON, L = 50 ms.** SKELETON reaches content 16.7 ms earlier than BLANK.
 - **Model-dependent explanation, not tested.** At such short delays BLANK pays a larger frame-scheduling cost: BLANK's median excess over the reference model is 27.2 ms at L = 50 ms against 10.9 ms for SKELETON. The skeleton's commit at input appears to keep the renderer's frame loop active, so the content commit lands in an earlier frame.
-- **Measurement dependence.** EXP-004 (S1) shows that the alternative paint methods shrink the effect to -15.3 ms (rAF1) and -9.1 ms (Element Timing), and equivalence holds under both. The effect is a frame-scale artefact of when frames are produced and measured, of about one 60 Hz frame. It is not evidence that skeletons deliver content sooner.
+- **Measurement dependence.** EXP-004 (S1) shows that the alternative paint methods shrink the effect to -15.3 ms (rAF1) and -9.1 ms (Element Timing), and equivalence holds under both. The effect is of frame scale, about one frame, and its size depends on how paint time is measured. The direction is the same under all three methods, so the data do not show that it is absent; they show that it is not robust and do not establish a skeleton benefit. The M4 exploratory decomposition (`results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv`) locates it in frame alignment: the second-frame gap was the same in both arms, and the frame carrying the content had already started at the commit in 83% of SKELETON trials against 1% of BLANK trials. (Revised in M4 review pass 2; the M3 text called it an artefact and said it was not evidence that skeletons deliver content sooner.)
 - **Expected-pattern contradiction.** Under the frozen wording ("SKELETON outside the equivalence margin"), the point estimate lies inside the margin but the TOST fails. The result is therefore reported as "equivalence not shown, method-dependent", not as a confirmed contradiction.
 - **Test readings.** For SKELETON at L = 300 ms, the unadjusted 95% interval excludes 0 (-1.1 to -0.4 ms) while the Holm-adjusted Wilcoxon test does not reject. The difference is about one millisecond and lies well inside the equivalence margin; neither reading changes the equivalence verdict.
 - **Non-significance is not equivalence.** Equivalence is claimed only where the TOST shows it.

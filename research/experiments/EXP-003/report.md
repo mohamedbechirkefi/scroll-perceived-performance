@@ -124,13 +124,13 @@ Wrong-state exposure in failure trials (83 failure trials per L and arm, all see
 | 1000 | BLANK | 0.0 | 0.0 | 0.0 | 1014.0 |
 | 1000 | OPTIMISTIC | 999.1 | 0.0 | 999.1 | 1014.0 |
 
-- **Successful saves.** BLANK's wrong-state exposure is stale-state waiting of about the delay (cell medians 111.6 to 1024.5 ms over all trials), whereas OPTIMISTIC is about 27 to 30 ms.
+- **Successful saves.** BLANK's wrong-state exposure is stale-state waiting of about the delay (cell medians 110.1 to 1024.5 ms over all trials; corrected in M4, the M3 text said 111.6), whereas OPTIMISTIC is about 27 to 30 ms.
 - **Cell medians of TTUC:**
   - BLANK: 111.6 to 112.3 ms at L = 100, 312.1 to 313.1 ms at L = 300, 1024.4 to 1024.8 ms at L = 1000.
   - OPTIMISTIC: 27.0 to 29.7 ms.
   - With failures (p = 0.3), OPTIMISTIC's upper quartile rises to 108.0, 293.1 and 943.7 ms.
 - **Layout shift:** 0 in every cell.
-- **Event Timing** (descriptive, A4): below threshold in 62 to 76% of BLANK trials.
+- **Event Timing** (descriptive, A4): below threshold in 62.5 to 75.5% of BLANK trials.
 - **Runtime:** 6,318.7 s; peak Python RSS 78 MiB.
 - **Figures:** `results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-ttuc.png`, `fig-paired.png` and `fig-excess.png`, generated from `results.json`.
 
@@ -155,7 +155,7 @@ Wrong-state exposure in failure trials (83 failure trials per L and arm, all see
   - One mock toggle; failures are uniform Bernoulli with fixed delay, so no retries or timeouts are modelled.
   - One browser version and one machine.
 - **Statistical:**
-  - The failure strata have 12 or 18 seeds and few trials per seed (26 and 57 pairs in total), so their intervals are wider.
+  - The failure strata have 12 or 18 seeds and few trials per seed (26 trial pairs per cell at p = 0.1 and 57 at p = 0.3), so their intervals are wider.
   - Holm over 15; the DEC-011 test reading.
 
 ## 11. Conclusion and next experiment
