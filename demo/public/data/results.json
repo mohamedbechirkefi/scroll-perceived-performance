@@ -1,0 +1,1409 @@
+{
+ "schema": "lab-demo-results",
+ "schema_version": "1.0.0",
+ "project": "SCROLL",
+ "question": "How do loading strategies (blank, skeleton, optimistic update, prefetch) affect measurable interface responsiveness under controlled, injected delays?",
+ "status_label": "Measured benchmark results, one mock page in one browser on one machine. EXP-002 to EXP-004 are confirmatory under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. Objective timing only: no claim about perceived speed. The manuscript is a preprint draft, not peer-reviewed; the owner's full-text review is pending (M6). DEC-011 is a pending owner decision and is shown both ways.",
+ "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+ "sources": [
+  {
+   "path": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json",
+   "sha256": "4873e027e30f7e3aebe728786bce30f72b773e54ddf6761441ebe8cc52be6802"
+  },
+  {
+   "path": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json",
+   "sha256": "cf46b6d20b01185ea9d644e031e60ca6c22c52ac13ab74da07309c8b11bb70cf"
+  },
+  {
+   "path": "results/raw/EXP-004/sensitivity/sensitivity.json",
+   "sha256": "3ed7f4f86cc39e136b85db2b7f0c90ec625b7bf39f80f1610c84b56a80708404"
+  },
+  {
+   "path": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/cell_summary.csv",
+   "sha256": "5f84980280a32a2e8f52592cd633b1928f766d2a0e24a0a0b83992f02a89795a"
+  },
+  {
+   "path": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/cell_summary.csv",
+   "sha256": "19af5544746877d2288f44668716d3b2f23133ce9f13b7cb9b1a650812857b16"
+  },
+  {
+   "path": "results/exploratory/M4-REANALYSIS/x6_narrow_s1_reading.csv",
+   "sha256": "6fe3c3eb112b1514cd58cf4733008e491c70659f2ed1563a60c3278d32abb391"
+  },
+  {
+   "path": "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv",
+   "sha256": "1d0c90c00dfb16c7d21b5f052d6680f7fad87c2fa99dbcb817ff7cf870c06dcd"
+  },
+  {
+   "path": "research/experiment_registry.csv",
+   "sha256": "4774f300591b686eb9265337f038a279c8c4d348e3ee3b0a8d0ddbd3ae81708b"
+  },
+  {
+   "path": "research/claims_register.csv",
+   "sha256": "48bf0f0903421ea720e747a12e55f4ef04b5793a7701ff67bbd81d151eaad114"
+  },
+  {
+   "path": "research/publication/artifact_manifest.json",
+   "sha256": "bbaf35d12f07d2b36078daf295455011165c2443deed52b8e89d69bb494eb6f9"
+  },
+  {
+   "path": "research/limitations.md",
+   "sha256": "042dc0487c87c614a3d4ae48a3b07c5d52da48f2712d6a39f23aea198123302e"
+  }
+ ],
+ "experiments": [
+  {
+   "id": "EXP-001",
+   "title": "Smoke run and instrumentation validation",
+   "status": "exploratory (not frozen), two runs",
+   "verdict": "Instrumentation validated (exploratory).",
+   "estimates": [],
+   "claim_ids": [
+    "C-035"
+   ],
+   "report_path": "research/experiments/EXP-001/report.md",
+   "notes": [
+    "Both runs had 70 of 70 sessions and 350 interactions.",
+    "The second run had one hover-lead exclusion.",
+    "The pre-freeze run motivated amendments A1 to A3 and A6; its values are not evidence.",
+    "The protocol said EXP-001 would choose the alternative paint method for S1; no choice was recorded (DEC-012)."
+   ]
+  },
+  {
+   "id": "EXP-002",
+   "title": "Read path: BLANK vs SKELETON vs PREFETCH",
+   "status": "confirmatory, complete",
+   "verdict": "No contradiction; H0 rejected at all 4 delays. Equivalence shown at 3 of 4 delays; not shown at 50 ms.",
+   "estimates": [
+    {
+     "label": "L = 50 ms: PREFETCH minus BLANK",
+     "estimate": -49.95000000298023,
+     "ci_low": -51.17499999701977,
+     "ci_high": -48.92499999888241,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-50.0",
+     "interval_display": "[-51.2, -48.9]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "0.00053",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-001"
+    },
+    {
+     "label": "L = 50 ms: SKELETON minus BLANK",
+     "estimate": -16.675000000745058,
+     "ci_low": -17.099999997764826,
+     "ci_high": -16.049999997019768,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-16.7",
+     "interval_display": "[-17.1, -16.0]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "0.00053",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": "[-17.05, -16.1], not shown",
+     "claim_id": "C-002"
+    },
+    {
+     "label": "L = 100 ms: PREFETCH minus BLANK",
+     "estimate": -84.90000000037253,
+     "ci_low": -86.27500000037253,
+     "ci_high": -84.12500000558794,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-84.9",
+     "interval_display": "[-86.3, -84.1]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "1.5e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-003"
+    },
+    {
+     "label": "L = 100 ms: SKELETON minus BLANK",
+     "estimate": -0.5500000026077032,
+     "ci_low": -1.8749999944120646,
+     "ci_high": 0.1249999962747097,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.6",
+     "interval_display": "[-1.9, 0.1]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "0.27",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": "[-1.6, 0.0], equivalent",
+     "claim_id": "C-004"
+    },
+    {
+     "label": "L = 300 ms: PREFETCH minus BLANK",
+     "estimate": -160.52500000409782,
+     "ci_low": -163.5,
+     "ci_high": -157.14999999850988,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-160.5",
+     "interval_display": "[-163.5, -157.1]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "1.5e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-005"
+    },
+    {
+     "label": "L = 300 ms: SKELETON minus BLANK",
+     "estimate": -0.9750000014901161,
+     "ci_low": -1.1499999985098839,
+     "ci_high": -0.44999999552965164,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-1.0",
+     "interval_display": "[-1.1, -0.4]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "0.27",
+     "reading_a": "not rejected",
+     "reading_b": "excludes 0",
+     "tost_display": "[-1.1, -0.6], equivalent",
+     "claim_id": "C-006"
+    },
+    {
+     "label": "L = 1000 ms: PREFETCH minus BLANK",
+     "estimate": -157.80000000074506,
+     "ci_low": -159.125,
+     "ci_high": -155.40000000409782,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-157.8",
+     "interval_display": "[-159.1, -155.4]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "0.00053",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-007"
+    },
+    {
+     "label": "L = 1000 ms: SKELETON minus BLANK",
+     "estimate": 0.04999999888241291,
+     "ci_low": -0.9499999973922968,
+     "ci_high": 0.9249999988824129,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.0",
+     "interval_display": "[-0.9, 0.9]",
+     "group": "read",
+     "seeds": 20,
+     "holm_p_display": "1.0",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": "[-0.7, 0.8], equivalent",
+     "claim_id": "C-008"
+    }
+   ],
+   "claim_ids": [
+    "C-001",
+    "C-002",
+    "C-003",
+    "C-004",
+    "C-005",
+    "C-006",
+    "C-007",
+    "C-008",
+    "C-030",
+    "C-031",
+    "C-034",
+    "C-038",
+    "C-039",
+    "C-040",
+    "C-041",
+    "C-042",
+    "C-044",
+    "C-046"
+   ],
+   "report_path": "research/experiments/EXP-002/report.md",
+   "notes": [
+    "EXP-002 (`EXP-002-20261125T070315Z`) completed 240 of 240 sessions in 3,887.4 s; 2,387 of 2,400 trials were analysed after 13 hover-lead exclusions (at most 2 of 200 in any cell and arm), and no cell failed.",
+    "Prefetching reduced TTUC at every delay.",
+    "The skeleton reached usable content 16.7 ms earlier than BLANK under the main paint method, H0 was rejected, and equivalence was not shown because the lower 90% bound, -17.05 ms, lies just beyond the margin.",
+    "The two test readings disagree at L = 300 ms: the unadjusted interval [-1.1, -0.4] ms excludes 0, the Holm-adjusted Wilcoxon test does not reject."
+   ]
+  },
+  {
+   "id": "EXP-003",
+   "title": "Write path: BLANK (pessimistic) vs OPTIMISTIC with failures",
+   "status": "confirmatory, complete",
+   "verdict": "H0 rejected in all 9 success strata. No contradiction. H0 not rejected in all 6; no equivalence claim.",
+   "estimates": [
+    {
+     "label": "L = 100 ms, p = 0, success: OPTIMISTIC minus BLANK",
+     "estimate": -85.22500000149012,
+     "ci_low": -88.02499999850988,
+     "ci_high": -84.32500000298023,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-85.2",
+     "interval_display": "[-88.0, -84.3]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "0.00079",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-009"
+    },
+    {
+     "label": "L = 100 ms, p = 0.1, success: OPTIMISTIC minus BLANK",
+     "estimate": -85.2749999947846,
+     "ci_low": -86.625,
+     "ci_high": -84.82500000670552,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-85.3",
+     "interval_display": "[-86.6, -84.8]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-010"
+    },
+    {
+     "label": "L = 100 ms, p = 0.1, failure: OPTIMISTIC minus BLANK",
+     "estimate": 0.5000000111758709,
+     "ci_low": -1.5000000037252903,
+     "ci_high": 1.6750000026077032,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.5",
+     "interval_display": "[-1.5, 1.7]",
+     "group": "failure",
+     "seeds": 12,
+     "holm_p_display": "1.0",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-011"
+    },
+    {
+     "label": "L = 100 ms, p = 0.3, success: OPTIMISTIC minus BLANK",
+     "estimate": -85.34999999031425,
+     "ci_low": -87.99999999627471,
+     "ci_high": -83.89999998733401,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-85.3",
+     "interval_display": "[-88.0, -83.9]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "0.00079",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-012"
+    },
+    {
+     "label": "L = 100 ms, p = 0.3, failure: OPTIMISTIC minus BLANK",
+     "estimate": 2.749999998137355,
+     "ci_low": -0.9500000029802322,
+     "ci_high": 5.425000000745058,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "2.7",
+     "interval_display": "[-1.0, 5.4]",
+     "group": "failure",
+     "seeds": 18,
+     "holm_p_display": "0.37",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-013"
+    },
+    {
+     "label": "L = 300 ms, p = 0, success: OPTIMISTIC minus BLANK",
+     "estimate": -288.4750000052154,
+     "ci_low": -297.69999999925494,
+     "ci_high": -282.32500000298023,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-288.5",
+     "interval_display": "[-297.7, -282.3]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "0.00079",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-014"
+    },
+    {
+     "label": "L = 300 ms, p = 0.1, success: OPTIMISTIC minus BLANK",
+     "estimate": -289.2750000022352,
+     "ci_low": -297.5750000011176,
+     "ci_high": -283.52500000596046,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-289.3",
+     "interval_display": "[-297.6, -283.5]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-015"
+    },
+    {
+     "label": "L = 300 ms, p = 0.1, failure: OPTIMISTIC minus BLANK",
+     "estimate": -0.7749999985098839,
+     "ci_low": -3.0499999932944775,
+     "ci_high": 4.3250000067055225,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.8",
+     "interval_display": "[-3.0, 4.3]",
+     "group": "failure",
+     "seeds": 12,
+     "holm_p_display": "1.0",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-016"
+    },
+    {
+     "label": "L = 300 ms, p = 0.3, success: OPTIMISTIC minus BLANK",
+     "estimate": -290.4000000022352,
+     "ci_low": -297.42500000074506,
+     "ci_high": -284.1000000052154,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-290.4",
+     "interval_display": "[-297.4, -284.1]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-017"
+    },
+    {
+     "label": "L = 300 ms, p = 0.3, failure: OPTIMISTIC minus BLANK",
+     "estimate": -0.09999999962747097,
+     "ci_low": -2.5999999940395355,
+     "ci_high": 1.4999999925494194,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.1",
+     "interval_display": "[-2.6, 1.5]",
+     "group": "failure",
+     "seeds": 18,
+     "holm_p_display": "1.0",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-018"
+    },
+    {
+     "label": "L = 1000 ms, p = 0, success: OPTIMISTIC minus BLANK",
+     "estimate": -998.625,
+     "ci_low": -1012.1999999973923,
+     "ci_high": -972.6250000037253,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-998.6",
+     "interval_display": "[-1012.2, -972.6]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-019"
+    },
+    {
+     "label": "L = 1000 ms, p = 0.1, success: OPTIMISTIC minus BLANK",
+     "estimate": -995.9499999992549,
+     "ci_low": -1015.7500000037253,
+     "ci_high": -967.2749999985099,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-995.9",
+     "interval_display": "[-1015.8, -967.3]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-020"
+    },
+    {
+     "label": "L = 1000 ms, p = 0.1, failure: OPTIMISTIC minus BLANK",
+     "estimate": -1.5999999940395355,
+     "ci_low": -7.050000000745058,
+     "ci_high": 0.10000000521540642,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-1.6",
+     "interval_display": "[-7.1, 0.1]",
+     "group": "failure",
+     "seeds": 12,
+     "holm_p_display": "0.46",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-021"
+    },
+    {
+     "label": "L = 1000 ms, p = 0.3, success: OPTIMISTIC minus BLANK",
+     "estimate": -990.6999999992549,
+     "ci_low": -1016.6499999910593,
+     "ci_high": -961.6750000044703,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-990.7",
+     "interval_display": "[-1016.6, -961.7]",
+     "group": "success",
+     "seeds": 20,
+     "holm_p_display": "2.9e-05",
+     "reading_a": "reject",
+     "reading_b": "excludes 0",
+     "tost_display": null,
+     "claim_id": "C-022"
+    },
+    {
+     "label": "L = 1000 ms, p = 0.3, failure: OPTIMISTIC minus BLANK",
+     "estimate": 0.5999999977648258,
+     "ci_low": -1.3999999966472387,
+     "ci_high": 3.3749999962747097,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.6",
+     "interval_display": "[-1.4, 3.4]",
+     "group": "failure",
+     "seeds": 18,
+     "holm_p_display": "1.0",
+     "reading_a": "not rejected",
+     "reading_b": "includes 0",
+     "tost_display": null,
+     "claim_id": "C-023"
+    }
+   ],
+   "claim_ids": [
+    "C-009",
+    "C-010",
+    "C-011",
+    "C-012",
+    "C-013",
+    "C-014",
+    "C-015",
+    "C-016",
+    "C-017",
+    "C-018",
+    "C-019",
+    "C-020",
+    "C-021",
+    "C-022",
+    "C-023",
+    "C-029",
+    "C-032",
+    "C-033",
+    "C-038",
+    "C-040",
+    "C-044",
+    "C-046"
+   ],
+   "report_path": "research/experiments/EXP-003/report.md",
+   "notes": [
+    "EXP-003 (`EXP-003-20261125T080838Z`) completed 360 of 360 sessions in 6,318.7 s, with 3,600 of 3,600 trials analysed, no exclusion and rollback correctness 1.0; the stop rule was not triggered.",
+    "On failure, no stratum rejected H0, with estimates from -1.6 to 2.7 ms; no equivalence test was registered for these strata, so they are not equivalence claims.",
+    "In failure trials (83 per delay and arm over both p levels), OPTIMISTIC displayed a false state for a median of 83.4, 283.9 and 999.1 ms at L = 100, 300 and 1000 ms, and BLANK displayed none."
+   ]
+  },
+  {
+   "id": "EXP-004",
+   "title": "Sensitivity analyses",
+   "status": "confirmatory, complete",
+   "verdict": "Literal contradiction criterion met for 4 contrasts; main interpretation qualified at 50 ms (see Section 6).",
+   "estimates": [
+    {
+     "label": "read L = 50 ms, SKELETON: main method, equivalence not shown",
+     "estimate": -16.675000000745058,
+     "ci_low": -17.099999997764826,
+     "ci_high": -16.049999997019768,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-16.7",
+     "interval_display": "[-17.1, -16.0]",
+     "group": "method-dependent",
+     "seeds": 20,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "read L = 50 ms, SKELETON: S1 rAF1, equivalent within 17 ms",
+     "estimate": -15.341999999254483,
+     "ci_low": -16.025500001489945,
+     "ci_high": -14.833499999627463,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-15.3",
+     "interval_display": "[-16.0, -14.8]",
+     "group": "method-dependent",
+     "seeds": 20,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "read L = 50 ms, SKELETON: S1 Element Timing, equivalent within 17 ms",
+     "estimate": -9.12500000372529,
+     "ci_low": -9.849999997764826,
+     "ci_high": -8.274999994784594,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-9.1",
+     "interval_display": "[-9.8, -8.3]",
+     "group": "method-dependent",
+     "seeds": 20,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.1, failure: main method",
+     "estimate": -0.7749999985098839,
+     "ci_low": -3.0499999932944775,
+     "ci_high": 4.3250000067055225,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.8",
+     "interval_display": "[-3.0, 4.3]",
+     "group": "method-dependent",
+     "seeds": 12,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.1, failure: S1 rAF1",
+     "estimate": 0.6584999977651478,
+     "ci_low": -1.8659999962746951,
+     "ci_high": 4.250500002980232,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.7",
+     "interval_display": "[-1.9, 4.3]",
+     "group": "method-dependent",
+     "seeds": 12,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.3, failure: main method",
+     "estimate": -0.09999999962747097,
+     "ci_low": -2.5999999940395355,
+     "ci_high": 1.4999999925494194,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.1",
+     "interval_display": "[-2.6, 1.5]",
+     "group": "method-dependent and condition-dependent",
+     "seeds": 18,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.3, failure: S1 rAF1",
+     "estimate": 0.36949999925491284,
+     "ci_low": -1.353000000744487,
+     "ci_high": 1.670000003725221,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.4",
+     "interval_display": "[-1.4, 1.7]",
+     "group": "method-dependent and condition-dependent",
+     "seeds": 18,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.3, failure: S2 CPU 4x",
+     "estimate": -0.29999999701976776,
+     "ci_low": -0.8500000014901161,
+     "ci_high": 2.000000014901161,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-0.3",
+     "interval_display": "[-0.9, 2.0]",
+     "group": "method-dependent and condition-dependent",
+     "seeds": 9,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 300 ms, p = 0.3, failure: S4 headed",
+     "estimate": 0.3500000014901161,
+     "ci_low": -2.699999988079071,
+     "ci_high": 0.9000000134110451,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.4",
+     "interval_display": "[-2.7, 0.9]",
+     "group": "method-dependent and condition-dependent",
+     "seeds": 9,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 1000 ms, p = 0.3, failure: main method",
+     "estimate": 0.5999999977648258,
+     "ci_low": -1.3999999966472387,
+     "ci_high": 3.3749999962747097,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.6",
+     "interval_display": "[-1.4, 3.4]",
+     "group": "condition-dependent",
+     "seeds": 18,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 1000 ms, p = 0.3, failure: S1 rAF1",
+     "estimate": 1.1645000037250384,
+     "ci_low": -0.8304999985102768,
+     "ci_high": 2.0869999985106915,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "1.2",
+     "interval_display": "[-0.8, 2.1]",
+     "group": "condition-dependent",
+     "seeds": 18,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 1000 ms, p = 0.3, failure: S2 CPU 4x",
+     "estimate": -1.3000000044703484,
+     "ci_low": -4.199999988079071,
+     "ci_high": 0.8500000089406967,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "-1.3",
+     "interval_display": "[-4.2, 0.9]",
+     "group": "condition-dependent",
+     "seeds": 9,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    },
+    {
+     "label": "write L = 1000 ms, p = 0.3, failure: S4 headed",
+     "estimate": 0.0,
+     "ci_low": -1.3499999940395355,
+     "ci_high": 2.799999989569187,
+     "ci_level": 0.95,
+     "unit": "ms",
+     "display": "0.0",
+     "interval_display": "[-1.3, 2.8]",
+     "group": "condition-dependent",
+     "seeds": 9,
+     "holm_p_display": null,
+     "reading_a": null,
+     "reading_b": null,
+     "tost_display": null,
+     "claim_id": null
+    }
+   ],
+   "claim_ids": [
+    "C-024",
+    "C-025",
+    "C-026",
+    "C-027",
+    "C-028",
+    "C-036",
+    "C-037",
+    "C-040",
+    "C-043",
+    "C-045",
+    "C-046"
+   ],
+   "report_path": "research/experiments/EXP-004/report.md",
+   "notes": [
+    "EXP-004 ran S2 (CPU 4x, 140 sessions), S3 (h = 0 and 600 ms, 80 sessions, 4 hover-lead exclusions) and S4 (headed, 140 sessions) in full, 3,596 of 3,600 trials analysed, with no failed cell; S1 recomputed every EXP-002 and EXP-003 contrast with the alternative paint methods.",
+    "We therefore do not report a skeleton benefit at 50 ms.",
+    "The frozen verdicts stand as reported.",
+    "TTFF sensitivity could not be computed, because the frozen code records alternative paint times only for the usable-content frame."
+   ]
+  }
+ ],
+ "assumptions": [
+  {
+   "name": "Delay model",
+   "value": "d = L (1 + j), j uniform in [-0.1, 0.1], from a seeded stream shared by all arms (common random numbers)",
+   "source": "research/protocol.md; experiments/EXP-002.json (jitter 0.1)"
+  },
+  {
+   "name": "Interactions per session",
+   "value": "K = 10 scripted interactions of one path, fresh browser context per session",
+   "source": "research/protocol.md section 5"
+  },
+  {
+   "name": "Read latencies",
+   "value": "L in {50, 100, 300, 1000} ms",
+   "source": "experiments/EXP-002.json"
+  },
+  {
+   "name": "Write latencies and failure probabilities",
+   "value": "L in {100, 300, 1000} ms, p in {0, 0.1, 0.3}",
+   "source": "experiments/EXP-003.json"
+  },
+  {
+   "name": "Hover lead (PREFETCH)",
+   "value": "h = 150 ms in EXP-002; h = 0 and 600 ms in EXP-004 S3",
+   "source": "experiments/EXP-002.json; research/experiments/EXP-004/protocol.md"
+  },
+  {
+   "name": "Equivalence margin (SKELETON)",
+   "value": "17 ms, justified as one 60 Hz frame; the measured headless frame interval was larger (limitation 15)",
+   "source": "research/protocol.md section 4"
+  },
+  {
+   "name": "Seeds",
+   "value": "1 to 20 (EXP-002, EXP-003), 1 to 10 (EXP-004), 1001 to 1005 (EXP-001, exploratory); the seed is the independent unit",
+   "source": "research/experiment_registry.csv"
+  },
+  {
+   "name": "Reference model",
+   "value": "Zero-overhead lower bounds: BLANK and SKELETON TTUC >= d; PREFETCH >= max(0, d - h); OPTIMISTIC >= 0 on success and >= d on failure",
+   "source": "src/scroll/reference.py; manuscript Section 3"
+  },
+  {
+   "name": "Environment",
+   "value": "Google Chrome 158.0.8127.38 via Playwright 1.65.0, headless at CPU 1x except EXP-004 S2 and S4; Apple M1 Pro, macOS 15.3.1",
+   "source": "run manifests under results/raw/"
+  }
+ ],
+ "limitations": [
+  "No perception claims. All metrics are objective timings in a browser. Nothing here measures how fast an interface feels to a person. Any perceived-speed statement needs a human study, which is out of scope and would need an owner-approved protocol.",
+  "One mock interface. Results hold for one synthetic page with fixed layout and content. Real applications differ in DOM size, framework, caching and network behaviour.",
+  "Synthetic latency. Delays come from a seeded mock transport, not from a network. Bandwidth, connection setup, server variance and tail latency are not modelled beyond a uniform jitter of plus or minus 10%.",
+  "One machine and one engine. Chromium on an Apple M1 Pro laptop. Other engines (WebKit, Gecko), other devices and mobile hardware are not covered.",
+  "Instrumentation limits. Frame times are estimated in-page; Event Timing hides durations under 16 ms and rounds to 8 ms; headless rendering may not match a physical display.",
+  "Scripted input. Interactions and prefetch intent signals are scripted with fixed timing; real pointer behaviour is not modelled.",
+  "Prefetch results are partly mechanical. The benefit is bounded by the scripted lead time; the experiment measures whether the implementation and instrumentation recover it, and its costs, not how often real users hover before clicking.",
+  "Simulation status. All results are simulations within the stated assumptions; they are not claims about any real or proprietary product.",
+  "Frame-scale effects depend on the paint-time method. EXP-002 found SKELETON minus BLANK of -16.7 ms at L = 50 ms (equivalence not shown); under the alternative paint methods the estimate was -15.3 ms (raf1) and -9.1 ms (Element Timing), both equivalent within 17 ms (EXP-004 S1). Differences of about one frame are therefore method-dependent and are not interpreted as strategy effects.",
+  "Sign rule on null contrasts. The EXP-004 robustness rule compares signs of point estimates. For the write-path failure strata the main estimates are within about 3 ms of zero and not significant, so their sign changes across levels carry no information about direction.",
+  "Test reading. The protocol names a bootstrap interval, a Wilcoxon test and a Holm correction without stating which one decides H0. DEC-011 fixed the reading before data (Holm over Wilcoxon p-values); one contrast (EXP-002 SKELETON, L = 300 ms) differs between the two readings.",
+  "TTFF sensitivity not computed. The alternative paint method is recorded only for the usable-content frame, so the TTFF part of sensitivity S1 is missing (DEC-012).",
+  "Reduced sensitivity coverage. S2 to S4 use 10 seeds, L in {300, 1000} ms and p in {0, 0.3}; cells outside that set have only the S1 check.",
+  "Run conditions. One browser version (Chrome 158.0.8127.38), runs under nice -n 10, load average 1.4 to 2.4 at run starts with an editor and system services running. The exclusive window reduced, but did not remove, background activity.",
+  "Margin smaller than a measured frame. The 17 ms equivalence margin was justified as one 60 Hz frame, but the headless frame interval estimated from the second-frame gap was 18.0 to 18.9 ms in every cell (exploratory X2). A one-frame shift under the main method cannot pass the TOST; this bears on the 50 ms SKELETON result, which is reported as not robust.",
+  "rAF1 is a frame-start time. The rAF1 alternative of S1 precedes the reference delay in most trials (72 to 79% of BLANK read trials at L of 100 ms and more), so it is a lower, optimistic estimate, not a paint time. Whether it belongs in S1 is part of DEC-011 (pending owner review); under the narrow reading (Element Timing only) 9 write contrasts have no sensitivity level at all.",
+  "Literal contradiction criterion. The protocol's criterion for contradicting the main interpretation is literally met for four contrasts (the 50 ms SKELETON equivalence and three failure-stratum sign changes). The manuscript reports the interpretation as qualified; that judgement is post hoc.",
+  "Headed-mode confound. In S4 the frame cadence after input differed between arms (second-frame gap 8.6 to 9.0 ms for OPTIMISTIC against 16.45 to 16.75 ms for BLANK on the write path), and S4 ran one to three hours after the main runs. The headed shift of the optimistic benefit may reflect display behaviour or time drift rather than headed rendering as such. The refresh rate was not recorded.",
+  "External sources not read in full. Every cited source was opened as a model-written page summary; one is metadata only. Full-text reading is scheduled for M6.",
+  "No new measurement in M4. The machine was shared with other agents during M4, so sensitivity and confounder work used committed traces only (results/exploratory/M4-REANALYSIS/). Questions that need new runs (display refresh rate, first-feedback paint times, frame-loop state at short delays) remain open."
+ ],
+ "traces": {
+  "note": "Cell medians of trials, copied from the committed cell summaries (read path and write path at p = 0) and from the committed exploratory table X7 (write path, failed saves, both p levels). The bar shows the interquartile range of trials, a spread, not a confidence interval. Documented exception to the manuscript check: the manuscript prints only the ranges of these medians.",
+  "sources": [
+   "results/raw/EXP-002/EXP-002-20261125T070315Z/report/cell_summary.csv",
+   "results/raw/EXP-003/EXP-003-20261125T080838Z/report/cell_summary.csv",
+   "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv"
+  ],
+  "series": {
+   "read": [
+    {
+     "L": 50,
+     "arm": "BLANK",
+     "trials": 200,
+     "ttff_median_ms": 77.20000000298023,
+     "ttuc_median_ms": 77.20000000298023,
+     "ttuc_q1_ms": 75.20000000111759,
+     "ttuc_q3_ms": 79.89999999850988,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "77.2",
+      "ttuc": "77.2",
+      "iqr": "[75.2, 79.9]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 50,
+     "arm": "SKELETON",
+     "trials": 200,
+     "ttff_median_ms": 27.5,
+     "ttuc_median_ms": 60.900000002235174,
+     "ttuc_q1_ms": 59.20000000298023,
+     "ttuc_q3_ms": 63.650000002235174,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.5",
+      "ttuc": "60.9",
+      "iqr": "[59.2, 63.7]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 50,
+     "arm": "PREFETCH",
+     "trials": 198,
+     "ttff_median_ms": 27.700000002980232,
+     "ttuc_median_ms": 27.700000002980232,
+     "ttuc_q1_ms": 25.800000000745058,
+     "ttuc_q3_ms": 30.100000001490116,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.7",
+      "ttuc": "27.7",
+      "iqr": "[25.8, 30.1]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 100,
+     "arm": "BLANK",
+     "trials": 196,
+     "ttff_median_ms": 112.44999999925494,
+     "ttuc_median_ms": 112.44999999925494,
+     "ttuc_q1_ms": 109.82500000298023,
+     "ttuc_q3_ms": 125.25000000372529,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "112.4",
+      "ttuc": "112.4",
+      "iqr": "[109.8, 125.3]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 100,
+     "arm": "SKELETON",
+     "trials": 196,
+     "ttff_median_ms": 28.0,
+     "ttuc_median_ms": 112.25000000372529,
+     "ttuc_q1_ms": 109.20000000298023,
+     "ttuc_q3_ms": 124.29999999701977,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "28.0",
+      "ttuc": "112.3",
+      "iqr": "[109.2, 124.3]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 100,
+     "arm": "PREFETCH",
+     "trials": 198,
+     "ttff_median_ms": 27.700000002980232,
+     "ttuc_median_ms": 27.700000002980232,
+     "ttuc_q1_ms": 25.75,
+     "ttuc_q3_ms": 30.199999999254942,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.7",
+      "ttuc": "27.7",
+      "iqr": "[25.8, 30.2]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 300,
+     "arm": "BLANK",
+     "trials": 200,
+     "ttff_median_ms": 323.75,
+     "ttuc_median_ms": 323.75,
+     "ttuc_q1_ms": 295.5750000011176,
+     "ttuc_q3_ms": 331.9499999973923,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "323.8",
+      "ttuc": "323.8",
+      "iqr": "[295.6, 331.9]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 300,
+     "arm": "SKELETON",
+     "trials": 198,
+     "ttff_median_ms": 27.899999998509884,
+     "ttuc_median_ms": 314.8999999985099,
+     "ttuc_q1_ms": 296.44999999552965,
+     "ttuc_q3_ms": 328.1499999985099,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.9",
+      "ttuc": "314.9",
+      "iqr": "[296.4, 328.1]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 300,
+     "arm": "PREFETCH",
+     "trials": 198,
+     "ttff_median_ms": 159.80000000447035,
+     "ttuc_median_ms": 159.80000000447035,
+     "ttuc_q1_ms": 143.19999999925494,
+     "ttuc_q3_ms": 176.70000000298023,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "159.8",
+      "ttuc": "159.8",
+      "iqr": "[143.2, 176.7]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "BLANK",
+     "trials": 196,
+     "ttff_median_ms": 1029.2500000037253,
+     "ttuc_median_ms": 1029.2500000037253,
+     "ttuc_q1_ms": 960.2999999988824,
+     "ttuc_q3_ms": 1075.1749999970198,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "1029.3",
+      "ttuc": "1029.3",
+      "iqr": "[960.3, 1075.2]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "SKELETON",
+     "trials": 198,
+     "ttff_median_ms": 27.899999998509884,
+     "ttuc_median_ms": 1026.6000000014901,
+     "ttuc_q1_ms": 958.3500000014901,
+     "ttuc_q3_ms": 1073.5999999977648,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.9",
+      "ttuc": "1026.6",
+      "iqr": "[958.4, 1073.6]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "PREFETCH",
+     "trials": 196,
+     "ttff_median_ms": 867.6500000022352,
+     "ttuc_median_ms": 867.6500000022352,
+     "ttuc_q1_ms": 808.9000000022352,
+     "ttuc_q3_ms": 915.3250000011176,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "867.7",
+      "ttuc": "867.7",
+      "iqr": "[808.9, 915.3]",
+      "false_state": null
+     }
+    }
+   ],
+   "write_success": [
+    {
+     "L": 100,
+     "arm": "BLANK",
+     "trials": 200,
+     "ttff_median_ms": 111.70000000298023,
+     "ttuc_median_ms": 111.70000000298023,
+     "ttuc_q1_ms": 109.87499999254942,
+     "ttuc_q3_ms": 121.80000000074506,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "111.7",
+      "ttuc": "111.7",
+      "iqr": "[109.9, 121.8]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 100,
+     "arm": "OPTIMISTIC",
+     "trials": 200,
+     "ttff_median_ms": 27.0,
+     "ttuc_median_ms": 27.0,
+     "ttuc_q1_ms": 25.299999997019768,
+     "ttuc_q3_ms": 28.899999991059303,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.0",
+      "ttuc": "27.0",
+      "iqr": "[25.3, 28.9]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 300,
+     "arm": "BLANK",
+     "trials": 200,
+     "ttff_median_ms": 312.05000000447035,
+     "ttuc_median_ms": 312.05000000447035,
+     "ttuc_q1_ms": 298.1500000022352,
+     "ttuc_q3_ms": 328.2000000011176,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "312.1",
+      "ttuc": "312.1",
+      "iqr": "[298.2, 328.2]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 300,
+     "arm": "OPTIMISTIC",
+     "trials": 200,
+     "ttff_median_ms": 27.600000008940697,
+     "ttuc_median_ms": 27.600000008940697,
+     "ttuc_q1_ms": 26.07499999552965,
+     "ttuc_q3_ms": 29.024999998509884,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.6",
+      "ttuc": "27.6",
+      "iqr": "[26.1, 29.0]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "BLANK",
+     "trials": 200,
+     "ttff_median_ms": 1024.5,
+     "ttuc_median_ms": 1024.5,
+     "ttuc_q1_ms": 966.2249999903142,
+     "ttuc_q3_ms": 1061.1249999925494,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "1024.5",
+      "ttuc": "1024.5",
+      "iqr": "[966.2, 1061.1]",
+      "false_state": null
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "OPTIMISTIC",
+     "trials": 200,
+     "ttff_median_ms": 27.0,
+     "ttuc_median_ms": 27.0,
+     "ttuc_q1_ms": 25.475000001490116,
+     "ttuc_q3_ms": 28.899999994784594,
+     "false_state_median_ms": null,
+     "display": {
+      "ttff": "27.0",
+      "ttuc": "27.0",
+      "iqr": "[25.5, 28.9]",
+      "false_state": null
+     }
+    }
+   ],
+   "write_failure": [
+    {
+     "L": 100,
+     "arm": "BLANK",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 111.3,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 0.0,
+     "display": {
+      "ttff": null,
+      "ttuc": "111.3",
+      "iqr": null,
+      "false_state": "0.0"
+     }
+    },
+    {
+     "L": 100,
+     "arm": "OPTIMISTIC",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 111.9,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 83.4,
+     "display": {
+      "ttff": null,
+      "ttuc": "111.9",
+      "iqr": null,
+      "false_state": "83.4"
+     }
+    },
+    {
+     "L": 300,
+     "arm": "BLANK",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 313.0,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 0.0,
+     "display": {
+      "ttff": null,
+      "ttuc": "313.0",
+      "iqr": null,
+      "false_state": "0.0"
+     }
+    },
+    {
+     "L": 300,
+     "arm": "OPTIMISTIC",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 314.8,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 283.9,
+     "display": {
+      "ttff": null,
+      "ttuc": "314.8",
+      "iqr": null,
+      "false_state": "283.9"
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "BLANK",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 1025.7,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 0.0,
+     "display": {
+      "ttff": null,
+      "ttuc": "1025.7",
+      "iqr": null,
+      "false_state": "0.0"
+     }
+    },
+    {
+     "L": 1000,
+     "arm": "OPTIMISTIC",
+     "trials": 83,
+     "ttff_median_ms": null,
+     "ttuc_median_ms": 1025.3,
+     "ttuc_q1_ms": null,
+     "ttuc_q3_ms": null,
+     "false_state_median_ms": 999.1,
+     "display": {
+      "ttff": null,
+      "ttuc": "1025.3",
+      "iqr": null,
+      "false_state": "999.1"
+     }
+    }
+   ]
+  }
+ },
+ "robustness": [
+  {
+   "contrast": "read L = 50 ms, PREFETCH",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 50 ms, SKELETON",
+   "verdict_dec011": "method-dependent",
+   "verdict_narrow": "method-dependent"
+  },
+  {
+   "contrast": "read L = 100 ms, PREFETCH",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 100 ms, SKELETON",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 300 ms, PREFETCH",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 300 ms, SKELETON",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 1000 ms, PREFETCH",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "read L = 1000 ms, SKELETON",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "write L = 100 ms, p = 0, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 100 ms, p = 0.1, failure",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 100 ms, p = 0.1, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 100 ms, p = 0.3, failure",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 100 ms, p = 0.3, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 300 ms, p = 0, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "write L = 300 ms, p = 0.1, failure",
+   "verdict_dec011": "method-dependent",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 300 ms, p = 0.1, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 300 ms, p = 0.3, failure",
+   "verdict_dec011": "method-dependent and condition-dependent",
+   "verdict_narrow": "condition-dependent"
+  },
+  {
+   "contrast": "write L = 300 ms, p = 0.3, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "write L = 1000 ms, p = 0, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  },
+  {
+   "contrast": "write L = 1000 ms, p = 0.1, failure",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 1000 ms, p = 0.1, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "no sensitivity level"
+  },
+  {
+   "contrast": "write L = 1000 ms, p = 0.3, failure",
+   "verdict_dec011": "condition-dependent",
+   "verdict_narrow": "condition-dependent"
+  },
+  {
+   "contrast": "write L = 1000 ms, p = 0.3, success",
+   "verdict_dec011": "robust",
+   "verdict_narrow": "robust"
+  }
+ ],
+ "pending_decisions": [
+  {
+   "id": "DEC-011",
+   "title": "Which test decides H0, and which alternative paint methods form sensitivity level S1",
+   "state": "pending owner decision",
+   "readings": [
+    {
+     "label": "Test reading A (DEC-011 item 1)",
+     "text": "H0 is rejected when the Holm-adjusted Wilcoxon p is below 0.05"
+    },
+    {
+     "label": "Test reading B (shown beside it)",
+     "text": "the unadjusted 95% interval excludes 0"
+    },
+    {
+     "label": "Where the test readings differ",
+     "text": "Tabulating both readings over the 23 primary contrasts confirms that they disagree only for EXP-002 SKELETON at L = 300 ms"
+    },
+    {
+     "label": "S1 reading of DEC-011 (rAF1 and Element Timing)",
+     "text": "Under the frozen rule, 19 of 23 primary contrasts were robust, including every PREFETCH and every OPTIMISTIC success contrast and the SKELETON equivalence at L of 100 ms and more."
+    },
+    {
+     "label": "Narrow S1 reading (Element Timing only)",
+     "text": "The count becomes 11 robust, 1 method-dependent (the 50 ms skeleton), 2 condition-dependent (write L = 300 and 1000 ms, p = 0.3, failure) and 9 not assessed."
+    }
+   ]
+  }
+ ],
+ "placeholders": [
+  "Repository URL: placeholder, not yet published (the owner's decision).",
+  "Demo URL: placeholder, the page is not hosted anywhere.",
+  "Funding statement: placeholder for the owner.",
+  "Competing-interest statement: placeholder for the owner.",
+  "Author line and affiliation: placeholder for the owner (the freeze record holds a name, no affiliation, for confirmation).",
+  "Manuscript title: proposed in M4, awaiting the owner's approval."
+ ]
+}

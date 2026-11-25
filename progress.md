@@ -303,3 +303,52 @@ New: `scripts/m4_reanalysis.py`, `scripts/m4_number_audit.py`, `results/explorat
 ### Next action
 
 Coordinator: write the EXP-001 report from the returned text. Owner: review DEC-011, the title and the placeholders. AI: M5 when started.
+
+## 2026-11-25: Session M5 (interactive experience)
+
+Milestone: M5, started by the owner ("Next" (second), 2026-11-25; `labs/_shared/owner-approvals-2026-11-25e.md`), stack as in `owner-approvals-2026-11-25d.md` (TypeScript, React, Vite from the shared template). Bounded task: export the committed results, build the static page and sandbox, check accessibility and offline use, align public texts. No measurement, no benchmark, no model, nothing pushed.
+
+### Starting state
+
+`git status`: clean on `main` at `3008edc`. `uv sync --frozen --all-groups --all-extras`: "Audited 26 packages".
+
+### Commands and actual outputs
+
+```
+$ rsync template (without node_modules, dist) -> demo/; npm ci --prefer-offline   -> added 53 packages in 1s
+$ .venv/bin/python scripts/export_demo_data.py         -> wrote demo/public/data/results.json
+$ .venv/bin/python scripts/export_sandbox_fixture.py   -> wrote demo/src/fixtures/sandbox_fixture.json (0.04 s)
+$ npm test        -> Test Files 2 passed (2); Tests 24 passed (24)
+$ npm run build   -> tsc and vite build; dist/assets/index-*.js 252.23 kB, worker 2.89 kB, built in 97ms
+$ .venv/bin/python -m pytest -q tests/test_demo_export.py  -> 15 passed in 0.13s
+$ nice -n 10 .venv/bin/python -m pytest -q                 -> 193 passed in 40.03s (load 4.25 at start; functional browser tests only, no timing result)
+```
+
+Checker (`node tools/a11y_check.mjs dist --screenshots <scratch>/shots`), final run:
+
+```
+PASS results render (no fail-closed panel): 4 experiment panels
+PASS text contrast, light scheme (WCAG AA)
+PASS text contrast, dark scheme (WCAG AA)
+PASS keyboard reaches every focusable element: 24 reached of 24
+PASS visible focus indicator
+PASS no horizontal page scroll at 360 px: overflow 0px
+PASS reduced motion: no running animations: 0 running
+PASS no request leaves the local origin
+PASS offline after first load: results stay, sandbox runs: Sandbox output ready: seed 1, read path, L = 300 ms, 10 trials.
+A11Y-CHECK PASS
+```
+
+Failures on the way: the first checker run failed "keyboard reaches every focusable element: 19 reached of 24" (radio groups are one Tab stop, and unnamed inputs collided in the checker's key); fixed with toggle buttons and input ids, the checker unchanged. The first vitest run failed because X6 uses the verdict "no sensitivity level", which the validator did not list; added. Fail-closed check: a copy of `dist` with `traces` removed from `results.json` gave "FAIL results render (no fail-closed panel): 0 experiment panels" and "A11Y-CHECK FAIL (2)". Screenshots (desktop light, desktop dark, mobile, plus a scratch run with the failed-save view, the write sandbox and the replay) were inspected; a clipped delay label, an overlapping axis label, unreadable chart text at 360 px and a caption that said "black bar" in dark mode were fixed.
+
+### Files
+
+New: `scripts/export_demo_data.py`, `scripts/export_sandbox_fixture.py`, `tests/test_demo_export.py`, `demo/` (template copy with `src/App.tsx`, `Traces.tsx`, `Sandbox.tsx`, `engine.ts`, `engine.test.ts`, `sandbox.worker.ts`, `results.ts`, `results.test.ts`, `style.css`, `fixtures/sandbox_fixture.json`, `public/data/results.json`, `package-lock.json`), `docs/demo.png` (179 KB), `articles/medium.md`, `articles/linkedin.md`. Updated: `README.md`, `CITATION.cff`, `demo/README.md`, `research/decision_log.md` (DEC-014), `roadmap.md`.
+
+### Owner placeholders and pending decisions (unchanged)
+
+Repository URL, demo URL, funding, competing interests, author line and affiliation, manuscript title approval. DEC-011 pending, shown both ways on the page and in the README.
+
+### Next action
+
+Owner: DEC-011, the title and the placeholders. AI: M6 (release candidate) when started.
