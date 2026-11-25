@@ -408,3 +408,7 @@ New: `scripts/build_pdfs.py`, `scripts/check_links.py`, `tests/test_links.py`, `
 ### Status and next action
 
 M6: release candidate prepared, awaiting the owner's review and G-PUBLIC; not done until the owner signs off. Owner: `research/publication/author_review.md` (DEC-011, titles, statements, placeholders, author line, home paths), then any publication decision.
+
+### M6 addendum: fresh-clone re-check of the committed candidate
+
+After commit `a993b9f`, a second fresh clone was made in scratch: `uv sync --frozen` then `pytest -q` -> 196 passed in 56.94s; `scripts/check_links.py` -> LINK-CHECK PASS; `export_demo_data.py --check` -> EXPORT-CHECK PASS; `npm ci`, `npm test` -> Tests 24 passed (24); `npm run build`; `node tools/a11y_check.mjs dist` -> A11Y-CHECK PASS; `git status` clean. Both scratch clones were deleted.
