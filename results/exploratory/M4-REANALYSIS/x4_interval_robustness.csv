@@ -1,0 +1,20 @@
+path,L,p,arm,stratum,levels,interval_classes,exploratory_interval_reading,frozen_verdict
+read,50.0,,PREFETCH,all,main;S1-raf1;S1-element,neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+read,100.0,,PREFETCH,all,main;S1-raf1;S1-element,neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+read,300.0,,PREFETCH,all,main;S1-raf1;S1-element;S2-cpu4x;S4-headed;S3-h0;S3-h600,neg;neg;neg;neg;neg;zero;neg,mixed: some levels exclude 0 and others include it,robust
+read,1000.0,,PREFETCH,all,main;S1-raf1;S1-element;S2-cpu4x;S4-headed;S3-h0;S3-h600,neg;neg;neg;neg;neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,100.0,0.0,OPTIMISTIC,success,main;S1-raf1,neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,100.0,0.1,OPTIMISTIC,failure,main;S1-raf1,zero;zero,consistent: every level's 95% interval includes 0,robust
+write,100.0,0.1,OPTIMISTIC,success,main;S1-raf1,neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,100.0,0.3,OPTIMISTIC,failure,main;S1-raf1,zero;zero,consistent: every level's 95% interval includes 0,robust
+write,100.0,0.3,OPTIMISTIC,success,main;S1-raf1,neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,300.0,0.0,OPTIMISTIC,success,main;S1-raf1;S2-cpu4x;S4-headed,neg;neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,300.0,0.1,OPTIMISTIC,failure,main;S1-raf1,zero;zero,consistent: every level's 95% interval includes 0,method-dependent
+write,300.0,0.1,OPTIMISTIC,success,main;S1-raf1,neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,300.0,0.3,OPTIMISTIC,failure,main;S1-raf1;S2-cpu4x;S4-headed,zero;zero;zero;zero,consistent: every level's 95% interval includes 0,method-dependent and condition-dependent
+write,300.0,0.3,OPTIMISTIC,success,main;S1-raf1;S2-cpu4x;S4-headed,neg;neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,1000.0,0.0,OPTIMISTIC,success,main;S1-raf1;S2-cpu4x;S4-headed,neg;neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,1000.0,0.1,OPTIMISTIC,failure,main;S1-raf1,zero;zero,consistent: every level's 95% interval includes 0,robust
+write,1000.0,0.1,OPTIMISTIC,success,main;S1-raf1,neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust
+write,1000.0,0.3,OPTIMISTIC,failure,main;S1-raf1;S2-cpu4x;S4-headed,zero;zero;zero;zero,consistent: every level's 95% interval includes 0,condition-dependent
+write,1000.0,0.3,OPTIMISTIC,success,main;S1-raf1;S2-cpu4x;S4-headed,neg;neg;neg;neg,consistent: every level's 95% interval excludes 0 on the same side,robust

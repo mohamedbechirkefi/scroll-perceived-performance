@@ -1,6 +1,1051 @@
 {
-  "schema_version": "0.1.0",
-  "generated": "2026-11-24",
-  "status": "empty: no results, figures or claims exist at M0",
-  "artifacts": []
+ "schema_version": "1.0.0",
+ "generated": "2026-11-25",
+ "status": "M4 evidence audit: every quantitative table, figure and claim of the manuscript, supplement and experiment reports mapped to its source",
+ "note": "Numbers in prose map to these artifacts through the claims register (claims field below) and the mechanical check research/publication/number_audit_m4.json; see research/publication/evidence_audit.md for the manual review.",
+ "audit_outputs": {
+  "number_audit": "research/publication/number_audit_m4.json",
+  "evidence_audit": "research/publication/evidence_audit.md",
+  "review_pass_2": "research/publication/review_pass_2.md"
+ },
+ "artifacts": [
+  {
+   "artifact_id": "T1",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": [
+    "EXP-002-20261125T070315Z"
+   ],
+   "metric": "TTUC (ms): time from the click timeStamp to performance.now() in the second requestAnimationFrame callback after the DOM commit of the final, correct, usable state (protocol 3.1); contrast = median over seeds of per-seed median trial-paired difference (A1, A2); Holm-adjusted Wilcoxon; TOST 17 ms",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json",
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.csv"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json": "4873e027e30f7e3aebe728786bce30f72b773e54ddf6761441ebe8cc52be6802",
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.csv": "9654e17251d456c986789556d649a0bbf3ffdf7f964071ef68e39dd721ab877b"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python -m scroll.inference primary --run <run dir> (src/scroll/inference.py)",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "protocol_hash": "3d263935e5ed7f97f673b0c4b2beb27ea3b3016184c6d58186655358c73b2f1d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Table 1",
+    "EXP-002 report section 8",
+    "claims C-001 to C-008, C-030, C-034"
+   ]
+  },
+  {
+   "artifact_id": "T2",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": [
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "TTUC (ms): time from the click timeStamp to performance.now() in the second requestAnimationFrame callback after the DOM commit of the final, correct, usable state (protocol 3.1); contrast = median over seeds of per-seed median trial-paired difference (A1, A2); strata success/failure; Holm over 15",
+   "result_paths": [
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.csv"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json": "cf46b6d20b01185ea9d644e031e60ca6c22c52ac13ab74da07309c8b11bb70cf",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.csv": "604caa7590d1da6b9336723b49e4f725b05b24e12abc17dd4b7672e6be4e5c31"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python -m scroll.inference primary --run <run dir> (src/scroll/inference.py)",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "protocol_hash": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Table 2",
+    "EXP-003 report section 8",
+    "claims C-009 to C-023, C-029, C-032"
+   ]
+  },
+  {
+   "artifact_id": "T3",
+   "kind": "table",
+   "experiment_id": "EXP-004",
+   "run_ids": [
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z",
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "TTUC (ms): time from the click timeStamp to performance.now() in the second requestAnimationFrame callback after the DOM commit of the final, correct, usable state (protocol 3.1); contrast = median over seeds of per-seed median trial-paired difference (A1, A2) at each factor level; frozen robustness rule",
+   "result_paths": [
+    "results/raw/EXP-004/sensitivity/sensitivity.json",
+    "results/raw/EXP-004/sensitivity/sensitivity_long.csv",
+    "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-004/sensitivity/sensitivity.json": "3ed7f4f86cc39e136b85db2b7f0c90ec625b7bf39f80f1610c84b56a80708404",
+    "results/raw/EXP-004/sensitivity/sensitivity_long.csv": "6e4704f57ec41c6411bf518546aeb11516affd7d4358e9b6f23caf8052bb7d7a",
+    "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv": "09db843ffee9fd8211e843c42090befeee13d73a3135a8f41f5694646b9495f7"
+   },
+   "generator": "python -m scroll.inference sensitivity ... (src/scroll/inference.py; command in EXP-004 report section 7)",
+   "config_hash": "EXP-004-S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; EXP-004-S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; EXP-004-S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 uses EXP-002 and EXP-003 configs",
+   "protocol_hash": "9d67a8e91d965456c9fddaf372db1d21156840f311478d8647509aa46e5ae54d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Table 3, Section 5.4",
+    "EXP-004 report section 8",
+    "claims C-024 to C-028, C-036, C-037"
+   ]
+  },
+  {
+   "artifact_id": "T4",
+   "kind": "table",
+   "experiment_id": "EXP-001..004",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "predictions from frozen protocols; observations from T1 to T3 and EXP-001 checks",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json",
+    "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json": "4873e027e30f7e3aebe728786bce30f72b773e54ddf6761441ebe8cc52be6802",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json": "cf46b6d20b01185ea9d644e031e60ca6c22c52ac13ab74da07309c8b11bb70cf",
+    "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv": "09db843ffee9fd8211e843c42090befeee13d73a3135a8f41f5694646b9495f7"
+   },
+   "generator": "manual synthesis from T1 to T3 (no new numbers)",
+   "config_hash": "see T1 to T3",
+   "protocol_hash": "a87ae45e049c16ed42abef0ab853a0e3fcf28daec9d5482d11bbb1dfb365f004",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory synthesis",
+   "used_in": [
+    "manuscript Table 4 (expected versus observed)"
+   ]
+  },
+  {
+   "artifact_id": "S2",
+   "kind": "table",
+   "experiment_id": "EXP-002..004",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "sessions, trials analysed, exclusions, runtime_s, load_average_start",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/run_manifest.json",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/run_manifest.json",
+    "results/raw/EXP-004/EXP-004-20261125T095434Z/run_manifest.json",
+    "results/raw/EXP-004/EXP-004-20261125T103912Z/run_manifest.json",
+    "results/raw/EXP-004/EXP-004-20261125T110537Z/run_manifest.json"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/run_manifest.json": "aa08a3f1fdf8cf9c2e17107e2a3c31da682a8a231ca95ada5a1bfd9c59be5592",
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/run_manifest.json": "65311218379727f26b7f050089e66727311b259ba2d14450b13f2ac5ccda1c9f",
+    "results/raw/EXP-004/EXP-004-20261125T095434Z/run_manifest.json": "bf282b56ac5dddcba19d88cedb25a1b0e6096c864d20a969f6561bc3518b30eb",
+    "results/raw/EXP-004/EXP-004-20261125T103912Z/run_manifest.json": "5843579f646a5cbbcef9ae4f4d48190d920495151085b7a3b739d0651ee3d551",
+    "results/raw/EXP-004/EXP-004-20261125T110537Z/run_manifest.json": "5c80f320e19e7a7cd67b693e59956395cfe3bd5d5663744a86f52b2f48bbd949"
+   },
+   "generator": "runner (src/scroll/runner.py)",
+   "config_hash": "per run, see S3 table",
+   "protocol_hash": "per experiment",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "supplementary S2",
+    "manuscript Sections 5.2 to 5.4"
+   ]
+  },
+  {
+   "artifact_id": "S4.1",
+   "kind": "table",
+   "experiment_id": "EXP-002",
+   "run_ids": [
+    "EXP-002-20261125T070315Z"
+   ],
+   "metric": "cell medians of TTUC, TTFF, excess over reference model, Event Timing below-threshold share",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/cell_summary.csv"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/cell_summary.csv": "5f84980280a32a2e8f52592cd633b1928f766d2a0e24a0a0b83992f02a89795a"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "protocol_hash": "3d263935e5ed7f97f673b0c4b2beb27ea3b3016184c6d58186655358c73b2f1d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory (descriptive)",
+   "used_in": [
+    "supplementary S4.1",
+    "claim C-031"
+   ]
+  },
+  {
+   "artifact_id": "S4.2",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": [
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "secondary mixed estimand and frozen trend check",
+   "result_paths": [
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json": "cf46b6d20b01185ea9d644e031e60ca6c22c52ac13ab74da07309c8b11bb70cf"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python -m scroll.inference primary --run <run dir> (src/scroll/inference.py)",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "protocol_hash": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory (secondary)",
+   "used_in": [
+    "supplementary S4.2",
+    "claim C-032"
+   ]
+  },
+  {
+   "artifact_id": "S4.3",
+   "kind": "table",
+   "experiment_id": "EXP-003",
+   "run_ids": [
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "median false, stale and wrong state (ms) in failure trials",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv": "1d0c90c00dfb16c7d21b5f052d6680f7fad87c2fa99dbcb817ff7cf870c06dcd"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS (X7)",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "protocol_hash": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "descriptive, regenerated in M4 from committed traces",
+   "used_in": [
+    "supplementary S4.3",
+    "EXP-003 report section 8",
+    "claim C-033"
+   ]
+  },
+  {
+   "artifact_id": "X1",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X1",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x1_test_readings.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x1_test_readings.csv": "9f94a0b104166073242636dae11dc6d0e157a21255339d2274ff7278aad7e54f"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 4.5, 5.5",
+    "claims C-038"
+   ]
+  },
+  {
+   "artifact_id": "X2",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X2",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv": "307a280951c5e11864bedd3726dd4b2cce4ec4ed68f67fdab755fd3b5295233b"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.5, 6, 7; supplementary S4.4",
+    "claims C-039, C-040, C-041"
+   ]
+  },
+  {
+   "artifact_id": "X2b",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X2b",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x2_skeleton_l50_trial_distribution.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x2_skeleton_l50_trial_distribution.csv": "e28e67f608e330417da5b2a6c1225c61fd57f185c48ee7272ad349e082f20c87"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.5; supplementary S4.4",
+    "claims C-039"
+   ]
+  },
+  {
+   "artifact_id": "X3",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X3",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x3_a3_inclusion_exp002.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x3_a3_inclusion_exp002.csv": "b24af055fe1c8b1c266dd8f54035e922704d5d164c68cb19bca8b117f094ebdd"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.5",
+    "claims C-042"
+   ]
+  },
+  {
+   "artifact_id": "X4",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X4",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x4_interval_robustness.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x4_interval_robustness.csv": "e4b1ac8fd39450860057ccd2605eb480dcbc3ad0702d82a623c3d9bf51532438"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.4, 5.5; supplementary S5",
+    "claims C-043"
+   ]
+  },
+  {
+   "artifact_id": "X5",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X5",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x5_arm_order.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x5_arm_order.csv": "54acfc06d9303553f2a292abd68f392052c9a54331183751cd3bce18d86dcebe"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.5; supplementary S7",
+    "claims C-044"
+   ]
+  },
+  {
+   "artifact_id": "X6",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X6",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x6_narrow_s1_reading.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x6_narrow_s1_reading.csv": "6fe3c3eb112b1514cd58cf4733008e491c70659f2ed1563a60c3278d32abb391"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "manuscript 5.4, 7; supplementary S5",
+    "claims C-045"
+   ]
+  },
+  {
+   "artifact_id": "X7",
+   "kind": "table",
+   "experiment_id": "M4 re-analysis",
+   "run_ids": [
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z",
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z"
+   ],
+   "metric": "see the script docstring for X7",
+   "result_paths": [
+    "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv"
+   ],
+   "result_sha256": {
+    "results/exploratory/M4-REANALYSIS/x7_exp003_failure_exposure.csv": "1d0c90c00dfb16c7d21b5f052d6680f7fad87c2fa99dbcb817ff7cf870c06dcd"
+   },
+   "generator": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+   "config_hash": "inputs listed with SHA-256 in results/exploratory/M4-REANALYSIS/manifest.json",
+   "protocol_hash": "n/a (post hoc)",
+   "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+   "label": "exploratory, post hoc",
+   "used_in": [
+    "supplementary S4.3",
+    "claims C-033"
+   ]
+  },
+  {
+   "artifact_id": "F1",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": [
+    "EXP-002-20261125T070315Z"
+   ],
+   "metric": "TTUC per trial by cell and arm",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-ttuc.svg"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-ttuc.svg": "fdeffc90bba5cee78149e2c6bbbc0f92ffeca1919bfd4fd59fceb99d9ff35bf8"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "protocol_hash": "3d263935e5ed7f97f673b0c4b2beb27ea3b3016184c6d58186655358c73b2f1d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Section 5"
+   ]
+  },
+  {
+   "artifact_id": "F2",
+   "kind": "figure",
+   "experiment_id": "EXP-002",
+   "run_ids": [
+    "EXP-002-20261125T070315Z"
+   ],
+   "metric": "per-seed paired differences, 95% intervals",
+   "result_paths": [
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg": "76a3085194f702aac88a57af92ade823c8e8d80acefb2af8fcb6abc13f2ef57d"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "protocol_hash": "3d263935e5ed7f97f673b0c4b2beb27ea3b3016184c6d58186655358c73b2f1d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Section 5"
+   ]
+  },
+  {
+   "artifact_id": "F3",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": [
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "TTUC per trial",
+   "result_paths": [
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-ttuc.svg"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-ttuc.svg": "b6c75b9f1d5433a03f510f1caa036473ec51bb98207683baac08b92f1564fa1d"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "protocol_hash": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Section 5"
+   ]
+  },
+  {
+   "artifact_id": "F4",
+   "kind": "figure",
+   "experiment_id": "EXP-003",
+   "run_ids": [
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "per-seed paired differences",
+   "result_paths": [
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg": "05984f84a0cfffb78c76c85e0faef390575e1d367bb48062d36524b7dcf99cf7"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "protocol_hash": "2667ba2f078ba5eeccdcecf05a38cf8b8553343ff4d1ec2c5e75cdd1bcda151c",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Section 5"
+   ]
+  },
+  {
+   "artifact_id": "F5",
+   "kind": "figure",
+   "experiment_id": "EXP-004",
+   "run_ids": [
+    "EXP-004-20261125T095434Z",
+    "EXP-004-20261125T103912Z",
+    "EXP-004-20261125T110537Z",
+    "EXP-002-20261125T070315Z",
+    "EXP-003-20261125T080838Z"
+   ],
+   "metric": "estimate and 95% interval at every level",
+   "result_paths": [
+    "results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg"
+   ],
+   "result_sha256": {
+    "results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg": "1fca1b6f8d174717a0d6e342b0e28b3a7654a74e610258e0b5267fdaa0136230"
+   },
+   "generator": "python -m scroll.inference sensitivity ... (src/scroll/inference.py; command in EXP-004 report section 7)",
+   "config_hash": "see T3",
+   "protocol_hash": "9d67a8e91d965456c9fddaf372db1d21156840f311478d8647509aa46e5ae54d",
+   "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+   "label": "confirmatory",
+   "used_in": [
+    "manuscript Section 5"
+   ]
+  },
+  {
+   "artifact_id": "E1",
+   "kind": "table",
+   "experiment_id": "EXP-001",
+   "run_ids": [
+    "EXP-001-20261124T161058Z",
+    "EXP-001-20261125T065102Z"
+   ],
+   "metric": "checks C1 to C4; sigma_d",
+   "result_paths": [
+    "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/cell_summary.csv",
+    "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/paired_contrasts.csv",
+    "results/exploratory/EXP-001/EXP-001-20261125T065102Z/report/cell_summary.csv",
+    "results/exploratory/EXP-001/EXP-001-20261125T065102Z/report/trial_paired_contrasts.csv",
+    "research/experiment_journal.jsonl"
+   ],
+   "result_sha256": {
+    "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/cell_summary.csv": "12737dfd2db008dde495bcd2b178f96cc7b7524a00e228e35a124ee639f1cd59",
+    "results/exploratory/EXP-001/EXP-001-20261124T161058Z/report/paired_contrasts.csv": "49a0dfb1045705c1809632a70ad0c7996904ea10d5202f4b01dbaa75ca4fb5ee",
+    "results/exploratory/EXP-001/EXP-001-20261125T065102Z/report/cell_summary.csv": "060de7e1c4e0bd30498ac50355f55dfadf70557b15736992aecf302c0400817d",
+    "results/exploratory/EXP-001/EXP-001-20261125T065102Z/report/trial_paired_contrasts.csv": "56008b5e2b306dd6e239e31876ab2f3c043e429eb39d26270d9262483404fa5f",
+    "research/experiment_journal.jsonl": "02a00f686c52363264e99bc5ccb4dfd7bea43970d713af6c59484f4fc68ae58d"
+   },
+   "generator": "python -m scroll report --run <run dir> (src/scroll/report.py)",
+   "config_hash": "f39023e2ef11d9ea44951792ee5fa0316711486e081cd8c5d758d4aab0996c6c",
+   "protocol_hash": "not frozen (draft v0.1)",
+   "code_revision": "2059ba7e5f2955c65297cca1de9dcc3c95586f69; 7c8f7d10d14629a230536b4db42ba2fc81883538 (dirty)",
+   "label": "exploratory",
+   "used_in": [
+    "manuscript 5.1",
+    "EXP-001 report",
+    "claim C-035"
+   ]
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C-001",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=50 h=150|PREFETCH - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=50 h=150|PREFETCH - BLANK|all)"
+  },
+  {
+   "claim_id": "C-002",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=50 h=150|SKELETON - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=50 h=150|SKELETON - BLANK|all)"
+  },
+  {
+   "claim_id": "C-003",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=100 h=150|PREFETCH - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=100 h=150|PREFETCH - BLANK|all)"
+  },
+  {
+   "claim_id": "C-004",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=100 h=150|SKELETON - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=100 h=150|SKELETON - BLANK|all)"
+  },
+  {
+   "claim_id": "C-005",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=300 h=150|PREFETCH - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=300 h=150|PREFETCH - BLANK|all)"
+  },
+  {
+   "claim_id": "C-006",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=300 h=150|SKELETON - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=300 h=150|SKELETON - BLANK|all)"
+  },
+  {
+   "claim_id": "C-007",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=1000 h=150|PREFETCH - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=1000 h=150|PREFETCH - BLANK|all)"
+  },
+  {
+   "claim_id": "C-008",
+   "result_id": "EXP-002-20261125T070315Z | EXP-002|read L=1000 h=150|SKELETON - BLANK|all",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 1; results/raw/EXP-002/EXP-002-20261125T070315Z/report/figures/fig-paired.svg",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (result id EXP-002|read L=1000 h=150|SKELETON - BLANK|all)"
+  },
+  {
+   "claim_id": "C-009",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=100 p=0|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=100 p=0|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-010",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-011",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-012",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-013",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-014",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=300 p=0|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=300 p=0|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-015",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-016",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-017",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-018",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-019",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=1000 p=0|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=1000 p=0|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-020",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-021",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-022",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|success",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|success)"
+  },
+  {
+   "claim_id": "C-023",
+   "result_id": "EXP-003-20261125T080838Z | EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|failure",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Table 2; results/raw/EXP-003/EXP-003-20261125T080838Z/report/figures/fig-paired.svg",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (result id EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|failure)"
+  },
+  {
+   "claim_id": "C-024",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | EXP-004|read L=50 SKELETON - BLANK [all]",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Table 3; Supplementary S5; results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg",
+   "section": "5.4; 6",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity.json (result id EXP-004|read L=50 SKELETON - BLANK [all])"
+  },
+  {
+   "claim_id": "C-025",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | EXP-004|write L=300 p=0.1 OPTIMISTIC - BLANK [failure]",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Table 3; Supplementary S5; results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg",
+   "section": "5.4; 6",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity.json (result id EXP-004|write L=300 p=0.1 OPTIMISTIC - BLANK [failure])"
+  },
+  {
+   "claim_id": "C-026",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | EXP-004|write L=300 p=0.3 OPTIMISTIC - BLANK [failure]",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Table 3; Supplementary S5; results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg",
+   "section": "5.4; 6",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity.json (result id EXP-004|write L=300 p=0.3 OPTIMISTIC - BLANK [failure])"
+  },
+  {
+   "claim_id": "C-027",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | EXP-004|write L=1000 p=0.3 OPTIMISTIC - BLANK [failure]",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Table 3; Supplementary S5; results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg",
+   "section": "5.4; 6",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity.json (result id EXP-004|write L=1000 p=0.3 OPTIMISTIC - BLANK [failure])"
+  },
+  {
+   "claim_id": "C-028",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | sensitivity_verdicts.csv",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Table 3; Supplementary S5; results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg",
+   "section": "5.4; 6",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv"
+  },
+  {
+   "claim_id": "C-029",
+   "result_id": "EXP-003-20261125T080838Z | stop_rule",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Section 5.3 text",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (stop_rule)"
+  },
+  {
+   "claim_id": "C-030",
+   "result_id": "EXP-002-20261125T070315Z | prefetch_deviation_ms",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Table 4",
+   "section": "5.2; 5.6",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json"
+  },
+  {
+   "claim_id": "C-031",
+   "result_id": "EXP-002-20261125T070315Z | cell_summary ttff_median_ms",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Supplementary S4.1",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/cell_summary.csv"
+  },
+  {
+   "claim_id": "C-032",
+   "result_id": "EXP-003-20261125T080838Z | mixed_trend",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Supplementary S4.2",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json (mixed_trend)"
+  },
+  {
+   "claim_id": "C-033",
+   "result_id": "EXP-003-20261125T080838Z | failure-trial false_state_ms",
+   "config_hash": "11ad05387d0a71c879db8bcab4ced8f19b401aba46b988ee696bb3c4c0ddd58c",
+   "figure_or_table": "Supplementary S4.3",
+   "section": "5.3",
+   "evidence": "results/raw/EXP-003/EXP-003-20261125T080838Z/results.json (one-off computation in M3, not yet in the generator)"
+  },
+  {
+   "claim_id": "C-034",
+   "result_id": "EXP-002-20261125T070315Z | stop_rule; cell_summary",
+   "config_hash": "1040b20e1c79173c4393a2529af2f5abc8450c49bdba57beec0b0c7c7aacf752",
+   "figure_or_table": "Supplementary S2",
+   "section": "5.2",
+   "evidence": "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json (stop_rule) and cell_summary.csv"
+  },
+  {
+   "claim_id": "C-035",
+   "result_id": "EXP-001-20261124T161058Z; EXP-001-20261125T065102Z",
+   "config_hash": "f39023e2ef11d9ea44951792ee5fa0316711486e081cd8c5d758d4aab0996c6c",
+   "figure_or_table": "Table 4",
+   "section": "5.1",
+   "evidence": "research/experiment_journal.jsonl J-0003, J-0005; results/exploratory/EXP-001/*/report/cell_summary.csv"
+  },
+  {
+   "claim_id": "C-036",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z) | S2-cpu4x and S4-headed minus main",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "Supplementary S7",
+   "section": "5.4",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity_long.csv"
+  },
+  {
+   "claim_id": "C-037",
+   "result_id": "EXP-004-20261125T103912Z | S3 levels",
+   "config_hash": "S2 200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e; S3 5a8b8a7d9e8b4f2c091f6ceaa69a874ce5b9f45b424334b5749a1d90de7d62a5; S4 7c7b667ce8baebb24379af137c3d2f5f66c5f0df8ccba720f461f639f189fc50; S1 main configs EXP-002 1040b20e..., EXP-003 11ad0538...",
+   "figure_or_table": "EXP-004 report Table (section 8)",
+   "section": "5.4",
+   "evidence": "results/raw/EXP-004/sensitivity/sensitivity_long.csv"
+  },
+  {
+   "claim_id": "C-038",
+   "result_id": "EXP-002-20261125T070315Z; EXP-003-20261125T080838Z | inference.json",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Tables 1 and 2",
+   "section": "4.5; 5.5",
+   "evidence": "results/exploratory/M4-REANALYSIS/x1_test_readings.csv"
+  },
+  {
+   "claim_id": "C-039",
+   "result_id": "EXP-002-20261125T070315Z | read L=50",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Supplementary S4.4",
+   "section": "5.5; 6",
+   "evidence": "results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv; results/exploratory/M4-REANALYSIS/x2_skeleton_l50_trial_distribution.csv"
+  },
+  {
+   "claim_id": "C-040",
+   "result_id": "EXP-002-20261125T070315Z; EXP-003-20261125T080838Z; EXP-004-20261125T095434Z; EXP-004-20261125T103912Z",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Section 5.5 text",
+   "section": "5.5; 6; 7",
+   "evidence": "results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv"
+  },
+  {
+   "claim_id": "C-041",
+   "result_id": "EXP-002-20261125T070315Z | read cells",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Section 5.5 text",
+   "section": "5.5",
+   "evidence": "results/exploratory/M4-REANALYSIS/x2_frame_decomposition.csv"
+  },
+  {
+   "claim_id": "C-042",
+   "result_id": "EXP-002-20261125T070315Z",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Section 5.5 text",
+   "section": "5.5",
+   "evidence": "results/exploratory/M4-REANALYSIS/x3_a3_inclusion_exp002.csv"
+  },
+  {
+   "claim_id": "C-043",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z)",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Supplementary S5",
+   "section": "5.4; 5.5",
+   "evidence": "results/exploratory/M4-REANALYSIS/x4_interval_robustness.csv"
+  },
+  {
+   "claim_id": "C-044",
+   "result_id": "EXP-002-20261125T070315Z; EXP-003-20261125T080838Z",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Supplementary S7",
+   "section": "5.5",
+   "evidence": "results/exploratory/M4-REANALYSIS/x5_arm_order.csv"
+  },
+  {
+   "claim_id": "C-045",
+   "result_id": "EXP-004-20261125T095434Z; EXP-004-20261125T103912Z; EXP-004-20261125T110537Z (S1 from EXP-002-20261125T070315Z and EXP-003-20261125T080838Z)",
+   "config_hash": "inputs: EXP-002 config 1040b20e..., EXP-003 config 11ad0538..., EXP-004 S2-S4 configs; script scripts/m4_reanalysis.py (revision and input SHA-256 in manifest.json)",
+   "figure_or_table": "Supplementary S5",
+   "section": "5.4; 7",
+   "evidence": "results/exploratory/M4-REANALYSIS/x6_narrow_s1_reading.csv; results/exploratory/M4-REANALYSIS/manifest.json (x6_counts)"
+  },
+  {
+   "claim_id": "C-046",
+   "result_id": "EXP-002, EXP-003, EXP-004 raw folders",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "4.6",
+   "evidence": "results/raw/*/manifest_sha256.json; research/publication/evidence_audit.md"
+  },
+  {
+   "claim_id": "E-001",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2; 4.4",
+   "evidence": "W3C Event Timing API (w3c_event_timing)"
+  },
+  {
+   "claim_id": "E-002",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2",
+   "evidence": "MDN Largest Contentful Paint API (mdn_lcp)"
+  },
+  {
+   "claim_id": "E-003",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "1; 2",
+   "evidence": "web.dev INP (wagner_inp)"
+  },
+  {
+   "claim_id": "E-004",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2",
+   "evidence": "WICG Layout Instability (wicg_layout_instability); web.dev CLS (mihajlija_cls)"
+  },
+  {
+   "claim_id": "E-005",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "1; 2",
+   "evidence": "web.dev Optimize CLS (osmani_optimize_cls); NN/g Skeleton Screens 101 (tankala_skeleton)"
+  },
+  {
+   "claim_id": "E-006",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2",
+   "evidence": "Nielsen 1993 (nielsen1993response)"
+  },
+  {
+   "claim_id": "E-007",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2",
+   "evidence": "React useOptimistic documentation (react_useoptimistic)"
+  },
+  {
+   "claim_id": "E-008",
+   "result_id": "n/a",
+   "config_hash": "n/a",
+   "figure_or_table": "none",
+   "section": "2",
+   "evidence": "Mejtoft et al. 2018 (mejtoft2018), metadata via Crossref"
+  }
+ ]
 }

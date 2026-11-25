@@ -1,0 +1,7 @@
+L,arm,failure_trials,median_false_state_ms,median_stale_state_ms,median_wrong_state_ms,median_delay_ms,median_ttuc_ms
+100.0,BLANK,83,0.0,0.0,0.0,101.0,111.3
+100.0,OPTIMISTIC,83,83.4,0.0,83.4,101.0,111.9
+300.0,BLANK,83,0.0,0.0,0.0,304.0,313.0
+300.0,OPTIMISTIC,83,283.9,0.0,283.9,304.0,314.8
+1000.0,BLANK,83,0.0,0.0,0.0,1014.0,1025.7
+1000.0,OPTIMISTIC,83,999.1,0.0,999.1,1014.0,1025.3

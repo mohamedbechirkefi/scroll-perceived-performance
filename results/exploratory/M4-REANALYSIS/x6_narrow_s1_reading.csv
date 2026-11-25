@@ -1,0 +1,24 @@
+path,L,p,arm,stratum,frozen_verdict_dec011,levels_changed_dec011,verdict_element_only_s1,levels_changed_element_only
+read,50.0,,PREFETCH,all,robust,,robust,
+read,50.0,,SKELETON,all,method-dependent,S1-element;S1-raf1,method-dependent,S1-element
+read,100.0,,PREFETCH,all,robust,,robust,
+read,100.0,,SKELETON,all,robust,,robust,
+read,300.0,,PREFETCH,all,robust,,robust,
+read,300.0,,SKELETON,all,robust,,robust,
+read,1000.0,,PREFETCH,all,robust,,robust,
+read,1000.0,,SKELETON,all,robust,,robust,
+write,100.0,0.0,OPTIMISTIC,success,robust,,no sensitivity level,
+write,100.0,0.1,OPTIMISTIC,failure,robust,,no sensitivity level,
+write,100.0,0.1,OPTIMISTIC,success,robust,,no sensitivity level,
+write,100.0,0.3,OPTIMISTIC,failure,robust,,no sensitivity level,
+write,100.0,0.3,OPTIMISTIC,success,robust,,no sensitivity level,
+write,300.0,0.0,OPTIMISTIC,success,robust,,robust,
+write,300.0,0.1,OPTIMISTIC,failure,method-dependent,S1-raf1,no sensitivity level,
+write,300.0,0.1,OPTIMISTIC,success,robust,,no sensitivity level,
+write,300.0,0.3,OPTIMISTIC,failure,method-dependent and condition-dependent,S1-raf1;S4-headed,condition-dependent,S4-headed
+write,300.0,0.3,OPTIMISTIC,success,robust,,robust,
+write,1000.0,0.0,OPTIMISTIC,success,robust,,robust,
+write,1000.0,0.1,OPTIMISTIC,failure,robust,,no sensitivity level,
+write,1000.0,0.1,OPTIMISTIC,success,robust,,no sensitivity level,
+write,1000.0,0.3,OPTIMISTIC,failure,condition-dependent,S2-cpu4x;S4-headed,condition-dependent,S2-cpu4x;S4-headed
+write,1000.0,0.3,OPTIMISTIC,success,robust,,robust,

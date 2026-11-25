@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
 # Limitations (living document)
 
-Status at M0 (2026-11-24): no experiment has run. These are anticipated limitations of the draft protocol; they will be revised against actual results. Items 9 to 14 were added after the M3 confirmatory runs (2026-11-25).
+Status at M0 (2026-11-24): no experiment has run. These are anticipated limitations of the draft protocol; they will be revised against actual results. Items 9 to 14 were added after the M3 confirmatory runs (2026-11-25); items 15 to 20 in M4 (2026-11-25).
 
 1. **No perception claims.** All metrics are objective timings in a browser. Nothing here measures how fast an interface feels to a person. Any perceived-speed statement needs a human study, which is out of scope and would need an owner-approved protocol.
 2. **One mock interface.** Results hold for one synthetic page with fixed layout and content. Real applications differ in DOM size, framework, caching and network behaviour.
@@ -17,3 +17,9 @@ Status at M0 (2026-11-24): no experiment has run. These are anticipated limitati
 12. **TTFF sensitivity not computed.** The alternative paint method is recorded only for the usable-content frame, so the TTFF part of sensitivity S1 is missing (DEC-012).
 13. **Reduced sensitivity coverage.** S2 to S4 use 10 seeds, L in {300, 1000} ms and p in {0, 0.3}; cells outside that set have only the S1 check.
 14. **Run conditions.** One browser version (Chrome 158.0.8127.38), runs under `nice -n 10`, load average 1.4 to 2.4 at run starts with an editor and system services running. The exclusive window reduced, but did not remove, background activity.
+15. **Margin smaller than a measured frame.** The 17 ms equivalence margin was justified as one 60 Hz frame, but the headless frame interval estimated from the second-frame gap was 18.0 to 18.9 ms in every cell (exploratory X2). A one-frame shift under the main method cannot pass the TOST; this bears on the 50 ms SKELETON result, which is reported as not robust.
+16. **rAF1 is a frame-start time.** The rAF1 alternative of S1 precedes the reference delay in most trials (72 to 79% of BLANK read trials at L of 100 ms and more), so it is a lower, optimistic estimate, not a paint time. Whether it belongs in S1 is part of DEC-011 (pending owner review); under the narrow reading (Element Timing only) 9 write contrasts have no sensitivity level at all.
+17. **Literal contradiction criterion.** The protocol's criterion for contradicting the main interpretation is literally met for four contrasts (the 50 ms SKELETON equivalence and three failure-stratum sign changes). The manuscript reports the interpretation as qualified; that judgement is post hoc.
+18. **Headed-mode confound.** In S4 the frame cadence after input differed between arms (second-frame gap 8.6 to 9.0 ms for OPTIMISTIC against 16.45 to 16.75 ms for BLANK on the write path), and S4 ran one to three hours after the main runs. The headed shift of the optimistic benefit may reflect display behaviour or time drift rather than headed rendering as such. The refresh rate was not recorded.
+19. **External sources not read in full.** Every cited source was opened as a model-written page summary; one is metadata only. Full-text reading is scheduled for M6.
+20. **No new measurement in M4.** The machine was shared with other agents during M4, so sensitivity and confounder work used committed traces only (`results/exploratory/M4-REANALYSIS/`). Questions that need new runs (display refresh rate, first-feedback paint times, frame-loop state at short delays) remain open.

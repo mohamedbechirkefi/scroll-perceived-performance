@@ -1,0 +1,9 @@
+cell,contrast,frozen_trial_pairs,included_trial_pairs,frozen_median_ms,included_median_ms,included_ci95_low_ms,included_ci95_high_ms,frozen_holm_p,included_holm_p,frozen_reject,included_reject,frozen_equivalent,included_equivalent,verdict_changed,restored_trials_total
+read L=50 h=150,PREFETCH - BLANK,199,200,-49.95,-49.95,-51.2,-48.925,0.0005,0.0004,True,True,,,False,13
+read L=50 h=150,SKELETON - BLANK,200,200,-16.675,-16.675,-17.1,-16.05,0.0005,0.0004,True,True,False,False,False,13
+read L=100 h=150,PREFETCH - BLANK,197,200,-84.9,-84.9,-86.275,-84.125,0.0,0.0,True,True,,,False,13
+read L=100 h=150,SKELETON - BLANK,196,200,-0.55,-0.55,-1.525,0.075,0.2719,0.2779,False,False,True,True,False,13
+read L=300 h=150,PREFETCH - BLANK,199,200,-160.525,-160.525,-163.5,-157.15,0.0,0.0,True,True,,,False,13
+read L=300 h=150,SKELETON - BLANK,199,200,-0.975,-0.975,-1.15,-0.45,0.2719,0.2779,False,False,True,True,False,13
+read L=1000 h=150,PREFETCH - BLANK,196,200,-157.8,-157.575,-159.2,-155.4,0.0005,0.0,True,True,,,False,13
+read L=1000 h=150,SKELETON - BLANK,197,200,0.05,0.175,-0.5,0.925,1.0,0.7782,False,False,True,True,False,13

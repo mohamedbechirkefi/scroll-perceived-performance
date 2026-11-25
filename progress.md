@@ -249,3 +249,57 @@ Owner: review DEC-011 (test reading) and DEC-012. AI (M4): audit every number, s
 ## 2026-11-25: M3 done (coordinator)
 
 The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 3 report(s). The coordinator checked that every decimal number in them appears in a committed file. With the complete matrices (or documented failures) recorded above, the M3 gate holds. M3 is **done**. Next: M4 (interpretation), not started.
+
+## 2026-11-25: Session M4 (interpretation, evidence audit, manuscript, review pass 2)
+
+Milestone: M4, started by the owner ("Next", 2026-11-25; `labs/_shared/owner-approvals-2026-11-25d.md`, item 2). Bounded task: confounder and sensitivity review from committed results, expected versus observed, claims register, evidence audit, manuscript and supplement, review pass 2, records. Nothing pushed, nothing frozen, no paid service.
+
+### Starting state
+
+`git status`: clean on `main` at `5238070`. Other lab agents were running, so the machine was not quiet: **no browser timing measurement was made in this session, exploratory or otherwise.** The full test suite (below) launches Chrome for its 21 functional browser tests; these record no timing result.
+
+### Commands and actual outputs
+
+```
+$ PYTHONPATH=src nice -n 10 .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS
+  -> x1..x7 CSV files and manifest.json; final run at a clean tree (code_revision recorded in the manifest), about 5 s
+$ PYTHONPATH=src .venv/bin/python scripts/m4_number_audit.py --out research/publication/number_audit_m4.json
+  -> claims_checked 23, claims_matching 23; manuscript 387 tokens, 2 unmatched; supplementary 217, 1; EXP-002 258, 1; EXP-003 235, 0; EXP-004 347, 1 (all unmatched tokens are derived sums verified by hand)
+$ (checksum check of results/raw/*/manifest_sha256.json)  -> checked 110, mismatches 0, unlisted files none
+$ pandoc research/paper/manuscript.md -s --citeproc --bibliography research/paper/references.bib -t latex -> manuscript.tex (header lines re-added)
+$ pandoc ... -t typst (scratch) + typst.compile -> 17-page PDF in the scratch folder only; first plain attempt failed ("label <osmani_optimize_cls> does not exist"): citations need --citeproc and the bibliography path. Not committed, not visually inspected (M6)
+$ nice -n 10 .venv/bin/python -m pytest -q  -> 178 passed in 40.33s
+```
+
+### Results of the interpretation work
+
+- Confounder and sensitivity review (`research/paper/supplementary.md` S7; manuscript 5.5 and 6): no frozen verdict changed. The 50 ms SKELETON effect stays not robust; the exploratory decomposition places it in frame alignment (second-frame gap equal in both arms; first frame already under way at the commit in 83% of SKELETON trials against 1% of BLANK trials). The headless frame interval (18.0 to 18.9 ms) exceeds the 17 ms margin. Hover-lead exclusions and arm order change no verdict. The three failure-stratum "sign changes" have intervals including 0 at every level.
+- DEC-011 shown both ways, not decided: test readings differ for 1 of 23 contrasts; S1 composition gives 19 of 23 robust (DEC-011) or 11 robust and 9 not assessed (Element Timing only).
+- Expected versus observed: manuscript Table 4. The frozen contradiction criterion is literally met for four contrasts; the qualified reading is labelled post hoc.
+- Evidence audit (`research/publication/evidence_audit.md`): 8 prose mismatches in the M3 reports corrected (none affects a verdict or a claim value); the EXP-003 failure-exposure table now maps to a committed output (X7). Two manuscript draft errors were caught before the final commit.
+- Review pass 2 (`research/publication/review_pass_2.md`): 12 challenges; changes made for R-1 to R-5, R-7, R-8, R-11 and R-12.
+
+### Files
+
+New: `scripts/m4_reanalysis.py`, `scripts/m4_number_audit.py`, `results/exploratory/M4-REANALYSIS/`, `research/publication/evidence_audit.md`, `research/publication/review_pass_2.md`, `research/publication/number_audit_m4.json`. Updated: `research/paper/manuscript.md`, `manuscript.tex`, `supplementary.md`, `references.bib`, `research/claims_register.csv` (54 rows, new columns), `research/publication/artifact_manifest.json`, `claims_audit.md`, `research/limitations.md` (items 15 to 20), `research/decision_log.md` (DEC-013), `research/experiment_journal.jsonl` (J-0009, J-0010), `research/experiment_registry.csv`, the EXP-002, EXP-003 and EXP-004 reports (corrections), `roadmap.md`.
+
+### Not done by this session
+
+- `research/experiments/EXP-001/report.md`: composed from committed outputs, but the Write tool refused it (subagents cannot write report files); returned to the coordinator as text.
+- No external source read in full (M6). No PDF committed or inspected (M6).
+
+### Owner placeholders for M5
+
+1. Repository URL (manuscript, Data and code availability).
+2. Funding statement.
+3. Competing-interest statement.
+4. Author line (manuscript front matter and the EXP-001 report; the freeze record C3 holds "Mohamed Bechir Kefi", no affiliation, shown beside the placeholder for confirmation).
+5. Manuscript title (proposed in M4, not yet approved).
+
+### Pending owner decisions
+
+- DEC-011 (test reading and S1 composition), open under owner, 2026-11-25, "Next".
+
+### Next action
+
+Coordinator: write the EXP-001 report from the returned text. Owner: review DEC-011, the title and the placeholders. AI: M5 when started.

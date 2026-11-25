@@ -1,0 +1,425 @@
+{
+ "label": "M4 evidence audit output (mechanical number check; manual review in evidence_audit.md)",
+ "claims_check": [
+  {
+   "claim_id": "C-001",
+   "result_id": "EXP-002|read L=50 h=150|PREFETCH - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-50.0",
+    "-51.2",
+    "-48.9"
+   ],
+   "raw_values": [
+    -49.95000000298023,
+    -51.17499999701977,
+    -48.92499999888241
+   ]
+  },
+  {
+   "claim_id": "C-002",
+   "result_id": "EXP-002|read L=50 h=150|SKELETON - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-16.7",
+    "-17.1",
+    "-16.0"
+   ],
+   "raw_values": [
+    -16.675000000745058,
+    -17.099999997764826,
+    -16.049999997019768
+   ]
+  },
+  {
+   "claim_id": "C-003",
+   "result_id": "EXP-002|read L=100 h=150|PREFETCH - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-84.9",
+    "-86.3",
+    "-84.1"
+   ],
+   "raw_values": [
+    -84.90000000037253,
+    -86.27500000037253,
+    -84.12500000558794
+   ]
+  },
+  {
+   "claim_id": "C-004",
+   "result_id": "EXP-002|read L=100 h=150|SKELETON - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-0.6",
+    "-1.9",
+    "0.1"
+   ],
+   "raw_values": [
+    -0.5500000026077032,
+    -1.8749999944120646,
+    0.1249999962747097
+   ]
+  },
+  {
+   "claim_id": "C-005",
+   "result_id": "EXP-002|read L=300 h=150|PREFETCH - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-160.5",
+    "-163.5",
+    "-157.1"
+   ],
+   "raw_values": [
+    -160.52500000409782,
+    -163.5,
+    -157.14999999850988
+   ]
+  },
+  {
+   "claim_id": "C-006",
+   "result_id": "EXP-002|read L=300 h=150|SKELETON - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-1.0",
+    "-1.1",
+    "-0.4"
+   ],
+   "raw_values": [
+    -0.9750000014901161,
+    -1.1499999985098839,
+    -0.44999999552965164
+   ]
+  },
+  {
+   "claim_id": "C-007",
+   "result_id": "EXP-002|read L=1000 h=150|PREFETCH - BLANK|all",
+   "match": true,
+   "text_values": [
+    "-157.8",
+    "-159.1",
+    "-155.4"
+   ],
+   "raw_values": [
+    -157.80000000074506,
+    -159.125,
+    -155.40000000409782
+   ]
+  },
+  {
+   "claim_id": "C-008",
+   "result_id": "EXP-002|read L=1000 h=150|SKELETON - BLANK|all",
+   "match": true,
+   "text_values": [
+    "0.0",
+    "-0.9",
+    "0.9"
+   ],
+   "raw_values": [
+    0.04999999888241291,
+    -0.9499999973922968,
+    0.9249999988824129
+   ]
+  },
+  {
+   "claim_id": "C-009",
+   "result_id": "EXP-003|write L=100 p=0|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-85.2",
+    "-88.0",
+    "-84.3"
+   ],
+   "raw_values": [
+    -85.22500000149012,
+    -88.02499999850988,
+    -84.32500000298023
+   ]
+  },
+  {
+   "claim_id": "C-010",
+   "result_id": "EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-85.3",
+    "-86.6",
+    "-84.8"
+   ],
+   "raw_values": [
+    -85.2749999947846,
+    -86.625,
+    -84.82500000670552
+   ]
+  },
+  {
+   "claim_id": "C-011",
+   "result_id": "EXP-003|write L=100 p=0.1|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "0.5",
+    "-1.5",
+    "1.7"
+   ],
+   "raw_values": [
+    0.5000000111758709,
+    -1.5000000037252903,
+    1.6750000026077032
+   ]
+  },
+  {
+   "claim_id": "C-012",
+   "result_id": "EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-85.3",
+    "-88.0",
+    "-83.9"
+   ],
+   "raw_values": [
+    -85.34999999031425,
+    -87.99999999627471,
+    -83.89999998733401
+   ]
+  },
+  {
+   "claim_id": "C-013",
+   "result_id": "EXP-003|write L=100 p=0.3|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "2.7",
+    "-1.0",
+    "5.4"
+   ],
+   "raw_values": [
+    2.749999998137355,
+    -0.9500000029802322,
+    5.425000000745058
+   ]
+  },
+  {
+   "claim_id": "C-014",
+   "result_id": "EXP-003|write L=300 p=0|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-288.5",
+    "-297.7",
+    "-282.3"
+   ],
+   "raw_values": [
+    -288.4750000052154,
+    -297.69999999925494,
+    -282.32500000298023
+   ]
+  },
+  {
+   "claim_id": "C-015",
+   "result_id": "EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-289.3",
+    "-297.6",
+    "-283.5"
+   ],
+   "raw_values": [
+    -289.2750000022352,
+    -297.5750000011176,
+    -283.52500000596046
+   ]
+  },
+  {
+   "claim_id": "C-016",
+   "result_id": "EXP-003|write L=300 p=0.1|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "-0.8",
+    "-3.0",
+    "4.3"
+   ],
+   "raw_values": [
+    -0.7749999985098839,
+    -3.0499999932944775,
+    4.3250000067055225
+   ]
+  },
+  {
+   "claim_id": "C-017",
+   "result_id": "EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-290.4",
+    "-297.4",
+    "-284.1"
+   ],
+   "raw_values": [
+    -290.4000000022352,
+    -297.42500000074506,
+    -284.1000000052154
+   ]
+  },
+  {
+   "claim_id": "C-018",
+   "result_id": "EXP-003|write L=300 p=0.3|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "-0.1",
+    "-2.6",
+    "1.5"
+   ],
+   "raw_values": [
+    -0.09999999962747097,
+    -2.5999999940395355,
+    1.4999999925494194
+   ]
+  },
+  {
+   "claim_id": "C-019",
+   "result_id": "EXP-003|write L=1000 p=0|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-998.6",
+    "-1012.2",
+    "-972.6"
+   ],
+   "raw_values": [
+    -998.625,
+    -1012.1999999973923,
+    -972.6250000037253
+   ]
+  },
+  {
+   "claim_id": "C-020",
+   "result_id": "EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-995.9",
+    "-1015.8",
+    "-967.3"
+   ],
+   "raw_values": [
+    -995.9499999992549,
+    -1015.7500000037253,
+    -967.2749999985099
+   ]
+  },
+  {
+   "claim_id": "C-021",
+   "result_id": "EXP-003|write L=1000 p=0.1|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "-1.6",
+    "-7.1",
+    "0.1"
+   ],
+   "raw_values": [
+    -1.5999999940395355,
+    -7.050000000745058,
+    0.10000000521540642
+   ]
+  },
+  {
+   "claim_id": "C-022",
+   "result_id": "EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|success",
+   "match": true,
+   "text_values": [
+    "-990.7",
+    "-1016.6",
+    "-961.7"
+   ],
+   "raw_values": [
+    -990.6999999992549,
+    -1016.6499999910593,
+    -961.6750000044703
+   ]
+  },
+  {
+   "claim_id": "C-023",
+   "result_id": "EXP-003|write L=1000 p=0.3|OPTIMISTIC - BLANK|failure",
+   "match": true,
+   "text_values": [
+    "0.6",
+    "-1.4",
+    "3.4"
+   ],
+   "raw_values": [
+    0.5999999977648258,
+    -1.3999999966472387,
+    3.3749999962747097
+   ]
+  }
+ ],
+ "token_check": {
+  "research/paper/manuscript.md": {
+   "tokens_checked": 387,
+   "unmatched": [
+    {
+     "line": 102,
+     "token": "2,387",
+     "context": "( ) completed 240 of 240 sessions in 3,887.4 s; 2,387 of 2,400 trials were analysed after 13 hover-lead exclusions (at most 2 of 200 in any cell and arm), and n"
+    },
+    {
+     "line": 155,
+     "token": "3,596",
+     "context": "ran   (CPU 4x, 140 sessions),   (h = 0 and 600 ms, 80 sessions, 4 hover-lead exclusions) and   (headed, 140 sessions) in full, 3,596 of 3,600 trials analysed, w"
+    }
+   ]
+  },
+  "research/paper/supplementary.md": {
+   "tokens_checked": 217,
+   "unmatched": [
+    {
+     "line": 23,
+     "token": "2,387",
+     "context": "|   | 240 of 240 | 2,387 of 2,400 | 13 (  hover lead) | 3,887.4 | 1.78, 1.83, 6.55 |"
+    }
+   ]
+  },
+  "research/experiments/EXP-002/report.md": {
+   "tokens_checked": 258,
+   "unmatched": [
+    {
+     "line": 86,
+     "token": "2,387",
+     "context": "- 2,400 trials, 2,387 analysed. The 13 exclusions all come from the hover-lead rule ( : measured lead off by more than 25 ms), at most 2 of 200 per cell and arm"
+    }
+   ]
+  },
+  "research/experiments/EXP-003/report.md": {
+   "tokens_checked": 235,
+   "unmatched": []
+  },
+  "research/experiments/EXP-004/report.md": {
+   "tokens_checked": 347,
+   "unmatched": [
+    {
+     "line": 58,
+     "token": "115.6",
+     "context": "- **Budget:** about 117 minutes were projected; 115.6 minutes were used."
+    }
+   ]
+  }
+ },
+ "summary": {
+  "claims_checked": 23,
+  "claims_matching": 23,
+  "research/paper/manuscript.md": {
+   "checked": 387,
+   "unmatched": 2
+  },
+  "research/paper/supplementary.md": {
+   "checked": 217,
+   "unmatched": 1
+  },
+  "research/experiments/EXP-002/report.md": {
+   "checked": 258,
+   "unmatched": 1
+  },
+  "research/experiments/EXP-003/report.md": {
+   "checked": 235,
+   "unmatched": 0
+  },
+  "research/experiments/EXP-004/report.md": {
+   "checked": 347,
+   "unmatched": 1
+  }
+ }
+}

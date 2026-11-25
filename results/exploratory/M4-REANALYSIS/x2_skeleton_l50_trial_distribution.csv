@@ -1,0 +1,4 @@
+metric,trial_pairs,median_ms,q25_ms,q75_ms,min_ms,max_ms,share_below_minus_25ms,share_minus_25_to_minus_8ms,share_minus_8_to_plus_8ms,share_above_plus_8ms
+ttuc_ms,200,-16.5,-19.3,-14.2,-73.2,21.8,0.095,0.805,0.055,0.045
+ttuc_raf1_ms,200,-15.5,-17.9,-12.425,-33.6,20.5,0.015,0.825,0.065,0.095
+ttuc_element_ms,200,-9.3,-13.7,-5.575,-23.3,19.2,0.0,0.605,0.325,0.07

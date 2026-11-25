@@ -1,0 +1,35 @@
+{
+ "label": "exploratory (M4, post hoc re-analysis of committed raw results; no browser run)",
+ "never_replaces": "frozen verdicts in results/raw/*/report/inference.json and results/raw/EXP-004/sensitivity/",
+ "script": "scripts/m4_reanalysis.py",
+ "code_revision": "4ba5732b5f0ba776e6fa9b0c082e8c6aa6d4ceff",
+ "tree_dirty_at_run": false,
+ "command": "PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS",
+ "bootstrap": "percentile, 10,000 resamples, seed 20261124 (stats.bootstrap_ci defaults); X5 uses 1,000 only for the unused intervals",
+ "x6_counts": {
+  "robust_dec011": 19,
+  "robust_element_only": 11,
+  "contrasts": 23
+ },
+ "inputs_sha256": {
+  "results/raw/EXP-002/EXP-002-20261125T070315Z/results.json": "0ca46a419b9d00b1b262f0b3f72cd4aeb342070dbb317dd8f36b89016886fce3",
+  "results/raw/EXP-003/EXP-003-20261125T080838Z/results.json": "9bf70c80b0066dcba545dee718b13e886c3fd850fa9d49c9718801db2f474fe6",
+  "results/raw/EXP-004/EXP-004-20261125T095434Z/results.json": "173a3b82f003f467dc89859821ff14d1d5061af8c70b4ea37aa63a687d4b81bf",
+  "results/raw/EXP-004/EXP-004-20261125T103912Z/results.json": "0e3ea2a6f3d4ae6da95de027b0d3bcf228a3c24600462ea84782387a6576041c",
+  "results/raw/EXP-004/EXP-004-20261125T110537Z/results.json": "0df4a90fa1a334fae11450917b7d02cd39b7a98d874652c6c382ca187343d317",
+  "results/raw/EXP-002/EXP-002-20261125T070315Z/report/inference.json": "4873e027e30f7e3aebe728786bce30f72b773e54ddf6761441ebe8cc52be6802",
+  "results/raw/EXP-003/EXP-003-20261125T080838Z/report/inference.json": "cf46b6d20b01185ea9d644e031e60ca6c22c52ac13ab74da07309c8b11bb70cf",
+  "results/raw/EXP-004/sensitivity/sensitivity_long.csv": "6e4704f57ec41c6411bf518546aeb11516affd7d4358e9b6f23caf8052bb7d7a",
+  "results/raw/EXP-004/sensitivity/sensitivity_verdicts.csv": "09db843ffee9fd8211e843c42090befeee13d73a3135a8f41f5694646b9495f7"
+ },
+ "outputs_sha256": {
+  "x1_test_readings.csv": "9f94a0b104166073242636dae11dc6d0e157a21255339d2274ff7278aad7e54f",
+  "x2_frame_decomposition.csv": "307a280951c5e11864bedd3726dd4b2cce4ec4ed68f67fdab755fd3b5295233b",
+  "x2_skeleton_l50_trial_distribution.csv": "e28e67f608e330417da5b2a6c1225c61fd57f185c48ee7272ad349e082f20c87",
+  "x3_a3_inclusion_exp002.csv": "b24af055fe1c8b1c266dd8f54035e922704d5d164c68cb19bca8b117f094ebdd",
+  "x4_interval_robustness.csv": "e4b1ac8fd39450860057ccd2605eb480dcbc3ad0702d82a623c3d9bf51532438",
+  "x5_arm_order.csv": "54acfc06d9303553f2a292abd68f392052c9a54331183751cd3bce18d86dcebe",
+  "x6_narrow_s1_reading.csv": "6fe3c3eb112b1514cd58cf4733008e491c70659f2ed1563a60c3278d32abb391",
+  "x7_exp003_failure_exposure.csv": "1d0c90c00dfb16c7d21b5f052d6680f7fad87c2fa99dbcb817ff7cf870c06dcd"
+ }
+}

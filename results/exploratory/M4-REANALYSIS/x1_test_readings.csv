@@ -1,0 +1,24 @@
+experiment,cell,contrast,stratum,median_diff_ms,ci95_low_ms,ci95_high_ms,holm_p,reading_A_holm_wilcoxon_reject,reading_B_ci95_excludes_0,readings_disagree,equivalent_17ms
+EXP-002,read L=50 h=150,PREFETCH - BLANK,all,-49.95,-51.175,-48.925,0.0005,True,True,False,
+EXP-002,read L=50 h=150,SKELETON - BLANK,all,-16.675,-17.1,-16.05,0.0005,True,True,False,False
+EXP-002,read L=100 h=150,PREFETCH - BLANK,all,-84.9,-86.275,-84.125,0.0,True,True,False,
+EXP-002,read L=100 h=150,SKELETON - BLANK,all,-0.55,-1.875,0.125,0.2719,False,False,False,True
+EXP-002,read L=300 h=150,PREFETCH - BLANK,all,-160.525,-163.5,-157.15,0.0,True,True,False,
+EXP-002,read L=300 h=150,SKELETON - BLANK,all,-0.975,-1.15,-0.45,0.2719,False,True,True,True
+EXP-002,read L=1000 h=150,PREFETCH - BLANK,all,-157.8,-159.125,-155.4,0.0005,True,True,False,
+EXP-002,read L=1000 h=150,SKELETON - BLANK,all,0.05,-0.95,0.925,1.0,False,False,False,True
+EXP-003,write L=100 p=0,OPTIMISTIC - BLANK,success,-85.225,-88.025,-84.325,0.0008,True,True,False,
+EXP-003,write L=100 p=0.1,OPTIMISTIC - BLANK,success,-85.275,-86.625,-84.825,0.0,True,True,False,
+EXP-003,write L=100 p=0.1,OPTIMISTIC - BLANK,failure,0.5,-1.5,1.675,1.0,False,False,False,
+EXP-003,write L=100 p=0.3,OPTIMISTIC - BLANK,success,-85.35,-88.0,-83.9,0.0008,True,True,False,
+EXP-003,write L=100 p=0.3,OPTIMISTIC - BLANK,failure,2.75,-0.95,5.425,0.3665,False,False,False,
+EXP-003,write L=300 p=0,OPTIMISTIC - BLANK,success,-288.475,-297.7,-282.325,0.0008,True,True,False,
+EXP-003,write L=300 p=0.1,OPTIMISTIC - BLANK,success,-289.275,-297.575,-283.525,0.0,True,True,False,
+EXP-003,write L=300 p=0.1,OPTIMISTIC - BLANK,failure,-0.775,-3.05,4.325,1.0,False,False,False,
+EXP-003,write L=300 p=0.3,OPTIMISTIC - BLANK,success,-290.4,-297.425,-284.1,0.0,True,True,False,
+EXP-003,write L=300 p=0.3,OPTIMISTIC - BLANK,failure,-0.1,-2.6,1.5,1.0,False,False,False,
+EXP-003,write L=1000 p=0,OPTIMISTIC - BLANK,success,-998.625,-1012.2,-972.625,0.0,True,True,False,
+EXP-003,write L=1000 p=0.1,OPTIMISTIC - BLANK,success,-995.95,-1015.75,-967.275,0.0,True,True,False,
+EXP-003,write L=1000 p=0.1,OPTIMISTIC - BLANK,failure,-1.6,-7.05,0.1,0.4614,False,False,False,
+EXP-003,write L=1000 p=0.3,OPTIMISTIC - BLANK,success,-990.7,-1016.65,-961.675,0.0,True,True,False,
+EXP-003,write L=1000 p=0.3,OPTIMISTIC - BLANK,failure,0.6,-1.4,3.375,1.0,False,False,False,
