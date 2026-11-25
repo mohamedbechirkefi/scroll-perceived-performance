@@ -18,7 +18,7 @@ frontend performance; loading strategies; skeleton screens; prefetching; optimis
 
 # 1. Introduction
 
-Interfaces that wait for a server must decide what to show during the wait. Common strategies show nothing new until the response arrives, show a placeholder with the final layout (a skeleton), start the request earlier on an intent signal such as a hover (prefetching), or show the expected result immediately and correct it if the server disagrees (an optimistic update). Practitioner guidance recommends skeletons and reserved space to reduce layout shift [@osmani_optimize_cls; @tankala_skeleton], and browser standards define how the latency from an input to the next paint is measured [@w3c_event_timing; @wagner_inp]. These strategies act on different quantities. A skeleton changes what is shown first, but it cannot make the data arrive sooner; a prefetch can; an optimistic update shows the final state at once on success and a false state on failure.
+Interfaces that wait for a server must decide what to show during the wait. Common strategies show nothing new until the response arrives, show a placeholder with the final layout (a skeleton), start the request earlier on an intent signal such as a hover (prefetching), or show the expected result immediately and correct it if the server disagrees (an optimistic update). Practitioner guidance recommends reserving space, for example with a placeholder or skeleton, to reduce layout shift [@osmani_optimize_cls], and discusses when skeleton screens are appropriate [@tankala_skeleton], and browser standards define how the latency from an input to the next paint is measured [@w3c_event_timing; @wagner_inp]. These strategies act on different quantities. A skeleton changes what is shown first, but it cannot make the data arrive sooner; a prefetch can; an optimistic update shows the final state at once on success and a false state on failure.
 
 The project's working question, set in its master prompt, is: how do loading strategies affect measurable interface responsiveness under controlled delays? We operationalise it as the time from a click to the first frame showing the requested content in its final, correct and usable state (TTUC), and we keep the time to first feedback (TTFF) as a secondary metric. The claims boundary is strict: objective timing is not perceived speed, and nothing here is a statement about human perception.
 
@@ -35,7 +35,7 @@ Contributions:
 
 # 2. Related work
 
-This section is a scoping summary, not a systematic review. Every source was opened on 2026-11-24 through a tool that returns a model-written summary of the page rather than its full text (`research/literature_review.md`). Claims below are limited to what those summaries stated; a full-text reading of every source a claim depends on is scheduled for M6 (owner, 2026-11-25, "Approve all" (post-M4), item 7).
+This section is a scoping summary, not a systematic review. Every source was first opened on 2026-11-24 through a tool that returns a model-written summary of the page (`research/literature_review.md`). On 2026-11-25 (M6) the full text of the nine freely available web sources was retrieved and each claim below was checked against the cited section (`research/publication/evidence_audit.md`, section 8); the tenth source [@mejtoft2018] has no free full text and is cited for its existence only.
 
 **Measurement standards.** The Event Timing API defines an event's duration from its timestamp to the next rendering update after dispatch, rounded to 8 ms, with an observer threshold of at least 16 ms [@w3c_event_timing]. Interaction to Next Paint aggregates such durations into a page-level responsiveness metric [@wagner_inp]. The Layout Instability API defines layout-shift values and excludes shifts shortly after discrete input [@wicg_layout_instability; @mihajlija_cls]. Largest Contentful Paint stops reporting at the first input, so it cannot time content that appears after a click [@mdn_lcp]. These sources motivate the custom TTUC marker used here and explain why Event Timing could only be descriptive: most of our interactions fell below its 16 ms threshold.
 
@@ -262,7 +262,7 @@ All code, configurations, frozen protocols, raw results with SHA-256 manifests, 
 ::: {#refs}
 :::
 
-The reference list is generated from `research/paper/references.bib`. Every entry was opened as a model-written page summary on 2026-11-24, not as full text; mejtoft2018 is metadata only and is not used for any finding.
+The reference list is generated from `research/paper/references.bib`. Nine entries were read as full text on 2026-11-25 and the cited passages checked (`research/publication/evidence_audit.md`, section 8); mejtoft2018 is metadata only (no free full text) and is not used for any finding.
 
 # Supplementary appendix
 

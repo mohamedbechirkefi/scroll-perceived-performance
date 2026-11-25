@@ -352,3 +352,59 @@ Repository URL, demo URL, funding, competing interests, author line and affiliat
 ### Next action
 
 Owner: DEC-011, the title and the placeholders. AI: M6 (release candidate) when started.
+
+## 2026-11-25: Session M6 (release candidate)
+
+Milestone: M6, started by the owner ("Push and next", 2026-11-25; `labs/_shared/owner-approvals-2026-11-25f.md`), under the M6 brief and its timing addendum. Bounded task: clean-clone reproduction, PDFs with visual inspection, references, links, manifests, scans, `CITATION.cff`, owner and release checklists. Nothing pushed, tagged, released or frozen; no paid service; no timing comparison.
+
+### Starting state
+
+`git status`: clean on `main` at `4f9e017`. Load average 2.12 1.94 1.68 at the start of the clone work (other lab agents running).
+
+### Commands and actual outputs
+
+Clean clone (scratch folder, deleted at the end):
+
+```
+$ git clone -q <labs>/scroll-perceived-performance <scratch>/clone; uv sync --frozen --all-groups --all-extras  -> 26 packages
+$ nice -n 10 .venv/bin/python -m pytest -q                         -> 193 passed in 55.91s
+$ scroll report / scroll.inference primary on copies of the 5 confirmatory run folders
+  -> 55 files byte-identical, 20 identical after normalising timestamps and SVG ids, 10 PDF/typ not regenerated, 0 other differences
+$ scroll.inference sensitivity (EXP-004)                           -> 4 files byte-identical, SVG identical after normalising
+$ scripts/m4_reanalysis.py                                         -> 8 CSV byte-identical; manifest differs only in code_revision and --out path
+$ scroll smoke --report (exploratory, load 2.32 -> 2.35)           -> 5/5 sessions ok, done in 7.2 s (not compared)
+$ npm ci --prefer-offline; npm test; npm run build                 -> added 53 packages; Tests 24 passed (24); built
+$ node tools/a11y_check.mjs dist                                   -> A11Y-CHECK PASS (9 PASS lines)
+$ export_demo_data.py; export_sandbox_fixture.py; git status       -> EXPORT-CHECK PASS; tree clean
+```
+
+Working repository:
+
+```
+$ ../.tools/py/bin/python scripts/build_pdfs.py --typ-dir <scratch>/typ --png <scratch>/png --ppi 70 --tex
+  -> manuscript.pdf 15 pages (211 KB), supplementary.pdf 6, EXP-001 4, EXP-002 8, EXP-003 6, EXP-004 8 (all under 200 KB); manuscript.tex
+$ pypdf metadata check -> title set on all 6; 0 e-mail addresses; 0 local paths
+$ scripts/check_links.py                                -> relative links checked: 60; failures: 0; LINK-CHECK PASS
+$ raw checksums / artifact manifest                     -> 110 of 110 match, 0 unlisted; 43 paths present, 36 hashes match
+$ tracked-file scan                                     -> 0 tokens, 0 private keys, 0 .env; 1 generic no-reply address (CLAUDE.md); 22 home-path lines in 6 files
+$ nice -n 10 .venv/bin/python -m pytest -q              -> 196 passed in 39.90s
+$ npm test; npm run build; node tools/a11y_check.mjs dist -> Tests 24 passed (24); built; A11Y-CHECK PASS
+```
+
+### Failures and fixes
+
+- First PDF builds failed: `typst.compile` refused a root that did not contain the intermediate file, then could not find the bibliography; fixed by compiling from the intermediate folder and rendering citations with citeproc (`-t typst-citations`).
+- Visual inspection found: equal-width table columns splitting words, a near-blank page before Table 1, inline code overlapping the next column in two supplement tables, "n.d." for dated web sources, and an install command whose double hyphens had become dashes. All fixed in the builder or the Markdown source (DEC-015); no PDF was edited.
+- Reference check: one Introduction sentence cited the NN/g article for layout shift, which it does not discuss; narrowed.
+
+### Note on earlier entries (append-only)
+
+Earlier entries of this file, and `research/decision_log.md`, contain absolute local paths; they are not edited (append-only). From this entry on, local paths are written as `<labs>` or `<scratch>`.
+
+### Files
+
+New: `scripts/build_pdfs.py`, `scripts/check_links.py`, `tests/test_links.py`, `research/publication/dependency_licences.md`, `research/paper/manuscript.pdf`, `research/paper/supplementary.pdf`, `research/experiments/EXP-00N/report.pdf` (4). Updated: `research/paper/manuscript.md`, `manuscript.tex`, `references.bib`, `research/experiments/EXP-002/report.md`, `research/claims_register.csv` (E-001 to E-008 status), `research/limitations.md` (item 19), `research/literature_review.md` (section 5), `research/publication/evidence_audit.md` (section 8), `claims_audit.md` (note), `reproducibility_report.md`, `release_checklist.md`, `author_review.md` (owner section), `demo/public/data/results.json` (limitation text), `tests/test_schedule_differential.py` (relative Node path), `README.md`, `CITATION.cff`, `research/decision_log.md` (DEC-015), `roadmap.md`.
+
+### Status and next action
+
+M6: release candidate prepared, awaiting the owner's review and G-PUBLIC; not done until the owner signs off. Owner: `research/publication/author_review.md` (DEC-011, titles, statements, placeholders, author line, home paths), then any publication decision.

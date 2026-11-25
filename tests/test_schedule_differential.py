@@ -11,7 +11,7 @@ import pytest
 from scroll import schedule as S
 
 ROOT = Path(__file__).resolve().parents[1]
-NODE = Path("/Users/bechir/research/helix/.tools/node/bin/node")
+NODE = ROOT.parents[1] / "helix" / ".tools" / "node" / "bin" / "node"  # shared read-only Node (CLAUDE.md), found relative to the repository
 
 
 def _node() -> str:

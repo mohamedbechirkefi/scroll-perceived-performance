@@ -12,3 +12,5 @@ Status: completed for M4 on 2026-11-25. Details in `evidence_audit.md`; mechanic
 - [x] A second review pass challenged the preferred hypothesis (`review_pass_2.md`).
 - [ ] External sources read in full: not done; all are summary-only or metadata-only. Scheduled for M6 (owner, 2026-11-25, "Approve all" (post-M4), item 7).
 - [ ] Owner review of DEC-011 and of the placeholders: pending.
+
+M6 note (2026-11-25): the unticked item "External sources read in full" is superseded by `evidence_audit.md` section 8: the full text of 9 of the 10 sources was retrieved and the cited passages read; every external claim E-001 to E-007 was confirmed; Mejtoft et al. (2018) stays metadata only (closed access). One manuscript sentence was narrowed. The box is left as M4 wrote it.

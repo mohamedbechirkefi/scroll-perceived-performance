@@ -3,7 +3,7 @@
 
 **Question:** how do loading strategies (blank, skeleton, optimistic update, prefetch) affect measurable interface responsiveness under controlled, injected delays?
 
-**Status, 2026-11-25 (M5).** Confirmatory results exist for EXP-002 to EXP-004 under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. The manuscript (`research/paper/manuscript.md`) is a preprint draft, not peer-reviewed; the owner's full-text review is pending (M6). One owner decision is pending and is shown both ways below. Nothing has been published.
+**Status, 2026-11-25 (M6, release candidate 0.1.0-rc1).** Confirmatory results exist for EXP-002 to EXP-004 under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. The manuscript (`research/paper/manuscript.md`, PDF [`manuscript.pdf`](research/paper/manuscript.pdf)) is a preprint draft, not peer-reviewed. A release candidate has been prepared and awaits the owner's review (`research/publication/author_review.md`); it is not a release. One owner decision is pending and is shown both ways below. Nothing has been published.
 
 ## Why it matters
 
@@ -33,14 +33,15 @@ Null and non-robust results are reported with the same weight as positive ones. 
 
 | ID | Experiment | Status | Report |
 |---|---|---|---|
-| EXP-001 | Smoke run and instrumentation validation | exploratory (not frozen), two runs; checks C1 to C4 passed | [`report`](research/experiments/EXP-001/report.md) |
-| EXP-002 | Read path: BLANK vs SKELETON vs PREFETCH | confirmatory, complete (240/240 sessions) | [`report`](research/experiments/EXP-002/report.md) |
-| EXP-003 | Write path: BLANK vs OPTIMISTIC with failures | confirmatory, complete (360/360 sessions) | [`report`](research/experiments/EXP-003/report.md) |
-| EXP-004 | Sensitivity analyses | confirmatory, complete (360/360 sessions) | [`report`](research/experiments/EXP-004/report.md) |
+| EXP-001 | Smoke run and instrumentation validation | exploratory (not frozen), two runs; checks C1 to C4 passed | [`report`](research/experiments/EXP-001/report.md), [`PDF`](research/experiments/EXP-001/report.pdf) |
+| EXP-002 | Read path: BLANK vs SKELETON vs PREFETCH | confirmatory, complete (240/240 sessions) | [`report`](research/experiments/EXP-002/report.md), [`PDF`](research/experiments/EXP-002/report.pdf) |
+| EXP-003 | Write path: BLANK vs OPTIMISTIC with failures | confirmatory, complete (360/360 sessions) | [`report`](research/experiments/EXP-003/report.md), [`PDF`](research/experiments/EXP-003/report.pdf) |
+| EXP-004 | Sensitivity analyses | confirmatory, complete (360/360 sessions) | [`report`](research/experiments/EXP-004/report.md), [`PDF`](research/experiments/EXP-004/report.pdf) |
 
 ## Research navigation
 
-- Manuscript (preprint draft, not peer-reviewed): [`research/paper/manuscript.md`](research/paper/manuscript.md); supplement: [`research/paper/supplementary.md`](research/paper/supplementary.md)
+- Manuscript (preprint draft, not peer-reviewed): [`research/paper/manuscript.md`](research/paper/manuscript.md) ([PDF](research/paper/manuscript.pdf)); supplement: [`research/paper/supplementary.md`](research/paper/supplementary.md) ([PDF](research/paper/supplementary.pdf))
+- Release candidate: [`release_checklist.md`](research/publication/release_checklist.md), [`reproducibility_report.md`](research/publication/reproducibility_report.md), [`author_review.md`](research/publication/author_review.md)
 - Protocol (frozen v1.0): [`research/protocol.md`](research/protocol.md); freeze record: [`research/freeze.json`](research/freeze.json)
 - Claims register: [`research/claims_register.csv`](research/claims_register.csv); artifact manifest: [`research/publication/artifact_manifest.json`](research/publication/artifact_manifest.json)
 - Limitations: [`research/limitations.md`](research/limitations.md); decisions: [`research/decision_log.md`](research/decision_log.md)
@@ -60,6 +61,8 @@ Python (after `uv sync --frozen`):
 PYTHONPATH=src .venv/bin/python -m scroll test              # test suite (launches Chrome for the browser tests)
 PYTHONPATH=src .venv/bin/python -m scroll smoke --report    # exploratory toolchain smoke run
 .venv/bin/python scripts/export_demo_data.py --check        # demo data matches the committed results
+.venv/bin/python scripts/check_links.py                     # every relative Markdown link resolves
+../.tools/py/bin/python scripts/build_pdfs.py --tex          # manuscript, supplement and report PDFs (pandoc and Typst, DEC-002)
 ```
 
 Demo (Node 22):

@@ -40,7 +40,7 @@
   },
   {
    "path": "research/claims_register.csv",
-   "sha256": "48bf0f0903421ea720e747a12e55f4ef04b5793a7701ff67bbd81d151eaad114"
+   "sha256": "28a4ff096a1a3eda7f1f75d6617cee701481fcf799662d64e5d59edcde8e96f7"
   },
   {
    "path": "research/publication/artifact_manifest.json",
@@ -48,7 +48,7 @@
   },
   {
    "path": "research/limitations.md",
-   "sha256": "042dc0487c87c614a3d4ae48a3b07c5d52da48f2712d6a39f23aea198123302e"
+   "sha256": "656c1d97098f6a5d6011460b0831e848e14cd0d4e5d257cd9f425c5ba9a4251d"
   }
  ],
  "experiments": [
@@ -849,7 +849,7 @@
   "rAF1 is a frame-start time. The rAF1 alternative of S1 precedes the reference delay in most trials (72 to 79% of BLANK read trials at L of 100 ms and more), so it is a lower, optimistic estimate, not a paint time. Whether it belongs in S1 is part of DEC-011 (pending owner review); under the narrow reading (Element Timing only) 9 write contrasts have no sensitivity level at all.",
   "Literal contradiction criterion. The protocol's criterion for contradicting the main interpretation is literally met for four contrasts (the 50 ms SKELETON equivalence and three failure-stratum sign changes). The manuscript reports the interpretation as qualified; that judgement is post hoc.",
   "Headed-mode confound. In S4 the frame cadence after input differed between arms (second-frame gap 8.6 to 9.0 ms for OPTIMISTIC against 16.45 to 16.75 ms for BLANK on the write path), and S4 ran one to three hours after the main runs. The headed shift of the optimistic benefit may reflect display behaviour or time drift rather than headed rendering as such. The refresh rate was not recorded.",
-  "External sources not read in full. Every cited source was opened as a model-written page summary; one is metadata only. Full-text reading is scheduled for M6.",
+  "External sources. Every cited source was first opened as a model-written page summary (M0). In M6 (2026-11-25) the full text of the nine free web sources was read and each cited claim was confirmed against the cited section; Mejtoft et al. (2018) has no free full text and stays metadata only, used for no finding. The literature search itself remains a short, non-systematic scoping search.",
   "No new measurement in M4. The machine was shared with other agents during M4, so sensitivity and confounder work used committed traces only (results/exploratory/M4-REANALYSIS/). Questions that need new runs (display refresh rate, first-feedback paint times, frame-loop state at short delays) remain open."
  ],
  "traces": {

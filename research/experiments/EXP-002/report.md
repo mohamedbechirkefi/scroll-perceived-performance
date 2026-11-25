@@ -185,7 +185,7 @@ Descriptive cell summaries (trial level; medians):
 
 ## 12. Reproduction appendix
 
-- **Dependencies:** `uv.lock` (uv sync --frozen --all-groups --all-extras); Python 3.12.1; Playwright 1.65.0; installed Google Chrome 158.0.8127.38.
+- **Dependencies:** `uv.lock` (`uv sync --frozen --all-groups --all-extras`); Python 3.12.1; Playwright 1.65.0; installed Google Chrome 158.0.8127.38.
 - **Data manifest:** synthetic schedule only (`data/manifest.json`).
 - **Clean run:**
   - `../.tools/py/bin/uv sync --frozen --all-groups --all-extras`

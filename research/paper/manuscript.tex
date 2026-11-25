@@ -149,13 +149,14 @@ wait. Common strategies show nothing new until the response arrives,
 show a placeholder with the final layout (a skeleton), start the request
 earlier on an intent signal such as a hover (prefetching), or show the
 expected result immediately and correct it if the server disagrees (an
-optimistic update). Practitioner guidance recommends skeletons and
-reserved space to reduce layout shift (Osmani and Pollard, n.d.;
-Tankala, n.d.), and browser standards define how the latency from an
-input to the next paint is measured (Mocny, n.d.a; Wagner and Pollard,
-n.d.). These strategies act on different quantities. A skeleton changes
-what is shown first, but it cannot make the data arrive sooner; a
-prefetch can; an optimistic update shows the final state at once on
+optimistic update). Practitioner guidance recommends reserving space,
+for example with a placeholder or skeleton, to reduce layout shift
+(Osmani and Pollard 2020), and discusses when skeleton screens are
+appropriate (Tankala 2023), and browser standards define how the latency
+from an input to the next paint is measured (Mocny 2026a; Wagner and
+Pollard 2022). These strategies act on different quantities. A skeleton
+changes what is shown first, but it cannot make the data arrive sooner;
+a prefetch can; an optimistic update shows the final state at once on
 success and a false state on failure.
 
 The project's working question, set in its master prompt, is: how do
@@ -205,20 +206,22 @@ Contributions:
 \section{2. Related work}\label{related-work}
 
 This section is a scoping summary, not a systematic review. Every source
-was opened on 2026-11-24 through a tool that returns a model-written
-summary of the page rather than its full text
-(\texttt{research/literature\_review.md}). Claims below are limited to
-what those summaries stated; a full-text reading of every source a claim
-depends on is scheduled for M6 (owner, 2026-11-25, ``Approve all''
-(post-M4), item 7).
+was first opened on 2026-11-24 through a tool that returns a
+model-written summary of the page
+(\texttt{research/literature\_review.md}). On 2026-11-25 (M6) the full
+text of the nine freely available web sources was retrieved and each
+claim below was checked against the cited section
+(\texttt{research/publication/evidence\_audit.md}, section 8); the tenth
+source (Mejtoft, Långström, and Söderström 2018) has no free full text
+and is cited for its existence only.
 
 \textbf{Measurement standards.} The Event Timing API defines an event's
 duration from its timestamp to the next rendering update after dispatch,
-rounded to 8 ms, with an observer threshold of at least 16 ms (Mocny,
-n.d.a). Interaction to Next Paint aggregates such durations into a
-page-level responsiveness metric (Wagner and Pollard, n.d.). The Layout
+rounded to 8 ms, with an observer threshold of at least 16 ms (Mocny
+2026a). Interaction to Next Paint aggregates such durations into a
+page-level responsiveness metric (Wagner and Pollard 2022). The Layout
 Instability API defines layout-shift values and excludes shifts shortly
-after discrete input (Mocny, n.d.b; Mihajlija and Walton, n.d.). Largest
+after discrete input (Mocny 2026b; Mihajlija and Walton, n.d.). Largest
 Contentful Paint stops reporting at the first input, so it cannot time
 content that appears after a click (MDN Web Docs, n.d.). These sources
 motivate the custom TTUC marker used here and explain why Event Timing
@@ -227,8 +230,8 @@ threshold.
 
 \textbf{Strategy guidance.} Practitioner guidance recommends reserving
 space with a placeholder or skeleton to avoid late layout shifts (Osmani
-and Pollard, n.d.) and discusses when skeleton screens are appropriate
-(Tankala, n.d.). Response-time limits of 0.1, 1 and 10 s (Nielsen 1993)
+and Pollard 2020) and discusses when skeleton screens are appropriate
+(Tankala 2023). Response-time limits of 0.1, 1 and 10 s (Nielsen 1993)
 were used only to choose latency levels. The React documentation of
 optimistic state describes the rollback semantics our optimistic arm
 imitates (React, n.d.).
@@ -1029,11 +1032,11 @@ Mihajlija, Milica, and Philip Walton. n.d. {``Cumulative Layout Shift
 ({CLS}).''} web.dev. \url{https://web.dev/articles/cls}.
 
 \bibitem[\citeproctext]{ref-w3c_event_timing}
-Mocny, Michal. n.d.a. {``Event Timing {API}.''} W3C Working Draft, 13
+Mocny, Michal. 2026a. {``Event Timing {API}.''} W3C Working Draft, 13
 November 2026. \url{https://www.w3.org/TR/event-timing/}.
 
 \bibitem[\citeproctext]{ref-wicg_layout_instability}
----------. n.d.b. {``Layout Instability {API}.''} WICG Draft Community
+---------. 2026b. {``Layout Instability {API}.''} WICG Draft Community
 Group Report, 8 November 2026.
 \url{https://wicg.github.io/layout-instability/}.
 
@@ -1043,7 +1046,7 @@ Nielsen Norman Group (excerpt of Usability Engineering, ch. 5).
 \url{https://www.nngroup.com/articles/response-times-3-important-limits/}.
 
 \bibitem[\citeproctext]{ref-osmani_optimize_cls}
-Osmani, Addy, and Barry Pollard. n.d. {``Optimize Cumulative Layout
+Osmani, Addy, and Barry Pollard. 2020. {``Optimize Cumulative Layout
 Shift.''} web.dev, published 2020-05-05, updated 2025-02-07.
 \url{https://web.dev/articles/optimize-cls}.
 
@@ -1052,21 +1055,23 @@ React. n.d. {``useOptimistic.''} React documentation.
 \url{https://react.dev/reference/react/useOptimistic}.
 
 \bibitem[\citeproctext]{ref-tankala_skeleton}
-Tankala, Samhita. n.d. {``Skeleton Screens 101.''} Nielsen Norman Group,
-4 June 2023, reviewed 2 September 2026.
+Tankala, Samhita. 2023. {``Skeleton Screens 101.''} Nielsen Norman
+Group, 4 June 2023, reviewed 2 September 2026.
 \url{https://www.nngroup.com/articles/skeleton-screens/}.
 
 \bibitem[\citeproctext]{ref-wagner_inp}
-Wagner, Jeremy, and Barry Pollard. n.d. {``Interaction to Next Paint
+Wagner, Jeremy, and Barry Pollard. 2022. {``Interaction to Next Paint
 ({INP}).''} web.dev, published 2022-05-06, updated 2025-09-02.
 \url{https://web.dev/articles/inp}.
 
 \end{CSLReferences}
 
 The reference list is generated from
-\texttt{research/paper/references.bib}. Every entry was opened as a
-model-written page summary on 2026-11-24, not as full text; mejtoft2018
-is metadata only and is not used for any finding.
+\texttt{research/paper/references.bib}. Nine entries were read as full
+text on 2026-11-25 and the cited passages checked
+(\texttt{research/publication/evidence\_audit.md}, section 8);
+mejtoft2018 is metadata only (no free full text) and is not used for any
+finding.
 
 \section{Supplementary appendix}\label{supplementary-appendix}
 

@@ -2,13 +2,13 @@
 # Licence: SCROLL Source-Available Non-Commercial Research License v1.0 (custom, see LICENSE).
 # No "license" field is given because the licence has no SPDX list identifier.
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below. Status: protocol v1.0 frozen by the owner on 2026-11-24; confirmatory results for EXP-002 to EXP-004 in one mock page, one browser and one machine (objective timing, no perception claims); manuscript is a preprint draft, not peer-reviewed; owner decision DEC-011 pending; not yet released. Repository URL: owner placeholder. An AI system was used as a research and development assistant; it is not an author."
+message: "If you use this work, please cite it as below. Status: protocol v1.0 frozen by the owner on 2026-11-24; confirmatory results for EXP-002 to EXP-004 in one mock page, one browser and one machine (objective timing, no perception claims); manuscript is a preprint draft, not peer-reviewed; owner decision DEC-011 pending; version 0.1.0-rc1 is a release candidate prepared for the owner's review, not a release. Repository URL: owner placeholder. An AI system was used as a research and development assistant; it is not an author."
 title: "SCROLL: loading strategies and measurable interface responsiveness under controlled delays"
 type: software
 authors:
   - family-names: Kefi
     given-names: Mohamed Bechir
-version: 0.0.0
+version: "0.1.0-rc1"
 keywords:
   - frontend performance
   - loading strategies

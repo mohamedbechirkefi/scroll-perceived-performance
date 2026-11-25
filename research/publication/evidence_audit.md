@@ -71,3 +71,24 @@ Every source in `research/paper/references.bib` was opened on 2026-11-24 through
 ## 7. Gate assessment
 
 Every numerical claim in the manuscript and reports maps to a result id, a configuration hash and a table or figure (claims register and `artifact_manifest.json`); every external claim maps to a source that was actually opened, marked summary-only or metadata-only. The M4 gate holds on that basis, with the open findings of section 4 disclosed.
+
+## 8. M6 addendum (2026-11-25): full-text check of external sources
+
+Sections 1 to 7 above are the M4 record and are left as written. In M6 the nine freely available web sources were downloaded as raw HTML with `curl` (no login, no paid access), converted to plain text locally, and the passages behind each external claim were read in the full text. Mejtoft et al. (2018) has no free full text: the Semantic Scholar record lists it as closed access with no open PDF, so it stays metadata only and no finding of it is used.
+
+| Claim | Source | Status | Passage checked | Outcome |
+|---|---|---|---|---|
+| E-001 | w3c_event_timing | full text, cited passages read | Working Draft of 13 November 2026, section 2.1 (`duration`: "rounded to the nearest 8ms", measured to the next completed rendering update after dispatch) and section 3.3 (minDuration is the maximum of 16 and `durationThreshold`) | confirmed |
+| E-002 | mdn_lcp | full text, cited passages read | Description: the API "stops searching for larger content when scroll or input events occur" | confirmed |
+| E-003 | wagner_inp | full text, cited passages read | "What is INP?": INP observes the latency of all interactions and reports a single value for the page | confirmed |
+| E-004 | wicg_layout_instability, mihajlija_cls | full text, cited passages read | WICG report of 8 November 2026, sections 2.3 (layout shift value) and 3 (`hadRecentInput`); web.dev CLS, "Expected versus unexpected layout shifts" (shifts within 500 ms of discrete input can be excluded) | confirmed |
+| E-005 | osmani_optimize_cls, tankala_skeleton | full text, cited passages read | web.dev, "Reserve space for late-loading content" (reserve space, for example with a placeholder or skeleton UI); NN/g, "Are Skeleton Screens Better than Progress Bars or Spinners?" (when skeletons are appropriate) | confirmed for the claim as registered; one manuscript sentence narrowed (below) |
+| E-006 | nielsen1993response | full text, cited passages read | excerpt of Usability Engineering, ch. 5: limits of 0.1, 1.0 and 10 seconds | confirmed |
+| E-007 | react_useoptimistic | full text, cited passages read | Reference, and "What happens when the Action fails": optimistic state equals `value` unless an Action is pending; on failure React renders with the committed value | confirmed |
+| E-008 | mejtoft2018 | unverified (metadata only) | none; closed access | cited for existence only, as before |
+
+Counts: 9 sources with full text retrieved and the cited passages read (none of the long web pages was read word for word from start to end; the cited sections were), 0 abstract only, 1 metadata only. Every bibliography key is cited in the manuscript and every citation resolves (10 of 10).
+
+Qualification made: the Introduction cited the NN/g article, together with web.dev, for recommending skeletons "to reduce layout shift". The NN/g article discusses skeleton screens as loading indicators and when to use them; it does not discuss layout shift. The sentence now attributes the layout-shift advice to web.dev only and cites NN/g for when skeleton screens are appropriate. No number, verdict or claim value changed. The bibliography entries with a stated publication year now carry it, so the reference list no longer prints "n.d." for them; the three undated pages (web.dev CLS, MDN, React) keep "n.d.".
+
+Section 4, item 4 (generated run report PDFs under `results/raw/` and `results/exploratory/`) stays open: these frozen generator outputs were not opened in M6. The M6 visual inspection covered the manuscript, the supplement and the four experiment reports built by `scripts/build_pdfs.py`.

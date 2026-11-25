@@ -40,3 +40,7 @@ Gap this project can address within five days: a controlled, reproducible, open-
 2. Search ACM DL, arXiv and Google Scholar for objective benchmarks of loading strategies and optimistic UI; document the search strings and dates.
 3. Open and cite statistics references for paired bootstrap and equivalence testing.
 4. Re-open CDP `Emulation` documentation for CPU throttling.
+
+## 5. M6 full-text check (2026-11-25)
+
+The nine web sources were downloaded as raw HTML with `curl` (free, no login) and converted to plain text locally; the text, not a summary, was searched and the passages behind each claim were read. Every claim in sections 1 and 2 of this review that enters the manuscript (claims register E-001 to E-007) was confirmed; the section checked for each is recorded in the claims register and in `research/publication/evidence_audit.md`, section 8. One manuscript sentence was narrowed: it had cited the NN/g skeleton article for reducing layout shift, which that article does not discuss (it discusses when skeleton screens are appropriate). MEJTOFT-18: the Semantic Scholar record reports the paper as closed access with no open PDF; no free full text was found, so it stays metadata only. Items 2 to 4 of section 4 remain open.
