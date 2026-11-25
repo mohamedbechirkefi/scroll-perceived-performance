@@ -12,6 +12,8 @@ Analyses:
   X3  Hover-lead (A3) exclusion sensitivity: EXP-002 primary contrasts with the excluded trials kept.
   X4  Interval-based reading of the EXP-004 robustness table (post hoc, not the frozen rule).
   X5  Arm-order check: per-seed paired differences split by whether the arm ran before BLANK.
+  X6  Narrow S1 reading: the frozen robustness rule recomputed with S1 = Element Timing only (the frozen
+      EXP-004 protocol names "Element Timing or trace"; DEC-011 item 5 also counted rAF1).
 
 Usage: PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out results/exploratory/M4-REANALYSIS
 """
@@ -238,6 +240,27 @@ def x5_order(results: dict[str, dict]) -> list[dict]:
     return rows
 
 
+def x6_narrow_s1() -> list[dict]:
+    rows = []
+    with open(ROOT / SENS_VERDICTS) as f:
+        for r in csv.DictReader(f):
+            changed = [x for x in r["levels_changed"].split(";") if x]
+            narrow = [x for x in changed if x != "S1-raf1"]
+            if not narrow:
+                verdict = "robust" if [x for x in r["levels_compared"].split(";") if x and x != "S1-raf1"] else "no sensitivity level"
+            else:
+                kinds = []
+                if any(x.startswith("S1") for x in narrow):
+                    kinds.append("method-dependent")
+                if any(not x.startswith("S1") for x in narrow):
+                    kinds.append("condition-dependent")
+                verdict = " and ".join(kinds)
+            rows.append({"path": r["path"], "L": r["L"], "p": r["p"], "arm": r["arm"], "stratum": r["stratum"],
+                         "frozen_verdict_dec011": r["verdict"], "levels_changed_dec011": r["levels_changed"],
+                         "verdict_element_only_s1": verdict, "levels_changed_element_only": ";".join(narrow)})
+    return rows
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
@@ -255,6 +278,10 @@ def main() -> int:
     write_csv(x3_a3_inclusion(results["EXP-002"]), out / "x3_a3_inclusion_exp002.csv")
     write_csv(x4_interval_robustness(), out / "x4_interval_robustness.csv")
     write_csv(x5_order(results), out / "x5_arm_order.csv")
+    x6 = x6_narrow_s1()
+    write_csv(x6, out / "x6_narrow_s1_reading.csv")
+    counts = {"robust_dec011": sum(r["frozen_verdict_dec011"] == "robust" for r in x6),
+              "robust_element_only": sum(r["verdict_element_only_s1"] == "robust" for r in x6), "contrasts": len(x6)}
     inputs = {f"{RUNS[n]}/results.json": sha256(ROOT / RUNS[n] / "results.json") for n in RUNS}
     for exp in ("EXP-002", "EXP-003"):
         p = f"{RUNS[exp]}/report/inference.json"
@@ -267,6 +294,7 @@ def main() -> int:
         "script": "scripts/m4_reanalysis.py", "code_revision": rev, "tree_dirty_at_run": dirty,
         "command": f"PYTHONPATH=src .venv/bin/python scripts/m4_reanalysis.py --out {args.out}",
         "bootstrap": "percentile, 10,000 resamples, seed 20261124 (stats.bootstrap_ci defaults); X5 uses 1,000 only for the unused intervals",
+        "x6_counts": counts,
         "inputs_sha256": inputs,
         "outputs_sha256": {p.name: sha256(p) for p in sorted(out.glob("*.csv"))},
     }
