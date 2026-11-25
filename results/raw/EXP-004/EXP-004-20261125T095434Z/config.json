@@ -1,0 +1,65 @@
+{
+ "browser": {
+  "channel": "chrome",
+  "cpu_throttle": 4,
+  "headless": true,
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "conditions": [
+  {
+   "arms": [
+    "BLANK",
+    "SKELETON",
+    "PREFETCH"
+   ],
+   "latency_ms": [
+    300,
+    1000
+   ],
+   "path": "read"
+  },
+  {
+   "arms": [
+    "BLANK",
+    "OPTIMISTIC"
+   ],
+   "failure_prob": [
+    0,
+    0.3
+   ],
+   "latency_ms": [
+    300,
+    1000
+   ],
+   "path": "write"
+  }
+ ],
+ "config_version": "1.0.0",
+ "decoy_hovers": 0,
+ "description": "EXP-004 sensitivity S2, CPU throttle 4x (frozen v1.0, owner-approved 2026-11-24).",
+ "experiment_id": "EXP-004",
+ "hover_lead_ms": 150,
+ "interactions_per_session": 10,
+ "jitter": 0.1,
+ "label": "confirmatory",
+ "meta_seed": 20261124,
+ "pre_input_ms": 50,
+ "reserve_space_blank": false,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "settle_ms": 1000,
+ "trial_timeout_extra_ms": 10000
+}

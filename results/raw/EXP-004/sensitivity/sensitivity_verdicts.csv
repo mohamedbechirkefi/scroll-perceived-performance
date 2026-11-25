@@ -1,0 +1,24 @@
+path,L,p,arm,stratum,in_reduced_matrix,rule_basis,levels_compared,levels_changed,sign_changed,levels_failed,verdict
+read,50.0,,PREFETCH,all,False,sign,S1-element;S1-raf1,,,,robust
+read,50.0,,SKELETON,all,False,equivalence verdict,S1-element;S1-raf1,S1-element;S1-raf1,,,method-dependent
+read,100.0,,PREFETCH,all,False,sign,S1-element;S1-raf1,,,,robust
+read,100.0,,SKELETON,all,False,equivalence verdict,S1-element;S1-raf1,,S1-raf1,,robust
+read,300.0,,PREFETCH,all,True,sign,S1-element;S1-raf1;S2-cpu4x;S3-h0;S3-h600;S4-headed,,,,robust
+read,300.0,,SKELETON,all,True,equivalence verdict,S1-element;S1-raf1;S2-cpu4x;S4-headed,,S1-raf1,,robust
+read,1000.0,,PREFETCH,all,True,sign,S1-element;S1-raf1;S2-cpu4x;S3-h0;S3-h600;S4-headed,,,,robust
+read,1000.0,,SKELETON,all,True,equivalence verdict,S1-element;S1-raf1;S2-cpu4x;S4-headed,,S1-element;S2-cpu4x,,robust
+write,100.0,0.0,OPTIMISTIC,success,False,sign,S1-raf1,,,,robust
+write,100.0,0.1,OPTIMISTIC,failure,False,sign,S1-raf1,,,,robust
+write,100.0,0.1,OPTIMISTIC,success,False,sign,S1-raf1,,,,robust
+write,100.0,0.3,OPTIMISTIC,failure,False,sign,S1-raf1,,,,robust
+write,100.0,0.3,OPTIMISTIC,success,False,sign,S1-raf1,,,,robust
+write,300.0,0.0,OPTIMISTIC,success,True,sign,S1-raf1;S2-cpu4x;S4-headed,,,,robust
+write,300.0,0.1,OPTIMISTIC,failure,False,sign,S1-raf1,S1-raf1,S1-raf1,,method-dependent
+write,300.0,0.1,OPTIMISTIC,success,False,sign,S1-raf1,,,,robust
+write,300.0,0.3,OPTIMISTIC,failure,True,sign,S1-raf1;S2-cpu4x;S4-headed,S1-raf1;S4-headed,S1-raf1;S4-headed,,method-dependent and condition-dependent
+write,300.0,0.3,OPTIMISTIC,success,True,sign,S1-raf1;S2-cpu4x;S4-headed,,,,robust
+write,1000.0,0.0,OPTIMISTIC,success,True,sign,S1-raf1;S2-cpu4x;S4-headed,,,,robust
+write,1000.0,0.1,OPTIMISTIC,failure,False,sign,S1-raf1,,,,robust
+write,1000.0,0.1,OPTIMISTIC,success,False,sign,S1-raf1,,,,robust
+write,1000.0,0.3,OPTIMISTIC,failure,True,sign,S1-raf1;S2-cpu4x;S4-headed,S2-cpu4x;S4-headed,S2-cpu4x;S4-headed,,condition-dependent
+write,1000.0,0.3,OPTIMISTIC,success,True,sign,S1-raf1;S2-cpu4x;S4-headed,,,,robust

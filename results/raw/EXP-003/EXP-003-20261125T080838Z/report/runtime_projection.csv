@@ -1,0 +1,6 @@
+experiment_id,description,sessions,interactions,projected_s,cpu_throttle,headless
+EXP-002,"EXP-002 read path (frozen v1.0, owner-approved 2026-11-24).",240,2400,3949.813805649056,1,True
+EXP-003,"EXP-003 write path (frozen v1.0, owner-approved 2026-11-24).",360,3600,6299.720708473569,1,True
+EXP-004,"EXP-004 sensitivity S2, CPU throttle 4x (frozen v1.0, owner-approved 2026-11-24).",140,1400,2706.5580532952904,4,True
+EXP-004,"EXP-004 sensitivity S3, prefetch lead time (frozen v1.0, owner-approved 2026-11-24; S1 reuses EXP-002/003 data; S2 and S4 are browser-setting variants).",80,800,1666.6046018830273,1,True
+EXP-004,"EXP-004 sensitivity S4, headed browser (frozen v1.0, owner-approved 2026-11-24).",140,1400,2706.5580532952904,1,False

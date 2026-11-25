@@ -1,0 +1,29 @@
+{
+ "experiment_id": "EXP-002",
+ "created": "2026-11-25",
+ "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
+ "algorithm": "SHA-256",
+ "files": {
+  "EXP-002-20261125T070315Z/config.json": "d210e25b0b1baae2dc36111d52e68b2aaee3f0cfa5a840f298ca438d1984a114",
+  "EXP-002-20261125T070315Z/report/analysis.json": "be59a3864bf67b15d35d14897f38d643fbc05b3acd26e9f8f19efdee33755af8",
+  "EXP-002-20261125T070315Z/report/cell_summary.csv": "5f84980280a32a2e8f52592cd633b1928f766d2a0e24a0a0b83992f02a89795a",
+  "EXP-002-20261125T070315Z/report/figures/fig-excess.png": "9dcd995ea4fc5bb2d2fe9dbd8159f797eb5cdb915fbd6f5984374106706250a6",
+  "EXP-002-20261125T070315Z/report/figures/fig-excess.svg": "382c9307d4e26ffac0e0c23cea9d3969d4fddb98ca24cd0bd0e1c48d19119a5d",
+  "EXP-002-20261125T070315Z/report/figures/fig-paired.png": "1d63e9c4e54e74eb9a02e6c0692ec2dd7cfaaad7ee59b6b0d5247bf0d14ef305",
+  "EXP-002-20261125T070315Z/report/figures/fig-paired.svg": "76a3085194f702aac88a57af92ade823c8e8d80acefb2af8fcb6abc13f2ef57d",
+  "EXP-002-20261125T070315Z/report/figures/fig-ttuc.png": "033aa250850173b6e4ef61894ffb8ae6822d08287a7d038d2c78f15b30fd5012",
+  "EXP-002-20261125T070315Z/report/figures/fig-ttuc.svg": "fdeffc90bba5cee78149e2c6bbbc0f92ffeca1919bfd4fd59fceb99d9ff35bf8",
+  "EXP-002-20261125T070315Z/report/inference.csv": "9654e17251d456c986789556d649a0bbf3ffdf7f964071ef68e39dd721ab877b",
+  "EXP-002-20261125T070315Z/report/inference.json": "4873e027e30f7e3aebe728786bce30f72b773e54ddf6761441ebe8cc52be6802",
+  "EXP-002-20261125T070315Z/report/metrics.csv": "4e16f13cc70e938b8a54b808c41f9275413adc056544f760170107eedcbdef8a",
+  "EXP-002-20261125T070315Z/report/paired_contrasts.csv": "0272c1ab13028538c69b89f02667a3ed75eb4733729665dd700edc7ba53eefd6",
+  "EXP-002-20261125T070315Z/report/report.md": "aa7cff57ad0bcf915ff731a42b006773dce2388a8c27cb6a63088029c0786546",
+  "EXP-002-20261125T070315Z/report/report.pdf": "d2a58ace87246cf30247b94c3619edaa9f2ce7797257209ae655a04ba79e4c3f",
+  "EXP-002-20261125T070315Z/report/report.typ": "cefb0eeeb2b749b6b52cb4259fcaea9a146954199a51caf94b529a3a06f792ce",
+  "EXP-002-20261125T070315Z/report/runtime_projection.csv": "dcc924994cc0f70f30b261885dd2c531538cb30d4ab6f15f2ee98a90c2d062d7",
+  "EXP-002-20261125T070315Z/report/trial_paired_contrasts.csv": "aa22714995cdcbae51b9d463bb413396c48ade2990bfc3230b1224eb60b6379f",
+  "EXP-002-20261125T070315Z/results.json": "0ca46a419b9d00b1b262f0b3f72cd4aeb342070dbb317dd8f36b89016886fce3",
+  "EXP-002-20261125T070315Z/run_manifest.json": "aa08a3f1fdf8cf9c2e17107e2a3c31da682a8a231ca95ada5a1bfd9c59be5592",
+  "EXP-002-20261125T070315Z/trials.csv": "4e16f13cc70e938b8a54b808c41f9275413adc056544f760170107eedcbdef8a"
+ }
+}

@@ -212,3 +212,36 @@ Milestone: M1 closed; pre-M3 records only. Bounded task: record the owner's rati
 - Other items of the second-round approvals (real data, new pre-data rules, code-only fixes) do not concern SCROLL.
 - Tests: `.venv/bin/python -m pytest -q` -> 171 passed in 31.92s.
 - Next action: unchanged. Coordinator schedules M3 on a quiet machine.
+
+## 2026-11-25: Session M3 (confirmatory runs in the coordinator's quiet-machine window)
+
+Milestone: M3, started by the owner ("Start next", 2026-11-25). Bounded task: run the frozen EXP-002, EXP-003 and EXP-004 matrices in full on a quiet machine, analyse exactly as frozen, keep the records. The M3 status line is left to the coordinator.
+
+### Starting state and environment
+
+`git status`: clean on `main` at `7c8f7d1`. Frozen hashes: protocol and all EXP-002..004 protocol and configuration hashes match `research/freeze.json` (`protocol_status` returned "frozen" for all five configurations). `uv sync --frozen --all-groups --all-extras`: "Audited 26 packages". `pytest`: 171 passed in 39.28s. Load 2.36/10.22/18.51 at 07:45 local (falling after SCALE), mains power.
+
+### Pre-data work (commit `b5a72c3`, before any confirmatory output)
+
+- DEC-011: `src/scroll/inference.py` wires the frozen Wilcoxon, Holm and TOST primitives to the frozen decision rules (none of this was applied by the frozen code); quiet rule fixed (mains power, 1- and 5-minute load below 3.0). Tests `tests/test_inference.py` (7). `pytest`: 178 passed in 38.32s.
+- Exploratory smoke (J-0004): 10/10 trials ok, 7.2 s. EXP-001 rerun as metric validation on seeds 1001-1005 (J-0005): 350 trials, 1 A3 exclusion, C1 to C4 pass, 645.4 s.
+
+### Confirmatory runs (code `b5a72c3`, Chrome 158.0.8127.38, `nice -n 10`)
+
+| Run | Start (UTC) | Load at start | Sessions | Trials analysed | Runtime (s) |
+|---|---|---|---|---|---|
+| EXP-002-20261125T070315Z | 07:03:15 | 1.78 1.83 6.55 | 240/240 | 2,387/2,400 | 3,887.4 |
+| EXP-003-20261125T080838Z | 08:08:38 | 2.36 1.77 1.74 | 360/360 | 3,600/3,600 | 6,318.7 |
+| EXP-004-20261125T095434Z (S2) | 09:54:34 | 1.37 1.41 1.51 | 140/140 | 1,400/1,400 | 2,677.9 |
+| EXP-004-20261125T103912Z (S3) | 10:39:12 | 2.29 2.12 1.74 | 80/80 | 796/800 | 1,584.4 |
+| EXP-004-20261125T110537Z (S4) | 11:05:37 | 2.19 2.42 2.28 | 140/140 | 1,400/1,400 | 2,676.1 |
+
+No failed session, no failed cell, no defect flag, stop rule never triggered. Results, verdicts and deviations: journal J-0006 to J-0008, DEC-012, claims C-001 to C-029, `research/limitations.md` items 9 to 14. Raw results with SHA-256 manifests are committed under `results/raw/` (each experiment below 20 MB).
+
+### Not done
+
+Experiment reports (11.3) for EXP-002, EXP-003 and EXP-004 were composed in this session and handed to the coordinator, who writes them to `research/experiments/EXP-00N/report.md`. EXP-001 report still not written. Manuscript not updated (M4).
+
+### Next action
+
+Owner: review DEC-011 (test reading) and DEC-012. AI (M4): audit every number, synthesise the manuscript, write the EXP-001 report.

@@ -1,0 +1,65 @@
+{
+ "browser": {
+  "channel": "chrome",
+  "cpu_throttle": 4,
+  "headless": true,
+  "version": "158.0.8127.38",
+  "viewport": [
+   1280,
+   800
+  ]
+ },
+ "config_hash": "200f25f294f699d3128b815bd130deeab7829e0121d82e4a3a78ac355ee9339e",
+ "experiment_id": "EXP-004",
+ "finished_at": "2026-11-25T10:39:12Z",
+ "git": {
+  "dirty": false,
+  "revision": "b5a72c32202cb66a17341a5022ad29e9344506b6"
+ },
+ "label": "confirmatory",
+ "load_average_end": [
+  2.29,
+  2.12,
+  1.74
+ ],
+ "load_average_start": [
+  1.37,
+  1.41,
+  1.51
+ ],
+ "notes": "Timings measured while other agents ran on the same machine are noisy; see progress.md.",
+ "peak_rss_bytes": 66207744,
+ "platform": {
+  "cpu": "Apple M1 Pro",
+  "mac_ver": "15.3.1",
+  "machine": "arm64",
+  "memsize_bytes": 17179869184,
+  "ncpu": 10,
+  "os": "Darwin",
+  "os_release": "24.3.0"
+ },
+ "run_id": "EXP-004-20261125T095434Z",
+ "runtime_s": 2677.9240315829957,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "started_at": "2026-11-25T09:54:34Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "playwright": "1.65.0",
+  "python": "3.12.1",
+  "scipy": "1.18.1",
+  "scroll": "0.1.0"
+ }
+}
