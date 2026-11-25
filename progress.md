@@ -245,3 +245,7 @@ Experiment reports (11.3) for EXP-002, EXP-003 and EXP-004 were composed in this
 ### Next action
 
 Owner: review DEC-011 (test reading) and DEC-012. AI (M4): audit every number, synthesise the manuscript, write the EXP-001 report.
+
+## 2026-11-25: M3 done (coordinator)
+
+The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 3 report(s). The coordinator checked that every decimal number in them appears in a committed file. With the complete matrices (or documented failures) recorded above, the M3 gate holds. M3 is **done**. Next: M4 (interpretation), not started.
