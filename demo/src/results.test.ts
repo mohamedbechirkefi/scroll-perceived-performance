@@ -60,7 +60,7 @@ describe("validateResults", () => {
     r.robustness[0].verdict_narrow = "fine";
     expect(() => validateResults(r)).toThrow(ResultsError);
   });
-  it("rejects a pending decision shown one way only or marked decided", () => {
+  it("rejects an open decision shown one way only or marked decided", () => {
     const one = good();
     one.pending_decisions[0].readings = one.pending_decisions[0].readings.slice(0, 1);
     expect(() => validateResults(one)).toThrow(ResultsError);

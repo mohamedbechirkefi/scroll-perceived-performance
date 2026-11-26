@@ -104,7 +104,7 @@ def test_texts_are_verbatim(export, data):
         for p in pieces:
             assert p in MANUSCRIPT, (e["id"], p)
     for d in data["pending_decisions"]:
-        assert d["state"] == "pending owner decision"
+        assert d["state"] == "owner chose none; both readings shown"
         for r in d["readings"]:
             assert r["text"] in MANUSCRIPT, r
 
@@ -141,11 +141,18 @@ def test_robustness_counts_match_the_manuscript(data):
     assert sum(r["verdict_narrow"] == "no sensitivity level" for r in rob) == 9
 
 
-def test_placeholders_stay_placeholders(data):
+def test_owner_facts_are_filled(data):
+    # Owner, 2026-11-26, decision sheet (B1 to B4, B6): the placeholders hold the owner's answers.
     text = " ".join(data["placeholders"])
-    for k in ("Repository URL", "Demo URL", "Funding", "Competing-interest", "Author line", "title"):
+    for k in ("Mohamed Bechir Kefi, independent researcher", "no funding was received",
+              "no competing interests", "title: approved"):
         assert k in text
-    assert "http" not in COMMITTED.read_text(encoding="utf-8")
+    assert "placeholder" not in text.lower()
+    # The only addresses in the exported data are the repository and the demo.
+    import re
+
+    urls = set(re.findall(r"https?://[^\s\"]+", COMMITTED.read_text(encoding="utf-8")))
+    assert urls == {"https://github.com/mohamedbechirkefi/scroll-perceived-performance", "https://scroll-perceived-performance.kefimohamedbechir.workers.dev"}
 
 
 def test_sandbox_fixture_is_reproduced():

@@ -3,7 +3,7 @@
  "schema_version": "1.0.0",
  "project": "SCROLL",
  "question": "How do loading strategies (blank, skeleton, optimistic update, prefetch) affect measurable interface responsiveness under controlled, injected delays?",
- "status_label": "Measured benchmark results, one mock page in one browser on one machine. EXP-002 to EXP-004 are confirmatory under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. Objective timing only: no claim about perceived speed. The manuscript is a preprint draft, not peer-reviewed; the owner's full-text review is pending (M6). DEC-011 is a pending owner decision and is shown both ways.",
+ "status_label": "Measured benchmark results, one mock page in one browser on one machine. EXP-002 to EXP-004 are confirmatory under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. Objective timing only: no claim about perceived speed. The manuscript is a preprint draft, not peer-reviewed; the owner's full-text review is pending (M6). For DEC-011 the owner chose neither reading (2026-11-26), so it is shown both ways.",
  "code_revision": "b5a72c32202cb66a17341a5022ad29e9344506b6",
  "sources": [
   {
@@ -1373,7 +1373,7 @@
   {
    "id": "DEC-011",
    "title": "Which test decides H0, and which alternative paint methods form sensitivity level S1",
-   "state": "pending owner decision",
+   "state": "owner chose none; both readings shown",
    "readings": [
     {
      "label": "Test reading A (DEC-011 item 1)",
@@ -1399,11 +1399,11 @@
   }
  ],
  "placeholders": [
-  "Repository URL: placeholder, not yet published (the owner's decision).",
-  "Demo URL: placeholder, the page is not hosted anywhere.",
-  "Funding statement: placeholder for the owner.",
-  "Competing-interest statement: placeholder for the owner.",
-  "Author line and affiliation: placeholder for the owner (the freeze record holds a name, no affiliation, for confirmation).",
-  "Manuscript title: proposed in M4, awaiting the owner's approval."
+  "Author: Mohamed Bechir Kefi, independent researcher.",
+  "Funding: no funding was received.",
+  "Competing interests: the author declares no competing interests.",
+  "Manuscript title: approved by the owner (2026-11-26).",
+  "Repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance",
+  "Demo: https://scroll-perceived-performance.kefimohamedbechir.workers.dev"
  ]
 }

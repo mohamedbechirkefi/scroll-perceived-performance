@@ -12,7 +12,7 @@
 | Code revision | `b5a72c32202cb66a17341a5022ad29e9344506b6` (clean; run path identical to freeze revision `b4bd25b`) |
 | Run | `EXP-003-20261125T080838Z` |
 | Status | Complete. Full frozen matrix, no exclusion, stop rule not triggered |
-| Authorship | Mohamed Bechir Kefi (no affiliation). An AI system was used as a research and development assistant; it is not an author |
+| Authorship | Mohamed Bechir Kefi, independent researcher. An AI system was used as a research and development assistant; it is not an author |
 
 ## 2. Executive summary
 

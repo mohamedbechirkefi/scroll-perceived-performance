@@ -33,8 +33,8 @@ Then: run `git status`, inspect existing files, never overwrite owner changes. S
 - No confirmatory experiment before the owner freezes the protocol. A tiny exploratory smoke check of the toolchain is allowed, labelled exploratory.
 
 ### Scope
-- Work only inside this repository (`/Users/bechir/research/labs/scroll-perceived-performance`). Tools are used read-only: `/usr/local/bin/python3`, `/Users/bechir/research/labs/.tools/py/bin/` (uv, typst, pypdf, pillow), `/Users/bechir/research/labs/.tools/pandoc`, Node at `/Users/bechir/research/helix/.tools/node/bin` (never modify that folder), git.
-- Do not touch any other folder under `/Users/bechir/research` (hive, helix, cogkt, trading, the other labs).
+- Work only inside this repository. Paths below are relative to the repository root. Tools are used read-only: `/usr/local/bin/python3`, `../.tools/py/bin/` (uv, typst, pypdf, pillow), `../.tools/pandoc`, Node at `../../helix/.tools/node/bin` (never modify that folder), git.
+- Do not touch any other folder under the research root (hive, helix, cogkt, trading, the other labs).
 - Never kill processes you did not start. Never delete anything you did not create in the current session.
 
 ### Truthfulness
@@ -51,7 +51,7 @@ Then: run `git status`, inspect existing files, never overwrite owner changes. S
 - Refer to the owner as "the owner" (they/them).
 
 ### Commits
-- Local commits only, with the owner's git identity passed through `git -c user.name=... -c user.email=... commit` exactly as given in `/Users/bechir/research/labs/_shared/M0-brief.md` (kept out of this file: no e-mail address in committed files), message ending with a blank line and `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. Run `git status` before and after.
+- Local commits only, with the owner's git identity passed through `git -c user.name=... -c user.email=... commit` exactly as given in `../_shared/M0-brief.md` (kept out of this file: no e-mail address in committed files), message ending with a blank line and `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. Run `git status` before and after.
 
 ## 4. Session end
 
@@ -59,7 +59,7 @@ Update `progress.md` (dated entry: decisions, commands, actual results, failures
 
 ## 5. Useful commands
 
-- Lock dependencies: `/Users/bechir/research/labs/.tools/py/bin/uv lock --python /usr/local/bin/python3`
-- Manuscript PDF (Typst route): `/Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t typst -V mainfont="Libertinus Serif" -o <out>.typ`, then `/Users/bechir/research/labs/.tools/py/bin/python -c "import typst,sys; typst.compile(sys.argv[1], output=sys.argv[2])" <out>.typ research/paper/manuscript.pdf`
-- LaTeX source: `/Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex` (then re-add the two header comment lines)
-- npm, if needed: prefix `PATH=/Users/bechir/research/helix/.tools/node/bin:$PATH` (an older Node is otherwise found first).
+- Lock dependencies: `../.tools/py/bin/uv lock --python /usr/local/bin/python3`
+- Manuscript PDF (Typst route): `../.tools/pandoc research/paper/manuscript.md -s -t typst -V mainfont="Libertinus Serif" -o <out>.typ`, then `../.tools/py/bin/python -c "import typst,sys; typst.compile(sys.argv[1], output=sys.argv[2])" <out>.typ research/paper/manuscript.pdf`
+- LaTeX source: `../.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex` (then re-add the two header comment lines)
+- npm, if needed: prefix `PATH=$PWD/../../helix/.tools/node/bin:$PATH` (run from the repository root) (an older Node is otherwise found first).

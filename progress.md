@@ -412,3 +412,38 @@ M6: release candidate prepared, awaiting the owner's review and G-PUBLIC; not do
 ### M6 addendum: fresh-clone re-check of the committed candidate
 
 After commit `a993b9f`, a second fresh clone was made in scratch: `uv sync --frozen` then `pytest -q` -> 196 passed in 56.94s; `scripts/check_links.py` -> LINK-CHECK PASS; `export_demo_data.py --check` -> EXPORT-CHECK PASS; `npm ci`, `npm test` -> Tests 24 passed (24); `npm run build`; `node tools/a11y_check.mjs dist` -> A11Y-CHECK PASS; `git status` clean. Both scratch clones were deleted.
+
+## 2026-11-26: owner answers of 2026-11-26 applied (wording and configuration)
+
+Authority: owner, 2026-11-26, decision sheet; coordinator's owner-answers brief. Bounded task: apply A1, B1 to B9, B11, B13, B14 and R-SCROLL-1/2 as wording and configuration (DEC-016). Timing project: no benchmark, no browser timing run. Nothing pushed or deployed; no `author_review.md` box ticked.
+
+### Starting state
+
+`git status`: clean on `main` at `f318543`.
+
+### Commands and actual outputs
+
+```
+$ .venv/bin/python scripts/export_demo_data.py; ... --check        -> wrote demo/public/data/results.json; EXPORT-CHECK PASS
+$ ../.tools/py/bin/python scripts/build_pdfs.py --typ-dir <scratch>/typ --png <scratch>/png --ppi 70 --tex
+  -> manuscript.pdf (209784 bytes, 15 pages), supplementary.pdf 6, EXP-001 4, EXP-002 8, EXP-003 6, EXP-004 8; manuscript.tex
+$ pypdf text scan of the 6 PDFs -> 0 "/Users/", 0 "PLACEHOLDER", 0 e-mail addresses; manuscript /Author "Mohamed Bechir Kefi, independent researcher"
+$ ruby -ryaml CITATION.cff -> keys cff-version, message, title, type, authors, repository-code, version, keywords
+$ nice -n 10 .venv/bin/python -m pytest -q                         -> 196 passed in 39.61s
+$ scripts/check_links.py                                            -> relative links checked: 61; failures: 0; LINK-CHECK PASS
+$ (demo) npm test                                                   -> Test Files 2 passed (2); Tests 24 passed (24)
+$ (demo) npm run build; node tools/a11y_check.mjs dist              -> first: A11Y-CHECK FAIL (1), "no horizontal page scroll at 360 px: overflow 28px"
+  fix: overflow-wrap: anywhere on the new facts list (the long addresses)
+$ (demo) npm test; npm run build; node tools/a11y_check.mjs dist    -> Tests 24 passed (24); built; A11Y-CHECK PASS (9 PASS lines)
+$ git grep -c "/Users/"                                             -> progress.md 8, research/decision_log.md 1, research/protocol.md 3, src/scroll/report.py 2
+```
+
+Rendered and inspected as PNG: manuscript pages 1 (title, author line, status), 13 (repository URL) and 14 (funding, competing interests, AI assistance); supplement page 1; EXP-001 report page 1 (authorship row). All six PDFs were rebuilt because each source changed (author line in every report).
+
+### Files
+
+New: `demo/wrangler.jsonc`. Updated: `CLAUDE.md`, `README.md`, `CITATION.cff`, `articles/medium.md`, `articles/linkedin.md`, `demo/README.md`, `demo/src/App.tsx`, `demo/src/results.ts`, `demo/src/results.test.ts`, `demo/src/style.css`, `demo/public/data/results.json`, `scripts/export_demo_data.py`, `tests/test_demo_export.py`, `research/paper/manuscript.md`, `.tex`, `.pdf`, `research/paper/supplementary.md`, `.pdf`, `research/experiments/EXP-00N/report.md` and `report.pdf` (4), `research/publication/author_review.md`, `release_checklist.md`, `reproducibility_report.md`, `claims_audit.md`, `research/decision_log.md` (DEC-016).
+
+### Status and next action
+
+M6 release candidate with the owner's answers applied; still not done until the owner's full-text review and sign-off (B16). Open for the owner: B15 article drafts, B16, B18 release. Push (B17) and the Cloudflare deploy (B2) are the coordinator's steps.

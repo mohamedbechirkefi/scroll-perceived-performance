@@ -1,6 +1,8 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
 # Supplementary material
 
+Author: Mohamed Bechir Kefi, independent researcher.
+
 Status: M4 synthesis, 2026-11-25. Independent research manuscript / preprint draft, not peer-reviewed. Every number comes from a committed result file; the mapping is in `research/publication/artifact_manifest.json`.
 
 ## S1. Complete experimental matrix
@@ -127,10 +129,10 @@ The complete side-by-side table of all 23 primary contrasts at every level is in
 | Mixed advantage shrinks with p | mixture of strata | frozen trend check passes at every L | p above 0.3 |
 | Every conclusion | machine load and time drift; arm order; browser version | quiet rule (load below 3.0); arm order randomised within seed and X5 (no order effect large enough to change a verdict); one Chrome version recorded | other machines; Chrome updates; display refresh rate |
 
-## S8. Deviations, gaps and pending decisions
+## S8. Deviations, gaps and owner decisions
 
-1. **DEC-011 (pending owner review).** The test reading (Holm over Wilcoxon p-values decides H0; the unadjusted 95% interval is reported beside it) and the S1 levels (rAF1 and Element Timing) were fixed before data by the AI. Both readings are shown where they differ.
+1. **DEC-011 (owner chose neither reading, 2026-11-26).** The test reading (Holm over Wilcoxon p-values decides H0; the unadjusted 95% interval is reported beside it) and the S1 levels (rAF1 and Element Timing) were fixed before data by the AI. Both readings are shown where they differ.
 2. **DEC-012.** Runs under `nice -n 10`; an inaccurate fixed sentence about other agents in the frozen generator output; TTFF part of S1 not computable; S1 alternative not chosen in EXP-001; Holm values inside the EXP-004 run folders are not frozen verdicts; two scratch log files overwritten outside the repository.
 3. **EXP-001** ran twice on exploratory seeds; the pre-freeze run's values were seen before the freeze (freeze record, C4).
 4. **M4 corrections to the experiment reports** (no verdict changed): EXP-004 shift ranges; EXP-003 BLANK wrong-state range, Event Timing share and failure-pair wording; EXP-002 minimum-excess wording and the interpretation of the 50 ms skeleton effect. Listed in `research/publication/evidence_audit.md`.
-5. **Owner placeholders** (repository URL, funding, competing interests, author line) remain placeholders; see `progress.md`.
+5. **Owner facts** (repository URL, funding, competing interests, author line) were filled from the owner's answers of 2026-11-26; see the manuscript and `research/decision_log.md`.

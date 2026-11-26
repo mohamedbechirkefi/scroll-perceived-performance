@@ -52,6 +52,7 @@ export function App() {
             Runs offline after the first load. No data about visitors is collected, stored or sent anywhere, and the
             page contacts no server other than the one that served it.
           </p>
+          <p>Mohamed Bechir Kefi, independent researcher.</p>
         </div>
       </footer>
     </>
@@ -87,7 +88,7 @@ function Published({ r }: { r: Results }) {
             <h3 id={`h-${d.id}`}>
               <span className="tag tag-pending">{d.state}</span> {d.id}: {d.title}
             </h3>
-            <p>No reading is chosen here. Each reading the manuscript reports is shown:</p>
+            <p>The owner chose no reading (2026-11-26). Each reading the manuscript reports is shown:</p>
             <dl className="readings">
               {d.readings.map((x) => (
                 <div key={x.label}>
@@ -109,8 +110,8 @@ function Published({ r }: { r: Results }) {
           revision <code>{r.code_revision}</code> and are printed exactly as in the manuscript. Each contrast is the
           median over seeds of per-seed median trial-paired differences against BLANK, in ms, with a 95% percentile
           bootstrap interval over seeds. Null results are listed with the same weight as positive ones. Reading A
-          (Holm-adjusted Wilcoxon) and reading B (the unadjusted interval) are both shown, because DEC-011 is a pending
-          owner decision.
+          (Holm-adjusted Wilcoxon) and reading B (the unadjusted interval) are both shown, because the owner chose neither
+          reading of DEC-011.
         </p>
         {r.experiments.map((e) => (
           <ExperimentPanel key={e.id} e={e} r={r} />
@@ -150,8 +151,8 @@ function Published({ r }: { r: Results }) {
             <li key={i}>{l}</li>
           ))}
         </ol>
-        <h3>Owner placeholders</h3>
-        <ul>
+        <h3>Author, funding and addresses</h3>
+        <ul className="facts">
           {r.placeholders.map((p) => (
             <li key={p}>{p}</li>
           ))}
@@ -243,7 +244,7 @@ function ExperimentPanel({ e, r }: { e: Experiment; r: Results }) {
 function RobustnessTable({ r }: { r: Results }) {
   return (
     <>
-      <h4>Robustness of the 23 primary contrasts, both S1 readings (pending owner decision, DEC-011)</h4>
+      <h4>Robustness of the 23 primary contrasts, both S1 readings (DEC-011, owner chose none)</h4>
       <div className="table-scroll" role="region" aria-label="EXP-004 robustness under both readings" tabIndex={0}>
         <table>
           <thead>

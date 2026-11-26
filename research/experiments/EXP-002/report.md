@@ -12,7 +12,7 @@
 | Code revision | `b5a72c32202cb66a17341a5022ad29e9344506b6` (clean). The run path is identical to the freeze revision `b4bd25b`; the only code difference is the analysis module `src/scroll/inference.py` (DEC-011), committed before any confirmatory output existed |
 | Run | `EXP-002-20261125T070315Z` |
 | Status | Complete. Full frozen matrix, no failed session, no failed cell |
-| Authorship | Mohamed Bechir Kefi (no affiliation). An AI system was used as a research and development assistant; it is not an author |
+| Authorship | Mohamed Bechir Kefi, independent researcher. An AI system was used as a research and development assistant; it is not an author |
 
 ## 2. Executive summary
 

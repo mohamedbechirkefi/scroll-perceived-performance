@@ -303,9 +303,9 @@ export function validateResults(raw: unknown): Results {
         const r = obj(x, `${w}.readings[${j}]`);
         return { label: str(r, "label", `${w}.readings[${j}]`), text: str(r, "text", `${w}.readings[${j}]`) };
       });
-      if (readings.length < 2) throw new ResultsError(`${w}: a pending decision must show at least two readings`);
+      if (readings.length < 2) throw new ResultsError(`${w}: an open decision must show at least two readings`);
       const state = str(d, "state", w);
-      if (state !== "pending owner decision") throw new ResultsError(`${w}.state: expected "pending owner decision"`);
+      if (state !== "owner chose none; both readings shown") throw new ResultsError(`${w}.state: expected "owner chose none; both readings shown"`);
       return { id: str(d, "id", w), title: str(d, "title", w), state, readings };
     }),
     placeholders: strArr(o, "placeholders", "results"),

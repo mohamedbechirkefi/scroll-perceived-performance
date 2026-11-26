@@ -7,6 +7,8 @@
 
 *What a frozen, single-browser benchmark measured about skeletons, prefetching and optimistic updates*
 
+Mohamed Bechir Kefi, independent researcher.
+
 When an interface has to wait for a server, it must decide what to show in the meantime. It can show nothing new, show a grey placeholder in the shape of the final layout (a skeleton), start the request earlier when the pointer hovers (prefetching), or show the expected result at once and correct it if the server disagrees (an optimistic update). These strategies are often recommended because they make an interface feel faster. Feeling faster and delivering usable content sooner are different quantities, and this project measured only the second.
 
 ## The question
@@ -31,7 +33,7 @@ One mock page was built once, with the loading strategy as the only switch. Scri
 
 ## An open decision
 
-One analysis choice, DEC-011, is still pending the owner's decision. It fixes which test decides each hypothesis and which alternative paint methods count in the sensitivity analysis. Both readings are reported: the two test readings disagree for one of 23 contrasts, and the robustness count is 19 of 23 under one reading and 11 robust with 9 not assessed under the other.
+One analysis choice, DEC-011, was left open: the owner chose neither reading. It fixes which test decides each hypothesis and which alternative paint methods count in the sensitivity analysis. Both readings are reported: the two test readings disagree for one of 23 contrasts, and the robustness count is 19 of 23 under one reading and 11 robust with 9 not assessed under the other.
 
 ## Limitations
 
@@ -39,4 +41,4 @@ These are timings in one synthetic page, one browser version and one machine, mo
 
 ## Reproducibility
 
-Code, frozen protocols, raw results with checksums, experiment reports and an offline interactive page are in the project repository: [OWNER PLACEHOLDER: repository URL, not yet published]. Interactive demo: [OWNER PLACEHOLDER: demo URL, not yet published].
+Code, frozen protocols, raw results with checksums, experiment reports and an offline interactive page are in the project repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance. Interactive demo: https://scroll-perceived-performance.kefimohamedbechir.workers.dev.

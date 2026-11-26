@@ -1,15 +1,17 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
 # SCROLL
 
+Mohamed Bechir Kefi, independent researcher. Repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance. Results page: https://scroll-perceived-performance.kefimohamedbechir.workers.dev.
+
 **Question:** how do loading strategies (blank, skeleton, optimistic update, prefetch) affect measurable interface responsiveness under controlled, injected delays?
 
-**Status, 2026-11-25 (M6, release candidate 0.1.0-rc1).** Confirmatory results exist for EXP-002 to EXP-004 under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. The manuscript (`research/paper/manuscript.md`, PDF [`manuscript.pdf`](research/paper/manuscript.pdf)) is a preprint draft, not peer-reviewed. A release candidate has been prepared and awaits the owner's review (`research/publication/author_review.md`); it is not a release. One owner decision is pending and is shown both ways below. Nothing has been published.
+**Status, 2026-11-26 (M6, release candidate 0.1.0-rc1).** Confirmatory results exist for EXP-002 to EXP-004 under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. The manuscript (`research/paper/manuscript.md`, PDF [`manuscript.pdf`](research/paper/manuscript.pdf)) is a preprint draft, not peer-reviewed. A release candidate has been prepared and awaits the owner's full-text review and sign-off (`research/publication/author_review.md`); it is not a release. The repository is public since 2026-11-25; no tag, release, DOI or preprint exists. For one analysis decision the owner chose neither reading, so both are shown below.
 
 ## Why it matters
 
 Loading strategies are often chosen because they look faster. This project measures, in a controlled local benchmark, what they change objectively: time to usable content (TTUC, the primary metric), time to first feedback, layout shift and wrong-state exposure. It makes no claim about how fast an interface feels to people.
 
-![The SCROLL results page: overview, the pending owner decision DEC-011 with both readings, and the side-by-side measured traces of BLANK, SKELETON and PREFETCH at a 300 ms injected delay.](docs/demo.png)
+![The SCROLL results page: overview, analysis decision DEC-011 with both readings, and the side-by-side measured traces of BLANK, SKELETON and PREFETCH at a 300 ms injected delay.](docs/demo.png)
 
 ## Key findings (one mock page, one browser, one machine)
 
@@ -22,9 +24,9 @@ All numbers below are printed in the manuscript; contrasts are medians over 20 s
 
 Null and non-robust results are reported with the same weight as positive ones. Objective timing is not perceived speed.
 
-### Pending owner decision (not chosen here)
+### Analysis decision shown both ways
 
-**DEC-011, pending owner decision.** It fixes which test decides H0 and which alternative paint methods form sensitivity level S1. Both readings are reported:
+**DEC-011, owner chose neither reading (2026-11-26).** It fixes which test decides H0 and which alternative paint methods form sensitivity level S1. Both readings are reported:
 
 - Test reading A (Holm-adjusted Wilcoxon p below 0.05) and reading B (the unadjusted 95% interval excludes 0) disagree for one of 23 contrasts, EXP-002 SKELETON at L = 300 ms.
 - S1 with rAF1 and Element Timing (DEC-011): 19 of 23 primary contrasts robust. S1 with Element Timing only: 11 robust, 1 method-dependent, 2 condition-dependent and 9 not assessed.
@@ -51,7 +53,7 @@ Null and non-robust results are reported with the same weight as positive ones. 
 ## What is implemented
 
 - `src/web/`: one mock page; the loading strategy is the only switch. `src/scroll/`: seeded schedule, Playwright harness on the installed Chrome, metrics, statistics, inference, versioned result schema, run manifests, report generator and CLI.
-- `demo/`: a static, offline results page (TypeScript, React, Vite) with side-by-side measured traces and a latency slider, every published contrast with its interval, the pending decision, assumptions, limitations, and a sandbox. The sandbox is an exact port of the seeded schedule and reference model (checked against the Python engine); it computes lower bounds and measures nothing. Its animated replay is labelled illustrative, not a measurement. The page collects nothing and contacts no other host.
+- `demo/`: a static, offline results page (TypeScript, React, Vite) with side-by-side measured traces and a latency slider, every published contrast with its interval, both readings of DEC-011, assumptions, limitations, and a sandbox. The sandbox is an exact port of the seeded schedule and reference model (checked against the Python engine); it computes lower bounds and measures nothing. Its animated replay is labelled illustrative, not a measurement. The page collects nothing and contacts no other host.
 
 ## Quick start
 
@@ -81,9 +83,11 @@ All experimental data are synthetic and generated locally from seeds. See [`data
 
 One synthetic page, one browser version (Chrome 158.0.8127.38), one laptop, mostly headless; synthetic delays and scripted input; frame-scale effects depend on the paint-time method. The full list is in [`research/limitations.md`](research/limitations.md).
 
-## Owner placeholders
+## Author, funding and competing interests
 
-Repository URL and demo URL: `[OWNER PLACEHOLDER: not yet published]`. Funding, competing interests, author line and affiliation: `[OWNER PLACEHOLDER]` (see the manuscript). The manuscript title is proposed and awaits the owner's approval.
+Author: Mohamed Bechir Kefi, independent researcher. Funding: no funding was received. Competing interests: the author declares no competing interests. The manuscript title is owner-approved (2026-11-26).
+
+Repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance. Results page: https://scroll-perceived-performance.kefimohamedbechir.workers.dev (the static demo, hosted as Cloudflare Workers static assets; see [`demo/README.md`](demo/README.md)).
 
 ## Licence
 

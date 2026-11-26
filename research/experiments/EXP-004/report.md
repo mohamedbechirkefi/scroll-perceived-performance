@@ -12,7 +12,7 @@
 | Code revision | `b5a72c32202cb66a17341a5022ad29e9344506b6` (clean) |
 | Runs | `EXP-004-20261125T095434Z` (S2), `EXP-004-20261125T103912Z` (S3), `EXP-004-20261125T110537Z` (S4) |
 | Status | Complete. All three configurations in full; S1 computed; the TTFF part of S1 not computable (gap) |
-| Authorship | Mohamed Bechir Kefi (no affiliation). An AI system was used as a research and development assistant; it is not an author |
+| Authorship | Mohamed Bechir Kefi, independent researcher. An AI system was used as a research and development assistant; it is not an author |
 
 ## 2. Executive summary
 

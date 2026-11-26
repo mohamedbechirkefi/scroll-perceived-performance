@@ -13,8 +13,8 @@ validated fail-closed by demo/src/results.ts:
                     these medians are copied from committed cell_summary.csv and X7 files, and the
                     manuscript prints only their ranges);
   robustness        the EXP-004 verdict of each of the 23 primary contrasts under both S1 readings;
-  pending_decisions owner decisions that are still open, each shown with every reading;
-  placeholders      owner-only facts that stay placeholders.
+  pending_decisions analysis decisions for which the owner chose no reading, each shown with every reading;
+  placeholders      owner-confirmed publication facts (author, funding, interests, title, addresses).
 Estimates carry optional project fields (group, seeds, holm_p_display, reading_a, reading_b,
 tost_display, claim_id). Deterministic: no timestamps; sources are listed with their SHA-256.
 
@@ -52,8 +52,8 @@ STATUS_LABEL = (
     "Measured benchmark results, one mock page in one browser on one machine. EXP-002 to EXP-004 are "
     "confirmatory under protocol v1.0, frozen by the owner on 2026-11-24; EXP-001 is exploratory. "
     "Objective timing only: no claim about perceived speed. The manuscript is a preprint draft, not "
-    "peer-reviewed; the owner's full-text review is pending (M6). DEC-011 is a pending owner decision "
-    "and is shown both ways."
+    "peer-reviewed; the owner's full-text review is pending (M6). For DEC-011 the owner chose neither "
+    "reading (2026-11-26), so it is shown both ways."
 )
 
 # Verdict texts: each piece is printed verbatim in manuscript Table 4 (checked by the test).
@@ -107,12 +107,13 @@ STATUS = {
     "EXP-004": "confirmatory, complete",
 }
 
-# Pending owner decisions: every reading is a verbatim manuscript sentence or phrase.
+# Decisions shown both ways (owner, 2026-11-26: no reading chosen): every reading is a verbatim
+# manuscript sentence or phrase.
 PENDING = [
     {
         "id": "DEC-011",
         "title": "Which test decides H0, and which alternative paint methods form sensitivity level S1",
-        "state": "pending owner decision",
+        "state": "owner chose none; both readings shown",
         "readings": [
             {
                 "label": "Test reading A (DEC-011 item 1)",
@@ -139,12 +140,12 @@ PENDING = [
 ]
 
 PLACEHOLDERS = [
-    "Repository URL: placeholder, not yet published (the owner's decision).",
-    "Demo URL: placeholder, the page is not hosted anywhere.",
-    "Funding statement: placeholder for the owner.",
-    "Competing-interest statement: placeholder for the owner.",
-    "Author line and affiliation: placeholder for the owner (the freeze record holds a name, no affiliation, for confirmation).",
-    "Manuscript title: proposed in M4, awaiting the owner's approval.",
+    "Author: Mohamed Bechir Kefi, independent researcher.",
+    "Funding: no funding was received.",
+    "Competing interests: the author declares no competing interests.",
+    "Manuscript title: approved by the owner (2026-11-26).",
+    "Repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance",
+    "Demo: https://scroll-perceived-performance.kefimohamedbechir.workers.dev",
 ]
 
 ASSUMPTIONS = [

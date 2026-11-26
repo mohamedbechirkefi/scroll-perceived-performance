@@ -13,7 +13,7 @@
 | Configuration | `experiments/EXP-001.json`, canonical hash `f39023e2ef11d9ea44951792ee5fa0316711486e081cd8c5d758d4aab0996c6c` (both runs) |
 | Code revision | First run `2059ba7e5f2955c65297cca1de9dcc3c95586f69` (clean). Second run `7c8f7d10d14629a230536b4db42ba2fc81883538` plus the then-uncommitted inference module (manifest `dirty: true`; the module was committed in `b5a72c3` before any confirmatory run) |
 | Status | Both runs complete; all four instrumentation checks passed in both |
-| Authorship | [OWNER PLACEHOLDER: author line; recorded at the freeze (C3) as Mohamed Bechir Kefi, no affiliation]. An AI system was used as a research and development assistant; it is not an author |
+| Authorship | Mohamed Bechir Kefi, independent researcher. An AI system was used as a research and development assistant; it is not an author |
 
 ## 2. Executive summary
 

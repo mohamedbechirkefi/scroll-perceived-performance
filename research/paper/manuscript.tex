@@ -89,15 +89,13 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Skeletons, prefetching and optimistic updates under controlled delays: time to usable content in a single-browser benchmark},
-  pdfauthor={{[}OWNER PLACEHOLDER: author line. Value recorded at the freeze (C3): Mohamed Bechir Kefi, no affiliation. To be confirmed by the owner before release.{]}},
+  pdfauthor={Mohamed Bechir Kefi, independent researcher},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Skeletons, prefetching and optimistic updates under controlled
 delays: time to usable content in a single-browser benchmark}
-\author{{[}OWNER PLACEHOLDER: author line. Value recorded at the freeze
-(C3): Mohamed Bechir Kefi, no affiliation. To be confirmed by the owner
-before release.{]}}
+\author{Mohamed Bechir Kefi, independent researcher}
 \date{}
 
 \begin{document}
@@ -107,10 +105,9 @@ before release.{]}}
 peer-reviewed. Every number in this text comes from a committed result
 file of this repository; the mapping is in
 \texttt{research/publication/artifact\_manifest.json} and the audit in
-\texttt{research/publication/evidence\_audit.md}. Two owner decisions
-are still pending and are disclosed where they matter: the test reading
-of DEC-011 (Section 4.5) and the owner-only facts marked as
-placeholders.
+\texttt{research/publication/evidence\_audit.md}. For DEC-011 (Section
+4.5) the owner chose neither reading on 2026-11-26, so both readings
+stay shown where they matter.
 
 \section{Abstract}\label{abstract}
 
@@ -366,15 +363,16 @@ the Holm correction without stating which one decides H0. Before any
 confirmatory output existed, DEC-011 fixed the reading ``H0 is rejected
 when the Holm-adjusted Wilcoxon p is below 0.05'' and required the
 alternative reading, ``the unadjusted 95\% interval excludes 0'', to be
-reported beside it. \textbf{DEC-011 awaits the owner's review and is not
-decided here.} Both readings are shown in Table 1 and Table 2; they
-differ for exactly one of the 23 primary contrasts (Section 5.2).
+reported beside it. \textbf{For DEC-011 the owner chose neither reading
+(2026-11-26); both stay shown.} Both readings are shown in Table 1 and
+Table 2; they differ for exactly one of the 23 primary contrasts
+(Section 5.2).
 
 EXP-004 applies the frozen robustness rule: a verdict is robust only if
 the sign of the point estimate is the same at every available factor
 level; for SKELETON the rule uses the equivalence verdict. DEC-011 item
 5 also fixed which alternative paint methods form level S1 (both rAF1
-and Element Timing); this too is part of the pending owner review, and
+and Element Timing); the owner chose neither S1 reading either, and
 Section 5.4 shows the effect of the narrower reading.
 
 \subsection{4.6 Reproducibility}\label{reproducibility}
@@ -667,7 +665,7 @@ reading of Section 5.5, every level's 95\% interval includes 0 for all
 six failure strata, which is the pattern expected of a null contrast.
 The frozen verdicts stand as reported.
 
-\textbf{Reading of level S1 (pending owner review).} The frozen EXP-004
+\textbf{Reading of level S1 (both readings shown).} The frozen EXP-004
 protocol names the S1 alternative as ``Element Timing or trace''.
 DEC-011 counted rAF1 as well, which made S1 available on the write path.
 Under the narrower reading (Element Timing only, which exists on the
@@ -923,11 +921,11 @@ most important are:
   5.4), the headless frame interval of 18.0 to 18.9 ms exceeds the 17 ms
   margin, and the display refresh rate was not recorded in headed runs.
 \item
-  \textbf{Pending test reading.} DEC-011 awaits the owner's review: it
-  fixes which test decides H0 and which alternative paint methods form
-  S1. Both readings are shown where they differ (one contrast in Table
-  1; the robustness counts in Section 5.4, 19 of 23 robust against 11
-  robust and 9 not assessed).
+  \textbf{Two test readings.} DEC-011 fixes which test decides H0 and
+  which alternative paint methods form S1; the owner chose neither
+  reading (2026-11-26). Both readings are shown where they differ (one
+  contrast in Table 1; the robustness counts in Section 5.4, 19 of 23
+  robust against 11 robust and 9 not assessed).
 \item
   \textbf{Sensitivity coverage.} S2 to S4 use 10 seeds and a reduced
   matrix (L in \{300, 1000\} ms, p in \{0, 0.3\}); TTFF sensitivity was
@@ -982,7 +980,7 @@ failure strata.
 
 All code, configurations, frozen protocols, raw results with SHA-256
 manifests, generated tables and figures are in the project repository:
-\texttt{{[}OWNER\ PLACEHOLDER:\ repository\ URL,\ not\ yet\ published{]}}.
+https://github.com/mohamedbechirkefi/scroll-perceived-performance.
 Clean-run commands are in each experiment report
 (\texttt{research/experiments/EXP-00N/report.md}, section 12). Raw
 results: \texttt{results/raw/EXP-002/}, \texttt{results/raw/EXP-003/},
@@ -994,10 +992,10 @@ Source-Available Non-Commercial Research License v1.0
 \section{Funding, competing interests and AI
 assistance}\label{funding-competing-interests-and-ai-assistance}
 
-\textbf{Funding.} \texttt{{[}OWNER\ PLACEHOLDER:\ funding\ statement{]}}
+\textbf{Funding.} No funding was received.
 
-\textbf{Competing interests.}
-\texttt{{[}OWNER\ PLACEHOLDER:\ competing-interest\ statement{]}}
+\textbf{Competing interests.} The author declares no competing
+interests.
 
 \textbf{AI assistance.} An AI system (Claude, Anthropic) was used as a
 research and development assistant: it drafted the protocols for the
@@ -1005,9 +1003,10 @@ owner's approval, wrote the code and tests, ran the experiments under
 the frozen protocol, computed the analyses and drafted this manuscript.
 It is not an author. Human verification: the owner approved the protocol
 freeze, the amendments and the decisions recorded in
-\texttt{research/decision\_log.md}; the owner's review of this
-manuscript, of DEC-011 and of the placeholders above is pending. An
-internal AI review pass
+\texttt{research/decision\_log.md}; the owner approved this AI-use
+statement, the title, the author line and the statements above on
+2026-11-26 and chose neither DEC-011 reading; the owner's full-text
+review of this manuscript is pending. An internal AI review pass
 (\texttt{research/publication/review\_pass\_2.md}) is quality control,
 not peer review.
 

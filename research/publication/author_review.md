@@ -25,33 +25,37 @@ No box above was ticked by an agent, and none was found ticked, so none was unti
 
 ### Open decisions for this repository
 
-- **DEC-011 (pending, `owner-approvals-2026-11-25e.md`).** The owner decides which test decides H0 and which paint methods form sensitivity level S1; the manuscript reports both: reading A (Holm-adjusted Wilcoxon) and reading B (unadjusted 95% interval) disagree only for EXP-002 SKELETON at L = 300 ms, and S1 with rAF1 and Element Timing gives 19 of 23 contrasts robust, against 11 robust, 1 method-dependent, 2 condition-dependent and 9 not assessed with Element Timing only.
-- **Manuscript title (not approved).** The proposed title is "Skeletons, prefetching and optimistic updates under controlled delays: time to usable content in a single-browser benchmark".
-- **CITATION.cff title (not approved).** It reads "SCROLL: loading strategies and measurable interface responsiveness under controlled delays", a project title for the software that differs from the manuscript title; it was kept as it is and awaits the owner's choice.
-- **CITATION.cff version.** It now reads "0.1.0-rc1" (release candidate, no `date-released`); `pyproject.toml` still says 0.0.0, and the owner chooses the release number and date at publication.
-- **Funding statement (not approved).** The manuscript holds a placeholder.
-- **Competing-interest statement (not approved).** The manuscript holds a placeholder.
-- **AI-use statement (not approved).** The wording in the manuscript, README and `CITATION.cff` was written by the AI assistant and awaits the owner's review.
-- **Author line and affiliation (owner-only fact).** The manuscript and the EXP-001 report hold a placeholder, while the EXP-002, EXP-003 and EXP-004 reports print the name recorded at the freeze with no affiliation; the owner confirms one form for all.
-- **Repository URL and demo URL (owner-only facts).** They are placeholders everywhere.
-- **Publication (G-PUBLIC).** No GitHub release, tag, DOI, preprint or article publication has been made; re-adding `date-released` belongs to that step.
-- **Home-directory paths in published files.** `research/protocol.md` (frozen), `src/scroll/report.py` (frozen code), `CLAUDE.md`, `progress.md` and `research/decision_log.md` contain absolute local paths that show the local user name; the owner decides whether this is acceptable before publication, because the frozen and append-only files were not edited.
-- **Generic e-mail address in `CLAUDE.md`.** The no-reply address of the commit trailer appears in the session rules; the owner decides whether to keep it.
-- **Run report PDFs inside frozen run folders.** The generator's own PDFs under `results/raw/` and `results/exploratory/` were not visually inspected; the owner decides whether they are published as they are.
+Updated 2026-11-26 after the owner's answers (next section). Still open:
+
+- **Full-text review and sign-off (B16).** The owner reads the manuscript, the supplement and the four reports in full, then decides on each box above.
+- **Article drafts (B15).** `articles/medium.md` and `articles/linkedin.md`, with their titles, are drafts; the owner reads and approves them before any posting.
+- **Release (B18).** No tag, GitHub release, DOI or preprint exists. At the release, `CITATION.cff` `version` becomes `0.1.0` and `date-released` is set to the release day (`research/publication/release_checklist.md`).
+- **Freezes.** None is pending in this repository: protocol v1.0 and every registered experiment protocol are frozen or exploratory as recorded in `research/freeze.json`.
 
 ### Remaining owner placeholders (file and line)
 
-| File | Line | Placeholder |
+None. Every placeholder listed on 2026-11-25 (manuscript author line, repository URL, funding and competing-interest statements; `manuscript.tex`; EXP-001 report author line; README; `CITATION.cff`; both articles; `demo/README.md`; `demo/public/data/results.json`) was filled on 2026-11-26 from the owner's answers (DEC-016). `git grep -n "OWNER PLACEHOLDER"` returns nothing.
+
+## Owner answers recorded (2026-11-26)
+
+Source: owner, 2026-11-26, decision sheet (`labs/_shared/owner-decision-sheet-2026-11-26.md`, answers in `labs/_shared/owner-approvals-2026-11-26.md`). Applied in DEC-016 as wording and configuration only; no result, analysis, figure, configuration, seed, frozen protocol, hash or checksummed output changed. No box above was ticked by an agent.
+
+| Id | Answer | Applied here |
 |---|---|---|
-| `research/paper/manuscript.md` | 4 | author line |
-| `research/paper/manuscript.md` | 250 | repository URL |
-| `research/paper/manuscript.md` | 254 | funding statement |
-| `research/paper/manuscript.md` | 256 | competing-interest statement |
-| `research/paper/manuscript.tex` | 92, 98 | author line (generated from the manuscript) |
-| `research/experiments/EXP-001/report.md` | 16 | author line |
-| `README.md` | 86 | repository URL, demo URL, funding, competing interests, author line and affiliation |
-| `CITATION.cff` | 5 | repository URL (in `message`) |
-| `articles/medium.md` | 42 | repository URL |
-| `articles/linkedin.md` | 14 | repository URL and demo URL |
-| `demo/README.md` | 28 | demo URL |
-| `demo/public/data/results.json` | 1401 to 1408 | repository URL, demo URL, funding, competing interests, author line and affiliation, manuscript title |
+| A1 | Correct the "not pushed / no remote" sentences | the repository is public since 2026-11-25; README, `release_checklist.md` and `reproducibility_report.md` say so; append-only records unchanged |
+| B1 | Repository URL `https://github.com/mohamedbechirkefi/scroll-perceived-performance` | manuscript, README, both articles, `demo/README.md`, demo data, `CITATION.cff` `repository-code` |
+| B2 | Demo hosted on Cloudflare Workers, free plan, `https://scroll-perceived-performance.kefimohamedbechir.workers.dev` | demo URL filled; `demo/wrangler.jsonc` added (static assets from `./dist`, no Worker script); deployment is the coordinator's |
+| B3 | Author "Mohamed Bechir Kefi, independent researcher" | manuscript, supplement, the four reports, README, articles, demo footer and data; `CITATION.cff` `affiliation: "Independent researcher"` |
+| B4 | No funding; no competing interests | manuscript, README, demo data |
+| B5 | AI-use statement approved as drafted | "not approved" marks removed; wording unchanged |
+| B6, B7 | Manuscript title approved; `CITATION.cff` carries it | "awaiting approval" marks removed; `CITATION.cff` title replaced |
+| B8 | `0.1.0-rc1` kept, no `date-released`; `0.1.0` and the release day at the release; `pyproject.toml` stays `0.0.0` | recorded in `release_checklist.md` |
+| B9 | Scrub home paths from editable files, no history rewrite | `CLAUDE.md` scrubbed; what remains and why: `reproducibility_report.md` section 8 |
+| B10 | PDFs kept and attached to a release | PDFs rebuilt from the changed sources |
+| B11, B13 | Release-note lines | `release_checklist.md`, "Release notes (draft)" (no SCROLL figure was listed for B11) |
+| B14 | Source labels accepted | recorded; Mejtoft et al. (2018) stays metadata only, as the manuscript states |
+| B17 | Push the local M6 commits | granted; pushing is the coordinator's step, not done here |
+| R-SCROLL-1 | DEC-011: owner chose none | both readings stay shown; "pending owner decision" wording replaced by "the owner chose neither reading" in the manuscript, supplement, README, articles and demo |
+| R-SCROLL-2 | Noreply address in `CLAUDE.md` kept; run PDFs under `results/` released without visual inspection | recorded; nothing changed |
+
+Still open: B15 (article drafts), B16 (full-text review and sign-off of every box above), B18 (release, tag, DOI or preprint). No freeze is pending in this repository.

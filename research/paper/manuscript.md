@@ -1,12 +1,12 @@
 ---
 # SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0
 title: "Skeletons, prefetching and optimistic updates under controlled delays: time to usable content in a single-browser benchmark"
-author: "[OWNER PLACEHOLDER: author line. Value recorded at the freeze (C3): Mohamed Bechir Kefi, no affiliation. To be confirmed by the owner before release.]"
-status: "Independent research manuscript / preprint draft, not peer-reviewed. M4 synthesis of 2026-11-25. Title proposed in M4, awaiting owner approval."
+author: "Mohamed Bechir Kefi, independent researcher"
+status: "Independent research manuscript / preprint draft, not peer-reviewed. Release candidate 0.1.0-rc1 (M6, 2026-11-25), owner answers applied 2026-11-26."
 ai_disclosure: "An AI system (Claude, Anthropic) was used as a research and development assistant; it is not an author. See the AI assistance section."
 ---
 
-**Status.** Independent research manuscript / preprint draft, not peer-reviewed. Every number in this text comes from a committed result file of this repository; the mapping is in `research/publication/artifact_manifest.json` and the audit in `research/publication/evidence_audit.md`. Two owner decisions are still pending and are disclosed where they matter: the test reading of DEC-011 (Section 4.5) and the owner-only facts marked as placeholders.
+**Status.** Independent research manuscript / preprint draft, not peer-reviewed. Every number in this text comes from a committed result file of this repository; the mapping is in `research/publication/artifact_manifest.json` and the audit in `research/publication/evidence_audit.md`. For DEC-011 (Section 4.5) the owner chose neither reading on 2026-11-26, so both readings stay shown where they matter.
 
 # Abstract
 
@@ -83,9 +83,9 @@ The primary metric is TTUC (Section 3), in milliseconds, lower is better. Second
 
 The seed is the independent unit. Each contrast is summarised by the median of its per-seed paired differences, with a 95% percentile bootstrap interval over seeds (10,000 resamples, fixed seed). The hypothesis test is the two-sided Wilcoxon signed-rank test on the per-seed values, with Holm correction over each experiment's primary family (8 contrasts in EXP-002, 15 in EXP-003). SKELETON equivalence uses two one-sided tests through the 90% bootstrap interval with a margin of 17 ms. Non-significance is never reported as equivalence.
 
-The frozen protocol names the bootstrap interval, the Wilcoxon test and the Holm correction without stating which one decides H0. Before any confirmatory output existed, DEC-011 fixed the reading "H0 is rejected when the Holm-adjusted Wilcoxon p is below 0.05" and required the alternative reading, "the unadjusted 95% interval excludes 0", to be reported beside it. **DEC-011 awaits the owner's review and is not decided here.** Both readings are shown in Table 1 and Table 2; they differ for exactly one of the 23 primary contrasts (Section 5.2).
+The frozen protocol names the bootstrap interval, the Wilcoxon test and the Holm correction without stating which one decides H0. Before any confirmatory output existed, DEC-011 fixed the reading "H0 is rejected when the Holm-adjusted Wilcoxon p is below 0.05" and required the alternative reading, "the unadjusted 95% interval excludes 0", to be reported beside it. **For DEC-011 the owner chose neither reading (2026-11-26); both stay shown.** Both readings are shown in Table 1 and Table 2; they differ for exactly one of the 23 primary contrasts (Section 5.2).
 
-EXP-004 applies the frozen robustness rule: a verdict is robust only if the sign of the point estimate is the same at every available factor level; for SKELETON the rule uses the equivalence verdict. DEC-011 item 5 also fixed which alternative paint methods form level S1 (both rAF1 and Element Timing); this too is part of the pending owner review, and Section 5.4 shows the effect of the narrower reading.
+EXP-004 applies the frozen robustness rule: a verdict is robust only if the sign of the point estimate is the same at every available factor level; for SKELETON the rule uses the equivalence verdict. DEC-011 item 5 also fixed which alternative paint methods form level S1 (both rAF1 and Element Timing); the owner chose neither S1 reading either, and Section 5.4 shows the effect of the narrower reading.
 
 ## 4.6 Reproducibility
 
@@ -167,7 +167,7 @@ Table 3. The four contrasts that the frozen rule does not call robust. Median tr
 
 **The three failure strata.** Their main estimates lie within 1 ms of zero, none rejects H0, and the frozen sign rule flags them because the sign of a near-zero estimate flips. Under the exploratory interval reading of Section 5.5, every level's 95% interval includes 0 for all six failure strata, which is the pattern expected of a null contrast. The frozen verdicts stand as reported.
 
-**Reading of level S1 (pending owner review).** The frozen EXP-004 protocol names the S1 alternative as "Element Timing or trace". DEC-011 counted rAF1 as well, which made S1 available on the write path. Under the narrower reading (Element Timing only, which exists on the read path only; X6 in Section 5.5), the read-path verdicts are unchanged, but the nine write contrasts at L = 100 ms or p = 0.1 have no sensitivity level at all, because S2 to S4 cover only L in {300, 1000} ms and p in {0, 0.3}. The count becomes 11 robust, 1 method-dependent (the 50 ms skeleton), 2 condition-dependent (write L = 300 and 1000 ms, p = 0.3, failure) and 9 not assessed. The skeleton result at 50 ms is method-dependent under both readings.
+**Reading of level S1 (both readings shown).** The frozen EXP-004 protocol names the S1 alternative as "Element Timing or trace". DEC-011 counted rAF1 as well, which made S1 available on the write path. Under the narrower reading (Element Timing only, which exists on the read path only; X6 in Section 5.5), the read-path verdicts are unchanged, but the nine write contrasts at L = 100 ms or p = 0.1 have no sensitivity level at all, because S2 to S4 cover only L in {300, 1000} ms and p in {0, 0.3}. The count becomes 11 robust, 1 method-dependent (the 50 ms skeleton), 2 condition-dependent (write L = 300 and 1000 ms, p = 0.3, failure) and 9 not assessed. The skeleton result at 50 ms is method-dependent under both readings.
 
 **Shifts within robust contrasts.** Under CPU 4x the prefetch benefit shrank by 5.9 to 7.6 ms and the optimistic success benefit grew by 5.9 to 13.7 ms; headed rendering enlarged the optimistic success benefit by 15.3 to 27.0 ms (10 seeds each; differences of point estimates, not tests). The headed shift has an untested competing explanation: in S4 the median second-frame gap was 8.6 to 9.0 ms for OPTIMISTIC but 16.45 to 16.75 ms for BLANK on the write path (exploratory X2), which suggests that the display ran a faster frame cadence shortly after input; the refresh rate was not recorded, and the S4 run also took place one to three hours after the main runs. In S3 the prefetch benefit scaled with the lead: -293.9 and -609.6 ms at h = 600 ms (L = 300 and 1000 ms), and -1.9 and -1.7 ms at h = 0. TTFF sensitivity could not be computed, because the frozen code records alternative paint times only for the usable-content frame. Figure: `results/raw/EXP-004/sensitivity/figures/fig-sensitivity.svg`; it shows only the 10 contrasts of the reduced matrix, so the 50 ms skeleton contrast and the contrasts checked under S1 only appear in Table 3 and the EXP-004 report, not in the figure.
 
@@ -229,7 +229,7 @@ The full list is maintained in `research/limitations.md`. The most important are
 2. **One page, one browser version, one machine.** Chrome 158.0.8127.38 on an Apple M1 Pro, mostly headless. Other engines, devices, frameworks and DOM sizes are not covered.
 3. **Synthetic latency and scripted input.** Delays come from a seeded transport with uniform 10% jitter; there are no retries, timeouts or network effects. The hover is scripted with a fixed lead, so the prefetch benefit is bounded by design and says nothing about how often real users hover.
 4. **Paint-time construct.** The main method measures the second animation frame after the commit; the alternatives move some estimates by up to about 10 ms (PREFETCH at L = 100 ms: -84.9 ms main, -95.2 ms Element Timing). Frame-scale effects are method-dependent (Section 5.4), the headless frame interval of 18.0 to 18.9 ms exceeds the 17 ms margin, and the display refresh rate was not recorded in headed runs.
-5. **Pending test reading.** DEC-011 awaits the owner's review: it fixes which test decides H0 and which alternative paint methods form S1. Both readings are shown where they differ (one contrast in Table 1; the robustness counts in Section 5.4, 19 of 23 robust against 11 robust and 9 not assessed).
+5. **Two test readings.** DEC-011 fixes which test decides H0 and which alternative paint methods form S1; the owner chose neither reading (2026-11-26). Both readings are shown where they differ (one contrast in Table 1; the robustness counts in Section 5.4, 19 of 23 robust against 11 robust and 9 not assessed).
 6. **Sensitivity coverage.** S2 to S4 use 10 seeds and a reduced matrix (L in {300, 1000} ms, p in {0, 0.3}); TTFF sensitivity was not computable.
 7. **Run conditions.** Runs executed under `nice -n 10` in a coordinator-arranged quiet window, with load averages of 1.4 to 2.4 at the starts; background services and an editor were still running. The frozen generator's fixed sentence that other agents were running is inaccurate for these runs (DEC-012).
 8. **Failure strata.** They have 12 or 18 seeds and 26 or 57 trial pairs per cell, and no equivalence test was registered for them.
@@ -247,15 +247,15 @@ Feasible extensions, each needing a new owner-approved protocol: record alternat
 
 # Data and code availability
 
-All code, configurations, frozen protocols, raw results with SHA-256 manifests, generated tables and figures are in the project repository: `[OWNER PLACEHOLDER: repository URL, not yet published]`. Clean-run commands are in each experiment report (`research/experiments/EXP-00N/report.md`, section 12). Raw results: `results/raw/EXP-002/`, `results/raw/EXP-003/`, `results/raw/EXP-004/`; exploratory results: `results/exploratory/`. The code is released under the SCROLL Source-Available Non-Commercial Research License v1.0 (`LICENSE`).
+All code, configurations, frozen protocols, raw results with SHA-256 manifests, generated tables and figures are in the project repository: https://github.com/mohamedbechirkefi/scroll-perceived-performance. Clean-run commands are in each experiment report (`research/experiments/EXP-00N/report.md`, section 12). Raw results: `results/raw/EXP-002/`, `results/raw/EXP-003/`, `results/raw/EXP-004/`; exploratory results: `results/exploratory/`. The code is released under the SCROLL Source-Available Non-Commercial Research License v1.0 (`LICENSE`).
 
 # Funding, competing interests and AI assistance
 
-**Funding.** `[OWNER PLACEHOLDER: funding statement]`
+**Funding.** No funding was received.
 
-**Competing interests.** `[OWNER PLACEHOLDER: competing-interest statement]`
+**Competing interests.** The author declares no competing interests.
 
-**AI assistance.** An AI system (Claude, Anthropic) was used as a research and development assistant: it drafted the protocols for the owner's approval, wrote the code and tests, ran the experiments under the frozen protocol, computed the analyses and drafted this manuscript. It is not an author. Human verification: the owner approved the protocol freeze, the amendments and the decisions recorded in `research/decision_log.md`; the owner's review of this manuscript, of DEC-011 and of the placeholders above is pending. An internal AI review pass (`research/publication/review_pass_2.md`) is quality control, not peer review.
+**AI assistance.** An AI system (Claude, Anthropic) was used as a research and development assistant: it drafted the protocols for the owner's approval, wrote the code and tests, ran the experiments under the frozen protocol, computed the analyses and drafted this manuscript. It is not an author. Human verification: the owner approved the protocol freeze, the amendments and the decisions recorded in `research/decision_log.md`; the owner approved this AI-use statement, the title, the author line and the statements above on 2026-11-26 and chose neither DEC-011 reading; the owner's full-text review of this manuscript is pending. An internal AI review pass (`research/publication/review_pass_2.md`) is quality control, not peer review.
 
 # References
 

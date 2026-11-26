@@ -88,3 +88,4 @@ figure.mini { margin: 0; }
 ol.limitations li { margin-bottom: 0.35rem; }
 button.toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
 .table-scroll th[scope=row] { min-width: 9.5rem; }
+.facts li { overflow-wrap: anywhere; }

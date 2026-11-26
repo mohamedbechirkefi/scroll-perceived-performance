@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCROLL-NC-Research-1.0 -->
 # Reproducibility report (M6, 2026-11-25)
 
-Status: clean-clone reproduction done on 2026-11-25 for the release candidate. Every command below was run, and its actual output is quoted. The machine was shared with other lab agents, so, under the M6 timing addendum, **no timing measurement made here is compared with the frozen results**; reproduction means regenerating the analysis and report outputs from the committed raw results.
+Status: clean-clone reproduction done on 2026-11-25 for the release candidate. Update, 2026-11-26: the repository is public at https://github.com/mohamedbechirkefi/scroll-perceived-performance since 2026-11-25; section 8 records the home-path scrub of 2026-11-26 (DEC-016). Every command below was run, and its actual output is quoted. The machine was shared with other lab agents, so, under the M6 timing addendum, **no timing measurement made here is compared with the frozen results**; reproduction means regenerating the analysis and report outputs from the committed raw results.
 
 Machine: Apple M1 Pro, macOS 15.3.1, Google Chrome 158.0.8127.38 (the version of every confirmatory run), Python 3.12.1 through uv, Node 22.23.3. Load average at the start of the clone work: 2.12 1.94 1.68.
 
@@ -131,3 +131,20 @@ Dependency licences: `research/publication/dependency_licences.md` (26 Python di
 ## 7. PDFs
 
 Built with `scripts/build_pdfs.py` (pandoc 3.6.3 to Typst, compiled with the `typst` Python package 0.15.0; DEC-002 route) and inspected page by page as PNG renders: manuscript 15 pages, supplement 6, EXP-001 4, EXP-002 8, EXP-003 6, EXP-004 8. Fixes and metadata checks are recorded in `progress.md` (M6 entry) and DEC-015.
+
+## 8. Local home paths after the scrub of 2026-11-26 (B9)
+
+Owner, 2026-11-26, decision sheet, B9: scrub absolute local home paths from editable files in a new commit; frozen, append-only and checksummed files stay untouched; no history rewrite. Earlier commits keep the old text.
+
+Scrubbed: `CLAUDE.md` (7 lines; tool paths are now relative to the repository, for example `../.tools/pandoc` and `../../helix/.tools/node/bin`, and the research folder is named "the research root"; each relative tool path was checked to resolve from the repository root). README, docs, scripts, tests, the demo files and the Markdown sources of the manuscript and reports had none.
+
+Remaining in tracked files (`git grep -c` on 2026-11-26): 14 lines in 4 files, each left on purpose.
+
+| File | Lines | Why it stays |
+|---|---|---|
+| `progress.md` | 8 | append-only session journal; dated entries stay true for their date |
+| `research/decision_log.md` | 1 | append-only decision log |
+| `research/protocol.md` | 3 | frozen protocol v1.0; its SHA-256 is in `research/freeze.json` and checked before every confirmatory run |
+| `src/scroll/report.py` | 2 | frozen report generator (unchanged since the confirmatory code revision `b5a72c3`); the paths are defaults that the `SCROLL_PANDOC` and `SCROLL_TYPST_PYTHON` environment variables override |
+
+The committed PDFs contain no local path (checked with pypdf on 2026-11-26, `progress.md`). Licence files and `master_prompt.md` contain none.
