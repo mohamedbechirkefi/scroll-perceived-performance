@@ -7,6 +7,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ARMS, type Arm, type Path, type SandboxInput, type SandboxOutput } from "./engine";
 import type { WorkerReply, WorkerRequest } from "./sandbox.worker";
+import { useSlidingIndicator } from "./motion";
 
 const DEFAULTS: SandboxInput = { seed: 1, path: "read", L: 300, p: 0.1, h: 150 };
 const P_LEVELS = [0, 0.1, 0.3, 0.5];
@@ -20,6 +21,8 @@ export function Sandbox() {
   const [status, setStatus] = useState("");
   const [result, setResult] = useState<{ input: SandboxInput; output: SandboxOutput } | null>(null);
   const ids = useId();
+  const seg = useSlidingIndicator(input.path);
+  const [runs, setRuns] = useState(0);
 
   useEffect(() => {
     const w = new Worker(new URL("./sandbox.worker.ts", import.meta.url), { type: "module" });
@@ -28,6 +31,7 @@ export function Sandbox() {
       setRunning(false);
       if (m.type === "done") {
         setResult({ input: m.input, output: m.output });
+        setRuns((n) => n + 1);
         const extra = m.input.path === "write" ? `, ${m.output.failures} of 10 saves rejected by the mock server` : "";
         setStatus(`Sandbox output ready: seed ${m.input.seed}, ${m.input.path} path, L = ${m.input.L} ms, 10 trials${extra}.`);
       }
@@ -59,14 +63,17 @@ export function Sandbox() {
         scheduled delays and the ideal, zero-overhead lower bounds of each strategy. It is not the research engine's
         browser measurement, it is not a research result, and it is not comparable to the published numbers above.
       </p>
-      <div className="controls">
+      <div className="controls bench">
         <fieldset className="seg">
           <legend>Path</legend>
+          <div className="seg-track" ref={seg.group}>
+            <span className="seg-bar" ref={seg.bar} aria-hidden="true" />
           {(["read", "write"] as Path[]).map((p) => (
             <button key={p} type="button" id={`sb-path-${p}`} className="toggle" aria-pressed={input.path === p} onClick={() => set({ path: p })}>
               {p === "read" ? "Read (open an item)" : "Write (save)"}
             </button>
           ))}
+          </div>
         </fieldset>
         <label>
           Seed{" "}
@@ -100,11 +107,13 @@ export function Sandbox() {
             </select>
           </label>
         )}
-        <button type="button" onClick={run} disabled={running}>Run</button>
-        <button type="button" onClick={reset}>Reset</button>
+        <div className="actions">
+          <button type="button" className="btn-primary" onClick={run} disabled={running} aria-busy={running}>Run</button>
+          <button type="button" className="btn-quiet" onClick={reset}>Reset</button>
+        </div>
       </div>
       <p aria-live="polite" className="sandbox-out">{status}</p>
-      {result && <SandboxResult input={result.input} output={result.output} />}
+      {result && <SandboxResult key={runs} input={result.input} output={result.output} />}
     </section>
   );
 }
@@ -124,8 +133,8 @@ function SandboxResult({ input, output }: { input: SandboxInput; output: Sandbox
             </tr>
           </thead>
           <tbody>
-            {arms.map((a) => (
-              <tr key={a}>
+            {arms.map((a, i) => (
+              <tr key={a} className="row-enter" style={{ animationDelay: `${i * 40}ms` }}>
                 <th scope="row">{a}</th>
                 <td className="num">{fmtMs(output.summary[a]!.median_ttuc_lb_ms)}</td>
                 <td className="num">{fmtMs(output.summary[a]!.median_diff_vs_blank_ms)}</td>
@@ -219,15 +228,19 @@ function Replay({ input, output }: { input: SandboxInput; output: SandboxOutput 
         <label htmlFor={`${ids}-slow`}>
           <input id={`${ids}-slow`} type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} /> Slow motion (4x)
         </label>
-        <button type="button" onClick={play}>Replay trial</button>
+        <button type="button" className="btn-secondary" onClick={play}>Replay trial</button>
       </div>
+      <p className="replay-clock">
+        <span className="clock-label">Replay clock</span>
+        <span className="readout">{elapsed === null ? "not started" : `${Math.round(elapsed)} ms`}</span>
+        {elapsed !== null && <span className="clock-label">after the click</span>}
+      </p>
       <div className="mini-grid">
         {arms.map((a) => (
           <MiniPanel key={a} arm={a} path={input.path} elapsed={elapsed} delay={t.delay_ms} ok={t.ok}
             ttuc={t.arms[a]!.ttuc_lb_ms} ttff={t.arms[a]!.ttff_lb_ms} h={input.h} />
         ))}
       </div>
-      <p className="meta">Replay clock: {elapsed === null ? "not started" : `${Math.round(elapsed)} ms after the click`}</p>
     </div>
   );
 }
@@ -257,7 +270,7 @@ function MiniPanel(props: { arm: Arm; path: Path; elapsed: number | null; delay:
   return (
     <figure className="mini">
       <figcaption><strong>{arm}</strong></figcaption>
-      <div className="mini-box">{body}</div>
+      <div className={`mini-box${path === "read" && e >= 0 && e >= ttff && e < ttuc ? " is-skel" : ""}`}>{body}</div>
       <p className="meta">{caption}</p>
     </figure>
   );

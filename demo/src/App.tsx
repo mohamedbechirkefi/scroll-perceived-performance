@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { fmtEstimate, fmtInterval, loadResults, ResultsError, type Experiment, type Results } from "./results";
 import { Traces } from "./Traces";
 import { Sandbox } from "./Sandbox";
+import { HeroIllustration } from "./Hero";
+
+const REPO = "https://github.com/mohamedbechirkefi/scroll-perceived-performance";
+const LABS = "https://labs.kefimohamedbechir.workers.dev";
 
 type State = { kind: "loading" } | { kind: "error"; message: string } | { kind: "ready"; results: Results };
 
@@ -21,12 +25,13 @@ export function App() {
     <>
       <a className="skip" href="#main">Skip to content</a>
       <header className="site">
-        <div className="wrap">
-          <p className="kicker">SCROLL, a single-browser timing benchmark</p>
-          <h1>Do loading strategies deliver usable content sooner, or only feedback?</h1>
+        <div className="bar">
+          <a className="brand" href="#top" aria-label="SCROLL, back to the top">
+            <img src="brand/scroll-lockup.svg" alt="" width="118" height="30" />
+          </a>
           <nav aria-label="Sections">
+            <a href="#traces">Traces</a>
             <a href="#overview">Overview</a>
-            <a href="#traces">Side-by-side traces</a>
             <a href="#results">Results</a>
             <a href="#assumptions">Assumptions</a>
             <a href="#method">Method and limitations</a>
@@ -34,6 +39,22 @@ export function App() {
           </nav>
         </div>
       </header>
+      <div className="hero" id="top">
+        <div className="hero-copy">
+          <p className="hero-kicker">SCROLL, a single-browser timing benchmark</p>
+          <h1>Do loading strategies deliver usable content sooner, or only feedback?</h1>
+          <p className="hero-answer">
+            Prefetching, and optimistic saves that succeed, delivered the usable state sooner. A skeleton changed what
+            appeared first: its time to usable content stayed within the 17 ms equivalence margin of a blank page at
+            delays of 100 ms and more, and at the shortest delay that verdict is not robust.
+          </p>
+          <p className="hero-by">Mohamed Bechir Kefi, independent researcher. Preprint draft, not peer-reviewed.</p>
+          <p className="hero-actions">
+            <a className="btn-primary" href="#traces">See the measured traces</a>
+          </p>
+        </div>
+        <HeroIllustration />
+      </div>
       <main id="main" className="wrap">
         {state.kind === "loading" && <p role="status">Loading the published results.</p>}
         {state.kind === "error" && (
@@ -47,12 +68,26 @@ export function App() {
         <Sandbox />
       </main>
       <footer className="site">
-        <div className="wrap">
+        <div className="wrap foot">
+          <img className="foot-mark" src="brand/scroll-lockup-on-dark.svg" alt="SCROLL" width="134" height="34" />
+          <ul className="foot-links">
+            <li><a href={REPO}>Source repository on GitHub</a></li>
+            <li><a href={`${REPO}/blob/main/research/paper/manuscript.md`}>Manuscript (preprint draft)</a></li>
+            <li><a href={LABS}>All lab studies</a></li>
+          </ul>
+          <p>Mohamed Bechir Kefi, independent researcher.</p>
           <p>
             Runs offline after the first load. No data about visitors is collected, stored or sent anywhere, and the
             page contacts no server other than the one that served it.
           </p>
-          <p>Mohamed Bechir Kefi, independent researcher.</p>
+          <p>
+            Source-available, non-commercial research licence: SCROLL Source-Available Non-Commercial Research License
+            v1.0. It is not an OSI-approved open-source licence. An AI system was used as a research and development
+            assistant; it is not an author.
+          </p>
+          <p>
+            Typefaces: Big Shoulders Display and Libre Franklin, both under the SIL Open Font License 1.1, self-hosted.
+          </p>
         </div>
       </footer>
     </>
@@ -73,6 +108,8 @@ function Legend() {
 function Published({ r }: { r: Results }) {
   return (
     <>
+      <Traces r={r} />
+
       <section id="overview" aria-labelledby="h-overview">
         <h2 id="h-overview">Overview</h2>
         <p className="lede">{r.question}</p>
@@ -100,8 +137,6 @@ function Published({ r }: { r: Results }) {
           </div>
         ))}
       </section>
-
-      <Traces r={r} />
 
       <section id="results" aria-labelledby="h-results">
         <h2 id="h-results">Published results</h2>
@@ -175,7 +210,7 @@ function Published({ r }: { r: Results }) {
 function ExperimentPanel({ e, r }: { e: Experiment; r: Results }) {
   const primary = e.estimates.some((x) => x.reading_a !== null);
   return (
-    <article className="panel" aria-labelledby={`h-${e.id}`}>
+    <article className="panel frame" aria-labelledby={`h-${e.id}`}>
       <h3 id={`h-${e.id}`}>
         {e.id}: {e.title}
       </h3>
@@ -235,7 +270,7 @@ function ExperimentPanel({ e, r }: { e: Experiment; r: Results }) {
       {e.id === "EXP-004" && <RobustnessTable r={r} />}
       <p className="meta">
         Report: <code>{e.report_path}</code>
-        {e.claim_ids.length > 0 && <> · Claims: {e.claim_ids.join(", ")}</>}
+        {e.claim_ids.length > 0 && <>. Claims: {e.claim_ids.join(", ")}</>}
       </p>
     </article>
   );

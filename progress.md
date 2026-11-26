@@ -447,3 +447,41 @@ New: `demo/wrangler.jsonc`. Updated: `CLAUDE.md`, `README.md`, `CITATION.cff`, `
 ### Status and next action
 
 M6 release candidate with the owner's answers applied; still not done until the owner's full-text review and sign-off (B16). Open for the owner: B15 article drafts, B16, B18 release. Push (B17) and the Cloudflare deploy (B2) are the coordinator's steps.
+
+## 2026-11-26: demo brand identity, motion and UI redesign (owner request)
+
+Authority: owner request of 2026-11-26 ("each website unique and branded, animations, premium UI"), coordinator's DEMO-BRAND brief. Bounded task: restyle `demo/` only. No number, result, exported data, fixture, test expectation, test id or checked accessible name changed; the measured benchmark pages, harness and fixtures outside `demo/` were not touched. Nothing pushed or deployed.
+
+### Starting state
+
+`git status`: clean on `main` at `58d73cb`.
+
+### Decisions
+
+- Direction: the stopwatch and the film strip (plan and review in `demo/DESIGN.md`). Measured traces drawn as film strips with an amber split mark (TTFF median) and a red sweep mark (TTUC median); sprocket holes are decoration and the caption says so. Single light scheme (silver paper, film base, two hands).
+- Fonts: Big Shoulders Display and Libre Franklin, `@fontsource-variable/*` 5.3.0, OFL 1.1, installed with `npm_config_before=2026-11-12`, Latin subset only, self-hosted.
+- Logo: hand-built stopwatch mark (ring, crown, three elapsed frames, the last in sweep red) and a lockup whose letters are Big Shoulders Display outlines at weight 800; small-size cut used as the favicon.
+- Motion: one hero sequence (about 1.8 s, plays once, labelled "Illustration, not study data", no number); sliding indicator on the two segmented controls; trace strips wipe in once when scrolled into view; Run press, sandbox rows staggered 40 ms, skeleton shimmer in the replay only while shown. All transform, opacity or clip-path; reduced motion shows the still final state.
+- Hero answer sentence written from the manuscript abstract (no new number; the 17 ms margin was already on the page).
+
+### Commands and actual outputs
+
+```
+$ (demo) npm install --save-exact @fontsource-variable/big-shoulders-display@5.3.0 @fontsource-variable/libre-franklin@5.3.0   (npm_config_before=2026-11-12) -> added 2 packages
+$ python3 -I .../logo-design/scripts/svg_audit.py scroll-mark.svg scroll-mark-small.svg scroll-lockup.svg
+  -> mark: no issues, 100/100; small cut: no issues, 100/100; lockup: 90/100, 1 near-miss-angle warning (the leg of the font's R), no failure
+$ (demo) npm test                                    -> Test Files 2 passed (2); Tests 24 passed (24)
+$ (demo) npm run build                               -> built; dist 481,932 bytes in total (before: about 312 KB); fonts 29.3 kB + 35.5 kB, JS 260.2 kB (80.0 kB gzip), CSS 14.7 kB
+$ (demo) node tools/a11y_check.mjs dist              -> 9 PASS lines; A11Y-CHECK PASS
+$ .venv/bin/python -m pytest -q tests/test_demo_export.py   -> 15 passed
+```
+
+Screenshots (headless Chrome, served with `python3 -m http.server 5226`, stopped afterwards): desktop 1440 full page and phone 390 px in an iframe, two critique passes. Pass 1 fixed: segmented indicator misplaced by the fieldset legend (moved into an inner track), delay label overlapping the first strip, tag inheriting the display face in the DEC-011 heading, ragged sandbox controls (grid), wrapped table cells; removed the second hero button. Pass 2 fixed: legend keys wrapping apart, "17 ms" breaking across lines, mobile panel padding, nav fade on phones. The OG image was rendered from an HTML page and checked for overlap.
+
+### Files
+
+New: `demo/DESIGN.md`, `demo/src/Hero.tsx`, `demo/src/motion.ts`, `demo/src/fonts.css`, `demo/public/brand/` (mark, lockup and variants, favicon SVG and 32 px PNG, `og.png`). Updated: `demo/index.html` (description, theme colour, icons, Open Graph), `demo/src/App.tsx`, `Traces.tsx`, `Sandbox.tsx`, `main.tsx`, `style.css`, `demo/README.md` (brand and font notes), `demo/package.json`, `package-lock.json`.
+
+### Risks and next action
+
+The phone page is long (about 23,700 px) because the result tables wrap. Unverified on a real phone. Deploy is the coordinator's step after the owner's review.
