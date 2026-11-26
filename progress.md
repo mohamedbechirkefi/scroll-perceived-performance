@@ -485,3 +485,34 @@ New: `demo/DESIGN.md`, `demo/src/Hero.tsx`, `demo/src/motion.ts`, `demo/src/font
 ### Risks and next action
 
 The phone page is long (about 23,700 px) because the result tables wrap. Unverified on a real phone. Deploy is the coordinator's step after the owner's review.
+
+## 2026-11-26: unique typeface pair across the labs (owner request)
+
+Authority: owner request of 2026-11-26 ("do not match fonts, I want each website to be unique and branded"), coordinator's FONT-UNIQUE brief (SCROLL row: Syne and Manrope, both faces change). Bounded task: `demo/` only; the measured benchmark pages, harness and fixtures were not touched. No number, data, fixture, test expectation or accessible name changed. Nothing pushed or deployed.
+
+### Starting state
+
+`git status`: clean at `62b0dd7`. The demo used Big Shoulders Display and Libre Franklin, a pair shared with MARKET.
+
+### Decisions
+
+- Fonts: `@fontsource-variable/syne` 5.3.0 (display, wght 400 to 800) and `@fontsource-variable/manrope` 5.3.0 (text, wght 200 to 800), OFL 1.1, installed with `npm_config_before=2026-11-12`; the old packages uninstalled. Both faces have `tnum`, so figures stay tabular in either face.
+- Type scale re-tuned for a much wider display face: headings at weight 700 with slight negative tracking (hero 31 to 52 px, h2 27 to 37 px, h3 21 px, h4 18 px), replay readout 32 px, trace arm labels 13.5 px (11.5 px at weight 600 on phones; at 13.5 px the wider face clipped SKELETON and PREFETCH on the 390 px screenshot).
+- Logo: the lockup's wordmark redrawn from Syne outlines at weight 700 (fontTools, cap height 160 centred on the ring; lockup now 1501 by 256). Mark and small cut are unchanged, so `favicon.svg` and `favicon-32.png` are unchanged. `og.png` re-rendered with the new faces. Header and footer `img` width attributes updated to the new aspect ratio; footer font credit updated.
+
+### Commands and actual outputs
+
+```
+$ python3 -I .../svg_audit.py scroll-lockup.svg scroll-mark.svg scroll-mark-small.svg
+  -> lockup 97/100 (info only: decimals, 174 anchors, extra-wide; no warning), mark 100/100, small cut 100/100
+$ (demo) npm test                          -> Tests 24 passed (24)
+$ (demo) npm run build                     -> dist 451,406 bytes; fonts 34.6 kB (Syne) + 24.8 kB (Manrope)
+$ (demo) node tools/a11y_check.mjs dist    -> A11Y-CHECK PASS
+$ .venv/bin/python -m pytest -q tests/test_demo_export.py -> 15 passed
+```
+
+Screenshots: CDP real-time capture, desktop 1440 and phone 390, served on port 5247 (stopped afterwards). Pass 1 found the hero too heavy at weight 760 and the phone arm labels clipped; both fixed in pass 2.
+
+### Risks and next action
+
+Phone page still long because wide result tables scroll (unchanged). Deploy is the coordinator's step.

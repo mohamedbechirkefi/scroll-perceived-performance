@@ -27,7 +27,7 @@ export function App() {
       <header className="site">
         <div className="bar">
           <a className="brand" href="#top" aria-label="SCROLL, back to the top">
-            <img src="brand/scroll-lockup.svg" alt="" width="118" height="30" />
+            <img src="brand/scroll-lockup.svg" alt="" width="176" height="30" />
           </a>
           <nav aria-label="Sections">
             <a href="#traces">Traces</a>
@@ -69,7 +69,7 @@ export function App() {
       </main>
       <footer className="site">
         <div className="wrap foot">
-          <img className="foot-mark" src="brand/scroll-lockup-on-dark.svg" alt="SCROLL" width="134" height="34" />
+          <img className="foot-mark" src="brand/scroll-lockup-on-dark.svg" alt="SCROLL" width="199" height="34" />
           <ul className="foot-links">
             <li><a href={REPO}>Source repository on GitHub</a></li>
             <li><a href={`${REPO}/blob/main/research/paper/manuscript.md`}>Manuscript (preprint draft)</a></li>
@@ -86,7 +86,7 @@ export function App() {
             assistant; it is not an author.
           </p>
           <p>
-            Typefaces: Big Shoulders Display and Libre Franklin, both under the SIL Open Font License 1.1, self-hosted.
+            Typefaces: Syne and Manrope, both under the SIL Open Font License 1.1, self-hosted.
           </p>
         </div>
       </footer>

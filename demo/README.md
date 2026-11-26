@@ -25,12 +25,12 @@ Regenerate the data and the sandbox fixture (from the repository root):
     .venv/bin/python scripts/export_demo_data.py
     .venv/bin/python scripts/export_sandbox_fixture.py
 
-Design and brand (owner request of 2026-11-26): the page has its own identity, the stopwatch and the film strip; the plan and its review are in `DESIGN.md`. Brand files are in `public/brand/`: the mark (`scroll-mark.svg`, mono, on-dark and a small-size cut), the wordmark lockup (`scroll-lockup.svg`, mono and on-dark), `favicon.svg`, `favicon-32.png` and the Open Graph image `og.png` (1200 by 630, rendered from an HTML page with headless Chrome). The wordmark letters are outlines of Big Shoulders Display at weight 800. The hero animation is an illustration, labelled as such, and shows no number.
+Design and brand (owner request of 2026-11-26): the page has its own identity, the stopwatch and the film strip; the plan and its review are in `DESIGN.md`. Brand files are in `public/brand/`: the mark (`scroll-mark.svg`, mono, on-dark and a small-size cut), the wordmark lockup (`scroll-lockup.svg`, mono and on-dark), `favicon.svg`, `favicon-32.png` and the Open Graph image `og.png` (1200 by 630, rendered from an HTML page with headless Chrome). The wordmark letters are outlines of Syne at weight 700 (redrawn on 2026-11-26 when the labs were given unique typeface pairs). The hero animation is an illustration, labelled as such, and shows no number.
 
 Third-party notes (fonts, bundled and self-hosted, Latin subset only):
 
-- Big Shoulders Display, npm package `@fontsource-variable/big-shoulders-display` 5.3.0, SIL Open Font License 1.1.
-- Libre Franklin, npm package `@fontsource-variable/libre-franklin` 5.3.0, SIL Open Font License 1.1.
+- Syne, npm package `@fontsource-variable/syne` 5.3.0, SIL Open Font License 1.1.
+- Manrope, npm package `@fontsource-variable/manrope` 5.3.0, SIL Open Font License 1.1.
 
 Demo URL: https://scroll-perceived-performance.kefimohamedbechir.workers.dev. The page is hosted as Cloudflare Workers static assets on the free plan, from the built `dist/` folder as configured in `wrangler.jsonc` (assets only, no Worker script). It is deployed by the coordinator, not by any script of this repository.
 

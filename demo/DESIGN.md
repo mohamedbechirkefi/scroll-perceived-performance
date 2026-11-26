@@ -26,10 +26,12 @@ A timing lab, not a dashboard. Every measured trace is drawn as a strip of film:
 
 ## Type
 
-- **Big Shoulders Display** (variable, OFL 1.1): headlines, the wordmark, the stopwatch readout in the replay. A condensed, signage-like face from Chicago street lettering; condensed numerals sit like a timer display.
-- **Libre Franklin** (variable, OFL 1.1): body, tables, controls, chart labels; tabular figures for every number.
+- **Syne** (variable 400 to 800, OFL 1.1): headlines, the wordmark, the stopwatch readout in the replay. Drawn for the Synesthèse art centre, it widens as it gets heavier, like a frame stretched across a wide film gate; at 700 its round, open capitals give the wordmark a cinema-title width beside the round stopwatch, and its tabular figures keep the replay readout steady.
+- **Manrope** (variable 200 to 800, OFL 1.1): body, tables, controls, chart labels. A geometric grotesque with a large x-height that stays clear at 12 to 15 px in chart labels and tables; tabular figures (`tnum`) for every number.
 
-Scale (Elements of Typographic Style, base 17 px): 13, 15, 17, 21, 28, 40, 64 px. Body line length capped at 68 characters.
+The pair replaced Big Shoulders Display and Libre Franklin on 2026-11-26 (owner request: no two lab demos share a typeface). Syne is much wider than the condensed face it replaced, so the scale was re-tuned: headlines set at weight 700 with slight negative tracking and line-height 1.07 to 1.08; hero 31 to 52 px, section heads 27 to 37 px, h3 21 px, h4 18 px, readout 32 px; trace arm labels 13.5 px (11.5 px at weight 600 on phones, where the wider face would otherwise be clipped). The wordmark caps are 160 units tall, centred on the stopwatch ring.
+
+Scale (base 17 px): 13, 15, 17, 18, 21, 27 to 37, 31 to 52 px. Body line length capped at 68 characters.
 
 ## Layout
 
@@ -39,7 +41,7 @@ Left-aligned throughout, one column of prose (max 42 rem) with wide figures brea
 +----------------------------------------------------------------+
 | [mark] SCROLL   Traces  Overview  Results  Method  Sandbox      |  sticky, 56 px, paper with hairline
 +----------------------------------------------------------------+
-| Question (Big Shoulders, 40 to 64 px)       +----------------+ |
+| Question (Syne, 31 to 52 px)                +----------------+ |
 | Answer in one sentence                       |  stopwatch     | |
 | author line, status chip                     |  + film strip  | |
 |                                              | Illustration,  | |
@@ -78,7 +80,7 @@ The measured traces drawn as film strips with a split hand and a sweep hand: the
 
 - *Cream plus terracotta:* the paper is cool grey (`#EDF0EE`), the accent is a stopwatch red used only for the sweep hand and the primary action. Kept, with that restriction.
 - *Near-black with one acid accent:* the dark film base appears only in strips, the hero plate and the footer, and it carries two hands (amber and red), not one acid accent. Kept.
-- *All-caps tracked eyebrows, mono data labels:* removed the old uppercase kicker; labels are sentence case in Libre Franklin; no monospace anywhere except file paths in `code`.
+- *All-caps tracked eyebrows, mono data labels:* removed the old uppercase kicker; labels are sentence case in Manrope; no monospace anywhere except file paths in `code`.
 - *01/02/03 markers:* none. The limitations list stays an ordered list because the manuscript numbers them.
 - *Identical rounded SaaS cards:* experiment panels became frames of a contact sheet (square corners, a film-edge rule on the left), the sandbox a workbench with a dashed register mark border; different shapes for different jobs.
 - *Fade-up on every section:* removed from the first draft, which faded every section in; only the trace strips reveal, because they are the result.
